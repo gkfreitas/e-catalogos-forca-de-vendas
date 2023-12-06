@@ -22,7 +22,7 @@ export default function AvailableProducts() {
   const { setCurrentProductOrder } = useContext(ProductOrderContext);
 
   const [imagesPerView, setImagesPerView] = useState(2);
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState(mockProcuts);
   const [selectedProducts, setSelectedProducts] = useState(JSON
     .parse(localStorage.getItem('selectedProducts')) || []);
   const [filters, setFilters] = useState({
@@ -33,7 +33,7 @@ export default function AvailableProducts() {
   });
   const [categorySelected, setCategorySelected] = useState('Todos');
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(mockProcuts);
   const categories = Array.from(new Set(allProducts
     .map((product) => product.category_name)));
 
@@ -42,7 +42,7 @@ export default function AvailableProducts() {
   const { Marca: brand, Gênero: gender, Categorias: category } = filters;
 
   useEffect(() => {
-    const filtered = allProducts.filter((product) => {
+    const filtered = mockProcuts.filter((product) => {
       const verifyImages = product.images.length;
       const verifyBrand = brand.length ? brand
         .includes(product.brand_name) : true;
@@ -52,6 +52,7 @@ export default function AvailableProducts() {
         .includes(product.category_name) : true;
       return verifyCategory && verifyBrand && verifyGender && verifyImages;
     });
+
     setFilteredProducts(filtered);
   }, [allProducts, brand, gender, category]);
 
@@ -73,7 +74,10 @@ export default function AvailableProducts() {
 
   useEffect(() => {
     setSeeAll(false);
-    setAllProducts(mockProcuts);
+
+    if (mockProcuts.length === 0) {
+      setAllProducts(mockProcuts);
+    }
   }, [allProducts, setSeeAll]);
 
   return (

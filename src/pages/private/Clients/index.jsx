@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import ClientCard from '../../../components/ClientCard';
 import Header from '../../../components/Header';
 import InputSearch from '../../../components/InputSearch';
 import Modal from '../../../components/Modal';
+import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import { companiesMock } from '../../../mocks/mockClients';
 import {
   ClientsCardContainer,
   ClientsContainer,
   EditorIcon,
+  InputSearchContainer,
   OverflowPage,
   Separator,
   TablePriceButton,
@@ -25,6 +27,7 @@ export default function ClientsPage() {
   const [searchValue, setSearchValue] = useState('');
   const [tableCard, setTableCard] = useState(false);
   const [priceTable, setPriceTable] = useState('');
+  const { setCurrentOrder } = useContext(ProductOrderContext);
 
   const typesPriceTableMock = ['REPRESENTACAO',
     'CENTRO OESTE', 'NORDESTE', 'SUL / SUDOESTE'];
@@ -50,8 +53,16 @@ export default function ClientsPage() {
   useEffect(() => {
     const clientData = filteredClients
       .find((client) => client.nome === currentClient);
-    localStorage.setItem('currentClient', JSON.stringify({ ...clientData, priceTable }));
-  }, [currentClient, filteredClients, priceTable]);
+    if (clientData) {
+      const { nome, cnpj, nomeFantasia } = clientData;
+      setCurrentOrder((prevState) => ({
+        ...prevState,
+        clientName: nome,
+        clientCNPJ: cnpj,
+        clientFantasyName: nomeFantasia,
+      }));
+    }
+  }, [currentClient, filteredClients, setCurrentOrder]);
 
   return (
 
@@ -61,10 +72,12 @@ export default function ClientsPage() {
         routeBack="/"
         routeNext={ currentClient && '/avaliableProducts' }
       />
-      <InputSearch
-        value={ searchValue }
-        onChange={ (e) => setSearchValue(e.target.value) }
-      />
+      <InputSearchContainer>
+        <InputSearch
+          value={ searchValue }
+          onChange={ (e) => setSearchValue(e.target.value) }
+        />
+      </InputSearchContainer>
       <Separator />
       <OverflowPage>
         <ClientsContainer>

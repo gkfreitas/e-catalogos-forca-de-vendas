@@ -4,8 +4,9 @@ export const InputContainer = styled.div`
   padding: 3px 6px;
   border-radius: 3px;
   background: #F7F7F7;
-  width: ${({ $width }) => $width || '90%'};
-  margin: 10px auto;
+  width: ${({ $width }) => $width || '100%'};
+  margin-top: 4px;
+  flex-shrink: 0;
 `;
 
 export const InputTag = styled.p`

@@ -5,7 +5,7 @@ export default function Separator({ margin, color, height }) {
         width: `calc(100% - ${margin}px)`,
         backgroundColor: color,
         height: `${height}px`,
-        margin: '0px auto',
+        margin: '0 auto',
       } }
     />
   );

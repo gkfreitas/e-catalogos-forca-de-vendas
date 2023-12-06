@@ -6,12 +6,13 @@ import {
   ModalContent,
   ModalHeader,
   ModalHeaderText,
+  RelativeContainer,
 } from './styles';
 
 export default function Modal({ title, children, disable,
   alignItems, padding }) {
   return (
-    <BackgroundFocus>
+    <RelativeContainer>
       <ModalContainer>
         <ModalHeader>
           <CloseIcon onClick={ disable }>
@@ -23,6 +24,7 @@ export default function Modal({ title, children, disable,
           {children}
         </ModalContent>
       </ModalContainer>
-    </BackgroundFocus>
+      <BackgroundFocus onClick={ disable } />
+    </RelativeContainer>
   );
 }

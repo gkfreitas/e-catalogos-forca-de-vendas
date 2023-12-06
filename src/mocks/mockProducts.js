@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable max-lines */
-const mockProcuts = [
+const mockProducts = [
   {
     id: 7934,
     name: 'BLUS├âO VIP - EA16',
@@ -1421,4 +1421,26 @@ const mockProcuts = [
   },
 ];
 
-export default mockProcuts;
+// const mockProducts = mockProcutsBase.map((product) => {
+//   const filteredImages = [];
+//   product.images.forEach((image) => {
+//     try {
+//       const img = new Image();
+//       img.src = image.image;
+
+//       img.onload = () => {
+//         filteredImages.push(image);
+//       };
+
+//       img.onerror = () => {
+//         console.log(`Failed to load image: ${image.image}`);
+//       };
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   });
+
+//   return { ...product, images: filteredImages };
+// });
+
+export default mockProducts;

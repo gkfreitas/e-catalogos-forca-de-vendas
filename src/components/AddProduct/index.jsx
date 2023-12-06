@@ -20,7 +20,8 @@ export default function AddProduct() {
     setCurrentProductOrder,
   } = useContext(ProductOrderContext);
 
-  const { id, name, reference, price, images, fixed_qtd, sizes } = currentProduct || {};
+  const { id, name, reference, price, images,
+    fixed_qtd, sizes, colors } = currentProduct || {};
 
   const [quantity, setQuantity] = useState(0);
   const [priceProduct, setPriceProduct] = useState(0);
@@ -34,11 +35,12 @@ export default function AddProduct() {
         [id]: {
           name,
           reference,
-          imageUrl: images[0],
+          imageUrl: images[0]?.image,
           sizes,
           quantity: 1,
           pack: fixed_qtd,
           price,
+          colors,
           total: price * fixed_qtd,
         },
       }));

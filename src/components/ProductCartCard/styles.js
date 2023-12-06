@@ -2,38 +2,41 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
   display: flex;
-  padding: 20px;
-  gap: 16px;
+  margin: 8px;
+  gap: 4px;
   justify-content: space-between;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
 `;
 
 export const CardImageWithInfosContainer = styled.div`
   display: flex;
-  align-items: start;
+  align-items: center;
   gap: 4px;
+  width: 100%;
 `;
 
 export const CardInfosContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  justify-content: center;
   align-items: flex-start;
   padding: 4px 0;
+  width: 100%;
 `;
 
 export const PricesWithSizesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  gap: 8px;
+  justify-content: center;
+  align-items: end;
+  padding: 0 4px;
+  gap: 4px;
 `;
 
 export const ContainerImage = styled.div`
-  height: auto;
-  width: 64px;
-  height: 96px;
+  width: 100%;
+  max-width: 80px;
 `;
 
 export const CardImage = styled.img`
@@ -41,12 +44,10 @@ export const CardImage = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  border: 0.5px solid black;
 `;
 
 export const PrimaryText = styled.p`
   color: #000;
-  text-align: center;
   font-family: Roboto;
   font-size: 12px;
   font-style: normal;
@@ -64,6 +65,7 @@ export const SecundaryText = styled.span`
 
 export const ColorContainer = styled.div`
   width: 100%;
+  max-width: 120px;
   padding: 4px;
   border-radius: 10px;
   background-color: ${({ color }) => color};
@@ -78,30 +80,55 @@ export const ColorText = styled.p`
   font-weight: 500;
 `;
 
-export const SizesTable = styled.table`
+export const SizesContainer = styled.div`
+  display: flex;
+`;
+
+export const KeyValueContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
   
 `;
 
-export const SizesTableHead = styled.thead`
-  
+export const SizeContent = styled.div`
+  width: 100%;
+  color: #000;
+  font-family: Roboto;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 1px 5px;
+  border-right: 1px solid #D9D9D9;
+  border-bottom: 1px solid #D9D9D9;
 `;
 
-export const SizesTableHeadContaienr = styled.tr`
-  
+export const TotalSizeTag = styled.div`
+  width: 100%;
+  color: #fff;
+  font-family: Roboto;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 1px 5px;
+  border-right: 1px solid #D9D9D9;
+  border-bottom: 1px solid #D9D9D9;
+  background-color: #000;
 `;
 
-export const SizeName = styled.th`
-  
-`;
-
-export const SizesTableBody = styled.tbody`
-  
-`;
-
-export const SizesTableBodyRow = styled.tr`
-  
-`;
-
-export const Size = styled.td`
-  
+export const TotalQuantitySize = styled.div`
+  width: 100%;
+  color: #fff;
+  font-family: Roboto;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 1px 5px;
+  border-right: 1px solid #D9D9D9;
+  border-bottom: 1px solid #D9D9D9;
+  background-color: #809CAA;
 `;

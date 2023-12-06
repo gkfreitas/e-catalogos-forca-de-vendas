@@ -1,6 +1,7 @@
 import AvailableProducts from '../pages/private/AvailableProducts';
 import Brands from '../pages/private/Brands';
 import Clients from '../pages/private/Clients';
+import ExportPage from '../pages/private/Export/ExportPage';
 import OrderPage from '../pages/private/Order/OrderPage';
 import Purchase from '../pages/private/Purchase';
 import Login from '../pages/public/Login';
@@ -30,5 +31,9 @@ export const publicRoutes = [
   {
     path: '/order',
     component: OrderPage,
+  },
+  {
+    path: '/export',
+    component: ExportPage,
   },
 ];

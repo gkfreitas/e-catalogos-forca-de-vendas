@@ -86,3 +86,10 @@ export const EditorIcon = styled.div`
   top: 6px;
   cursor: pointer;
 `;
+
+export const InputSearchContainer = styled.div`
+  padding: 12px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

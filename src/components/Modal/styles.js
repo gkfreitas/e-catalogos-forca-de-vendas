@@ -13,7 +13,8 @@ export const BackgroundFocus = styled.div`
 export const ModalContainer = styled.div`
   z-index: 1;
   width: 90%;
-  margin: 100px auto;
+  margin: 10svh auto;
+  position: relative;
 `;
 
 export const ModalHeader = styled.div`
@@ -52,4 +53,13 @@ export const CloseIcon = styled.div`
   position: absolute;
   top: 4px;
   right: 4px;
+`;
+
+export const RelativeContainer = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 0;
 `;

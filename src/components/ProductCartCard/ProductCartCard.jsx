@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   CardContainer,
   CardImage,
@@ -6,12 +7,24 @@ import {
   ColorContainer,
   ColorText,
   ContainerImage,
+  KeyValueContainer,
   PricesWithSizesContainer,
   PrimaryText,
   SecundaryText,
+  SizeContent,
+  SizesContainer,
+  TotalQuantitySize,
+  TotalSizeTag,
 } from './styles';
 
-export default function ProductCartCard({ imageSrc }) {
+export default function ProductCartCard({
+  imageSrc, reference, name, colors, sizes, totalPrice,
+  quantity,
+}) {
+  const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+  const totalQuantity = sizes.reduce((acc, cur) => acc + cur[1] * quantity, 0);
+
   return (
     <CardContainer>
       <CardImageWithInfosContainer>
@@ -23,25 +36,56 @@ export default function ProductCartCard({ imageSrc }) {
             REF:
             {' '}
             <SecundaryText>
-              RE03
+              {reference}
             </SecundaryText>
           </PrimaryText>
           <PrimaryText>
-            Blusa Preta e Azul
+            {name}
           </PrimaryText>
-          <ColorContainer
-            color="#000"
-          >
-            <ColorText>Preto</ColorText>
-          </ColorContainer>
-
+          {colors.map(({ cod_hex, color_name }) => (
+            <ColorContainer
+              key={ cod_hex }
+              color={ `#${cod_hex}` }
+            >
+              <ColorText>{color_name}</ColorText>
+            </ColorContainer>
+          ))}
         </CardInfosContainer>
       </CardImageWithInfosContainer>
       <PricesWithSizesContainer>
-        <PrimaryText>Desconto: R$ 20,00</PrimaryText>
-        <PrimaryText>Total: R$ 69,70</PrimaryText>
-      </PricesWithSizesContainer>
+        <SizesContainer>
+          {sizes.map((size) => (
+            <KeyValueContainer key={ size }>
+              <SizeContent>
+                {size[0]}
+              </SizeContent>
+              <SizeContent>
+                {size[1] * quantity}
+              </SizeContent>
+            </KeyValueContainer>
+          ))}
 
+          <KeyValueContainer>
+            <TotalSizeTag>TOTAL</TotalSizeTag>
+            <TotalQuantitySize>{totalQuantity}</TotalQuantitySize>
+          </KeyValueContainer>
+        </SizesContainer>
+        <PrimaryText>
+          Descontos: R$
+          {' '}
+          {0}
+        </PrimaryText>
+        <PrimaryText>
+          Impostos: R$
+          {' '}
+          {0}
+        </PrimaryText>
+        <PrimaryText>
+          Total
+          {' '}
+          {BRL.format(totalPrice)}
+        </PrimaryText>
+      </PricesWithSizesContainer>
     </CardContainer>
   );
 }

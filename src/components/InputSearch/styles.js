@@ -1,12 +1,12 @@
 import { styled } from 'styled-components';
 
 export const InputBox = styled.div`
-  margin: 12px auto;
+  padding: 12px 0;
   padding: 8px 12px;
   border-radius: 5px;
   background: #F5F5F5;
   max-width: 480px;
-  width: 60%;
+  width: 70%;
   display: flex;
   align-items: center;
   @media (min-width: 744px) {
