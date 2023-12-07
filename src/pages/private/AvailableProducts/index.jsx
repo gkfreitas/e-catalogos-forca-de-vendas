@@ -13,6 +13,7 @@ import {
   ButtonsContainer,
   ChangeImagesPerViewButton,
   ClearButton,
+  Container,
   InputSelect,
   NumbersContainer,
 } from './styles';
@@ -81,7 +82,7 @@ export default function AvailableProducts() {
   }, [allProducts, setSeeAll]);
 
   return (
-    <>
+    <Container>
       <Header
         title={ `Produtos Disponíveis (${filteredProducts.length})` }
         routeBack="/clients"
@@ -130,6 +131,6 @@ export default function AvailableProducts() {
 
         />
       </AvailableProductsContainer>
-    </>
+    </Container>
   );
 }

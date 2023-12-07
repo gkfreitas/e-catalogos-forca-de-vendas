@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
 import { AiFillSave, AiOutlineMail } from 'react-icons/ai';
 import { IoCloudUploadOutline } from 'react-icons/io5';
+import { ToastContainer, toast } from 'react-toastify';
+import EmailModal from '../../../components/EmailModal/EmailModal';
 import ExportFields from '../../../components/ExportFields/ExportFields';
 import Header from '../../../components/Header';
 import InputRadio from '../../../components/InputRadio/InputRadio';
-
-import EmailModal from '../../../components/EmailModal/EmailModal';
 import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import {
   ContainerFields,
@@ -30,6 +30,8 @@ export default function ExportPage() {
     installmentsValue,
   } = currentOrder;
   const { installments } = paymentCondition;
+
+  const [exported, setExported] = useState(false);
 
   const BRL = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -58,9 +60,16 @@ export default function ExportPage() {
 
   const [sendEmail, setSendEmail] = useState(false);
 
+  const handleSuccess = (message) => {
+    setExported(true);
+    toast.success(message);
+    localStorage.clear();
+  };
+
   return (
     <PageContainer>
-      <Header title="Exportar" routeBack="/order" />
+      <ToastContainer />
+      <Header title="Exportar" routeBack={ exported ? '/clients' : '/order' } />
       <PageTitle>Resumo do pedido</PageTitle>
       <ContainerFields>
         {tags.map((tag, i) => (
@@ -90,7 +99,9 @@ export default function ExportPage() {
         <TextArea placeholder="Digite sua observação aqui" />
       </TextAreaContainer>
       <ExportFooter>
-        <IconWithTextContainer>
+        <IconWithTextContainer
+          onClick={ () => handleSuccess('Pedido salvo com sucesso!') }
+        >
           <IconContainer>
             <AiFillSave size={ 24 } color="#809CAA" />
           </IconContainer>
@@ -104,7 +115,9 @@ export default function ExportPage() {
           </IconContainer>
           <IconText>Enviar para o E-Mail</IconText>
         </IconWithTextContainer>
-        <IconWithTextContainer>
+        <IconWithTextContainer
+          onClick={ () => handleSuccess('Pedido enviado para a fábrica com sucesso!') }
+        >
           <IconContainer>
             <IoCloudUploadOutline size={ 24 } color="#809CAA" />
           </IconContainer>
@@ -112,6 +125,7 @@ export default function ExportPage() {
         </IconWithTextContainer>
       </ExportFooter>
       {sendEmail && <EmailModal
+        handleSuccess={ handleSuccess }
         disable={ () => setSendEmail(false) }
       />}
     </PageContainer>

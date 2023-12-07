@@ -8,3 +8,10 @@ export const ShippmentContainer = styled.div`
   flex-direction: column;
   gap: 12px;
 `;
+
+export const ContainerInputSearch = styled.div`
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;

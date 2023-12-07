@@ -24,6 +24,7 @@ export const ContainerInputsCheckbox = styled.div`
   padding-top: 12px;
   margin: 0 auto;
   overflow: auto;
+  width: 70%;
 `;
 
 export const SendButton = styled.button`
@@ -48,4 +49,10 @@ export const PlusIconContainer = styled.div`
   position: absolute;
   top: 14px;
   right: 4px;
+`;
+
+export const EmailTextLabel = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `;

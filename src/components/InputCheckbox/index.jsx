@@ -8,7 +8,7 @@ export default function InputCheckbox({ text, size, ...rest }) {
         type="checkbox"
         { ...rest }
       />
-      <span>{text}</span>
+      {text}
     </LabelInput>
   );
 }

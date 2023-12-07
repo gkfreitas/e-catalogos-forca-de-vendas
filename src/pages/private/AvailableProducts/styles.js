@@ -1,8 +1,15 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+`;
+
 export const AvailableProductsContainer = styled.div`
   overflow: auto;
-  height: 90vh;
+  height: 90svh;
+  flex-grow: 1;
 `;
 
 export const QuantityText = styled.p`

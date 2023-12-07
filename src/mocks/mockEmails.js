@@ -1,52 +1,54 @@
+const basePhone = '(11) 9 9172-4489';
+
 const clientEmails = [
   {
     name: 'Morgan Sántos',
-    phone: '(02) 4312 7528',
+    phone: basePhone,
     email: 'molestie.sodales@yahoo.com',
   },
   {
     name: 'Sandra Andrade',
-    phone: '(03) 6375 2847',
+    phone: basePhone,
     email: 'magna.malesuada@hotmail.com',
   },
   {
     name: 'Nell de Azevedo',
-    phone: '(05) 1161 7103',
+    phone: basePhone,
     email: 'nulla.donec.non@icloud.com',
   },
   {
     name: 'Mikayla Matias',
-    phone: '(08) 0362 0121',
+    phone: basePhone,
     email: 'eget.dictum.placerat@yahoo.com',
   },
   {
     name: 'Germaine Correa',
-    phone: '(04) 9225 0909',
+    phone: basePhone,
     email: 'senectus.et.netus@hotmail.com',
   },
   {
     name: 'Phyllis Das Chagas',
-    phone: '(09) 3011 4517',
+    phone: basePhone,
     email: 'justo.eu@google.com',
   },
   {
     name: 'Quamar Braga',
-    phone: '(04) 8577 3433',
+    phone: basePhone,
     email: 'netus.et@outlook.com',
   },
   {
     name: 'Armando Barreto',
-    phone: '(03) 7817 8520',
+    phone: basePhone,
     email: 'donec.non@outlook.com',
   },
   {
     name: 'Cairo Fonseca',
-    phone: '(05) 9805 4523',
+    phone: basePhone,
     email: 'nibh.quisque@protonmail.com',
   },
   {
     name: 'Hector de Assis',
-    phone: '(06) 2512 5917',
+    phone: basePhone,
     email: 'sagittis@google.com',
   },
 ];

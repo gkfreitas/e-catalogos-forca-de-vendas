@@ -4,7 +4,7 @@ import InputRadio from '../InputRadio/InputRadio';
 import InputSearch from '../InputSearch';
 import Modal from '../Modal';
 import Separator from '../Separator';
-import { ShippmentContainer } from './styles';
+import { ContainerInputSearch, ShippmentContainer } from './styles';
 
 export default function ShippmentModal({ disable }) {
   const { setCurrentOrder, currentOrder } = useContext(ProductOrderContext);
@@ -33,10 +33,12 @@ export default function ShippmentModal({ disable }) {
       title="TRANSPORTADORA"
       disable={ disable }
     >
-      <InputSearch
-        value={ searchShippment }
-        onChange={ (e) => setSearchShippment(e.target.value) }
-      />
+      <ContainerInputSearch>
+        <InputSearch
+          value={ searchShippment }
+          onChange={ (e) => setSearchShippment(e.target.value) }
+        />
+      </ContainerInputSearch>
       <Separator
         height={ 1 }
         color="#D9D9D9"

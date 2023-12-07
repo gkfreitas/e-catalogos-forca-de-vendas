@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
+import ImageRender from '../ImageRender';
 import {
   AllImagesContainer,
   HeaderImage,
   HeaderImageText,
-  Image,
   ImageContainer,
   SecundaryText,
 } from './style';
@@ -67,10 +67,14 @@ export default function AllProductsAvaliable({ imagesPerView, filteredProducts,
             />
 
           </HeaderImage>
-          <Image
-            src={ product.images[0]?.image || randomImageUrl }
+          <ImageRender
+            imageSrc={ product.images[0] }
             onError={ (e) => handleErrorImage(e, product.images) }
           />
+          {/* <Image
+            src={ product.images[0]?.image || randomImageUrl }
+            onError={ (e) => handleErrorImage(e, product.images) }
+          /> */}
         </ImageContainer>
       )))}
     </AllImagesContainer>

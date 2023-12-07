@@ -8,21 +8,27 @@ import {
   ContainerInputsCheckbox,
   ContainerSearchOrAdd,
   ContentModal,
+  EmailTextLabel,
   PlusIconContainer,
   SendButton,
   SendButtonText,
 } from './styles';
 
-export default function EmailModal({ disable }) {
+export default function EmailModal({ disable, handleSuccess }) {
   const [filteredEmails, setFilteredEmails] = useState([]);
   const [emailText, setEmailText] = useState('');
   const emails = mockEmails;
-  console.log(emails);
+
   useEffect(() => {
     const filtered = emails.filter(({ name }) => name.toLowerCase()
       .includes(emailText.toLowerCase()));
     setFilteredEmails(filtered);
-  }, [emailText]);
+  }, [emailText, emails]);
+
+  const handleClick = () => {
+    disable();
+    handleSuccess('E-mail enviado com sucesso!');
+  };
 
   return (
     <Modal title="ENVIAR E-MAIL" disable={ disable }>
@@ -39,20 +45,25 @@ export default function EmailModal({ disable }) {
           <CiCirclePlus fill="#809CAA" size={ 28 } />
         </PlusIconContainer>
         <ContainerInputsCheckbox>
-          {filteredEmails.map(({ name }, i) => (
+          {filteredEmails.map(({ email, phone }, i) => (
             <InputCheckbox
-              text={ name }
-              gap={ 6 }
+              text={ (
+                <EmailTextLabel>
+                  <p>{email}</p>
+                  <p>{phone}</p>
+                </EmailTextLabel>) }
+              gap={ 12 }
               size={ 18 }
               key={ i }
             />
           ))}
         </ContainerInputsCheckbox>
         <SendButton>
-          <SendButtonText onClick={ disable }>
+          <SendButtonText onClick={ handleClick }>
             ENVIAR
           </SendButtonText>
         </SendButton>
+
       </ContentModal>
     </Modal>
   );
