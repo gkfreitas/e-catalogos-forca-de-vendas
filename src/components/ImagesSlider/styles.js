@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 export const ContainerImage = styled.div`
   flex: 0 0 100%; /* Garante que cada SlideItem ocupe 100% da largura do Slider */
   box-sizing: border-box;
+  
 `;
 
 export const ImageStyle = styled.img`

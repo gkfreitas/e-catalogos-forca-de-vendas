@@ -28,6 +28,16 @@ export default function AddProduct() {
   const [accumulatedPrice, setAccumuledPrice] = useState(0);
   // const [accumulatedQuantity, setAccumulatedQuantity] = useState(0);
 
+  const imageUrlVerify = (imagesVerify) => {
+    const img = new Image();
+    img.src = imagesVerify[0]?.image;
+    img.onerror = () => {
+      imagesVerify.shift();
+      imageUrlVerify(imagesVerify);
+    };
+    return imagesVerify;
+  };
+
   const addProduct = () => {
     if (!currentProductOrder[id]) {
       return setCurrentProductOrder((prevState) => ({
@@ -35,7 +45,7 @@ export default function AddProduct() {
         [id]: {
           name,
           reference,
-          imageUrl: images[0]?.image,
+          imageUrl: imageUrlVerify(images),
           sizes,
           quantity: 1,
           pack: fixed_qtd,

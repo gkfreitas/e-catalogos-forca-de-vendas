@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { useContext, useEffect, useState } from 'react';
-import { AiOutlineClear } from 'react-icons/ai';
+import { FaEraser } from 'react-icons/fa';
 import FilterAvaliableProducts from '../../../components/FilterAvaliableProducts';
 import Header from '../../../components/Header';
 import mockProcuts from '../../../mocks/mockProducts';
@@ -12,10 +12,11 @@ import {
   AvailableProductsContainer,
   ButtonsContainer,
   ChangeImagesPerViewButton,
-  ClearButton,
   Container,
   InputSelect,
   NumbersContainer,
+  Option,
+  ShowSelectedButton,
 } from './styles';
 
 export default function AvailableProducts() {
@@ -23,6 +24,7 @@ export default function AvailableProducts() {
   const { setCurrentProductOrder } = useContext(ProductOrderContext);
 
   const [imagesPerView, setImagesPerView] = useState(2);
+  const [showSelected, setShowSelected] = useState(false);
   const [allProducts, setAllProducts] = useState(mockProcuts);
   const [selectedProducts, setSelectedProducts] = useState(JSON
     .parse(localStorage.getItem('selectedProducts')) || []);
@@ -31,16 +33,24 @@ export default function AvailableProducts() {
     Marca: [],
     Gênero: [],
     Categorias: [],
+    Entrega: [],
   });
+  const [subFilters, setSubFilters] = useState({});
   const [categorySelected, setCategorySelected] = useState('Todos');
-
+  console.log(subFilters);
   const [filteredProducts, setFilteredProducts] = useState(mockProcuts);
   const categories = Array.from(new Set(allProducts
     .map((product) => product.category_name)));
 
   const imagesPerViewOptions = [1, 2, 3, 4];
 
-  const { Marca: brand, Gênero: gender, Categorias: category } = filters;
+  const {
+    Marca: brand,
+    Gênero: gender,
+    Categorias: category,
+    Tipo: type,
+    Entrega: delivery,
+  } = filters;
 
   useEffect(() => {
     const filtered = mockProcuts.filter((product) => {
@@ -51,11 +61,21 @@ export default function AvailableProducts() {
         .includes(product.group_name) : true;
       const verifyCategory = category.length ? category
         .includes(product.category_name) : true;
-      return verifyCategory && verifyBrand && verifyGender && verifyImages;
+      const verifyType = type.length ? type
+        .includes(product.type) : true;
+      const verifyDelivery = delivery.length ? delivery
+        .includes(product.delivery) : true;
+
+      const verifySubCategory = subFilters[categorySelected]?.length
+        ? subFilters[categorySelected].includes(product.sub_category) : true;
+
+      return verifyCategory && verifyBrand && verifyGender && verifyImages
+      && verifyType && verifyDelivery && verifySubCategory;
     });
 
     setFilteredProducts(filtered);
-  }, [allProducts, brand, gender, category]);
+  }, [allProducts, brand, gender, category, type,
+    filters.subCategory, delivery, subFilters, categorySelected]);
 
   const handleChangeCategory = (e) => {
     setCategorySelected(e.target.value);
@@ -66,6 +86,10 @@ export default function AvailableProducts() {
     setFilters((prevState) => ({ ...prevState, Categorias: [e.target.value] }));
   };
 
+  const handleShowSelected = () => {
+    setShowSelected(!showSelected);
+  };
+
   const handleClearSelectedProducts = () => {
     setSelectedProducts([]);
     setCurrentProductOrder({});
@@ -74,12 +98,27 @@ export default function AvailableProducts() {
   };
 
   useEffect(() => {
+    if (showSelected) {
+      setFilteredProducts(selectedProducts);
+    }
+    if (!showSelected) {
+      handleChangeCategory({ target: { value: categorySelected } });
+    }
+  }, [categorySelected, selectedProducts, showSelected]);
+
+  useEffect(() => {
     setSeeAll(false);
 
     if (mockProcuts.length === 0) {
       setAllProducts(mockProcuts);
     }
   }, [allProducts, setSeeAll]);
+
+  useEffect(() => {
+    if (showSelected) {
+      setFilteredProducts(selectedProducts);
+    }
+  }, [filteredProducts, selectedProducts, showSelected]);
 
   return (
     <Container>
@@ -94,9 +133,9 @@ export default function AvailableProducts() {
           value={ categorySelected }
           onChange={ handleChangeCategory }
         >
-          <option>Todos</option>
+          <Option>Todos</Option>
           {categories.map((categoryOption) => (
-            <option key={ categoryOption }>{categoryOption}</option>
+            <Option key={ categoryOption }>{categoryOption}</Option>
           ))}
         </InputSelect>
         <NumbersContainer>
@@ -111,13 +150,17 @@ export default function AvailableProducts() {
             </ChangeImagesPerViewButton>
           ))}
         </NumbersContainer>
-        <ClearButton onClick={ handleClearSelectedProducts }>
-          Limpar
-          <AiOutlineClear
-            size={ 12 }
-            fill="#fff"
-          />
-        </ClearButton>
+
+        <ShowSelectedButton onClick={ handleShowSelected }>
+          M
+        </ShowSelectedButton>
+
+        <FaEraser
+          cursor="pointer"
+          size={ 24 }
+          fill="#809CAA"
+          onClick={ handleClearSelectedProducts }
+        />
       </ButtonsContainer>
       <AvailableProductsContainer>
         <AllProductsAvaliable
@@ -128,7 +171,7 @@ export default function AvailableProducts() {
         />
         <FilterAvaliableProducts
           setFilters={ setFilters }
-
+          setSubFilters={ setSubFilters }
         />
       </AvailableProductsContainer>
     </Container>

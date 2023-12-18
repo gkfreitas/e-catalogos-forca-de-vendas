@@ -14,10 +14,11 @@ export const TitleDeadline = styled.p`
 `;
 
 export const Container = styled.div`
-  height: 70svh;
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 0px auto;
+  
   padding: 0 20px;
 `;
 
@@ -25,4 +26,6 @@ export const InputsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
+  align-items: center;
 `;

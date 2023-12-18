@@ -1,8 +1,8 @@
 import { InputContainer, InputContent, InputTag } from './styles';
 
-export default function InputOrder({ tag, content, width }) {
+export default function InputOrder({ tag, content, width, bgColor }) {
   return (
-    <InputContainer $width={ width }>
+    <InputContainer $bgColor={ bgColor } $width={ width }>
       <InputTag>
         {tag}
         {': '}

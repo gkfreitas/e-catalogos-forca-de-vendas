@@ -14,6 +14,7 @@ export const ContainerSearchOrAdd = styled.div`
   align-items: center;
   width: 100%;
   gap: 14px;
+  position: relative;
   padding-top: 12px;
 `;
 
@@ -21,13 +22,13 @@ export const ContainerInputsCheckbox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-top: 12px;
-  margin: 0 auto;
+  margin: 12px auto;
   overflow: auto;
   width: 70%;
 `;
 
 export const SendButton = styled.button`
+  cursor: pointer;
   margin: 20px auto;
   display: flex;
   padding: 10px 20px;
@@ -47,8 +48,7 @@ export const SendButtonText = styled.p`
 
 export const PlusIconContainer = styled.div`
   position: absolute;
-  top: 14px;
-  right: 4px;
+  right: 8%;
 `;
 
 export const EmailTextLabel = styled.div`

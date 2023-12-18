@@ -3,7 +3,6 @@ import downLine from '../../assets/icons/down-line.svg';
 import filterIcon from '../../assets/icons/filter-icon.svg';
 import { mockFilters } from '../../mocks/mockFilters';
 import InputCheckbox from '../InputCheckbox';
-import Separator from '../Separator';
 import {
   FilterContainer,
   FilterContent,
@@ -18,7 +17,7 @@ import {
   SubFilterNameContainer,
 } from './styles';
 
-export default function FilterAvaliableProducts({ setFilters }) {
+export default function FilterAvaliableProducts({ setFilters, setSubFilters }) {
   const [filterVisible, setFilterVisible] = useState(false);
   const [showSubFilter, setShowSubFilter] = useState({});
 
@@ -26,6 +25,16 @@ export default function FilterAvaliableProducts({ setFilters }) {
     const { name, checked } = target;
 
     setFilters((prevState) => ({
+      ...prevState,
+      [filterName]: checked ? [...prevState[filterName] || [], name]
+        : [...prevState[filterName]].filter((type) => type !== name),
+    }));
+  };
+
+  const handleSubFilters = ({ target }, filterName) => {
+    const { name, checked } = target;
+
+    setSubFilters((prevState) => ({
       ...prevState,
       [filterName]: checked ? [...prevState[filterName] || [], name]
         : [...prevState[filterName]].filter((type) => type !== name),
@@ -78,6 +87,8 @@ export default function FilterAvaliableProducts({ setFilters }) {
                       >
                         { subFilter.options.map((option) => (
                           <InputCheckbox
+                            name={ option }
+                            onClick={ (e) => handleSubFilters(e, subFilter.filterName) }
                             key={ option }
                             text={ option.replace(/├â/g, 'Ã') }
                           />
@@ -87,7 +98,7 @@ export default function FilterAvaliableProducts({ setFilters }) {
                   ))}
                 </InputsContainer>
               </FilterSection>
-              <Separator color="#eee" margin={ 16 } height={ 2 } />
+              <div style={ { width: '70%', height: '1px', backgroundColor: '#ccc' } } />
             </div>
           ))
         }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BackgroundFocus = styled.div`
-  position: fixed;
+  position: absolute;
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -13,6 +13,7 @@ export const BackgroundFocus = styled.div`
 export const ModalContainer = styled.div`
   z-index: 1;
   width: 90%;
+  max-width: calc(768px * 0.5);
   margin: 10svh auto;
   position: relative;
 `;
@@ -46,6 +47,7 @@ export const ModalContent = styled.div`
   align-items: ${({ $alignItems }) => $alignItems || 'center'};
   flex-direction: column;
   border-radius: 0px 0px 3px 3px;
+  height: ${({ $height }) => $height || '60svh'};
 `;
 
 export const CloseIcon = styled.div`

@@ -29,6 +29,7 @@ export default function SearchCard() {
       <Modal
         title="BUSCAR POR REF"
         disable={ () => setSearchCard(false) }
+        height="auto"
       >
         <InputContainer>
           <InputText

@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 
 export const FilterContainer = styled.div`
+  margin: 0 auto;
   transition: all 0.5s ease;
   height: 100svh;
   max-width: ${({ $visible }) => ($visible ? '50%' : '0px')};
@@ -8,7 +9,7 @@ export const FilterContainer = styled.div`
   background: #FAFAFA;
   position: fixed;
   bottom: 0px;
-  left: 0px;
+  margin-left: 2px;
 `;
 
 export const FilterContent = styled.div`
@@ -22,7 +23,9 @@ export const FilterIconContainer = styled.div`
   position: absolute;
   right: -30px;
   border-radius: 0px 5px 5px 0px;
-  background: hsl(0, 8%, 97%);
+  background: #FAFAFA;
+  border: 1px solid #809CAA;
+  border-left: none;
   top: 50svh;
   display: flex;
   padding: 4px;
@@ -61,7 +64,7 @@ export const SubFilterContainer = styled.div`
   transition-duration: 0.5s;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
   max-height: ${({ $visible }) => ($visible ? '100px' : '0px')};
   gap: 10px;
 `;

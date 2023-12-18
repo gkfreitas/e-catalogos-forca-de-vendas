@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
-export const FooterContainer = styled.footer`
-  padding: 10px 6px;
+export const FooterContainer = styled.section`
+  padding: 2px;
   display: flex;
   justify-content: center;
   gap: 12px;

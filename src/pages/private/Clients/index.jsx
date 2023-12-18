@@ -17,6 +17,7 @@ import {
   TablePriceButtonName,
   TablePriceButtonTitle,
   TablePriceCard,
+  TablePriceCardContainer,
   TablePriceCardText,
 } from './styles';
 
@@ -44,6 +45,15 @@ export default function ClientsPage() {
   };
 
   useEffect(() => {
+    const localClient = localStorage.getItem('currentOrder');
+    const { clientName, priceTable: localPriceTable } = JSON.parse(localClient) || {};
+
+    setCurrentClient(clientName || '');
+
+    setPriceTable(localPriceTable);
+  }, []);
+
+  useEffect(() => {
     const filtered = companiesMock
       .filter((client) => client.nome.toLowerCase()
         .includes(searchValue.toLowerCase()));
@@ -60,9 +70,10 @@ export default function ClientsPage() {
         clientName: nome,
         clientCNPJ: cnpj,
         clientFantasyName: nomeFantasia,
+        priceTable,
       }));
     }
-  }, [currentClient, filteredClients, setCurrentOrder]);
+  }, [currentClient, filteredClients, priceTable, setCurrentOrder]);
 
   return (
 
@@ -88,7 +99,7 @@ export default function ClientsPage() {
                 <AiOutlineEdit size={ 24 } fill="#2f2e2e" />
               </EditorIcon>
               <TablePriceButtonTitle>
-                TABLA DE PREÇOS:
+                TABELA DE PREÇOS:
                 {' '}
                 <TablePriceButtonName>
                   {priceTable}
@@ -116,14 +127,17 @@ export default function ClientsPage() {
             title="Escolha uma Tabela de Preços"
             disable={ () => setTableCard(false) }
           >
-            {typesPriceTableMock.map((type, i) => (
-              <TablePriceCard key={ i } onClick={ () => handleChosePriceTable(type) }>
-                <TablePriceCardText>
-                  {type}
-                </TablePriceCardText>
-              </TablePriceCard>
-            ))}
+            <TablePriceCardContainer>
+              {typesPriceTableMock.map((type, i) => (
+                <TablePriceCard key={ i } onClick={ () => handleChosePriceTable(type) }>
+                  <TablePriceCardText>
+                    {type}
+                  </TablePriceCardText>
+                </TablePriceCard>
+              ))}
+            </TablePriceCardContainer>
           </Modal>) }
+
       </OverflowPage>
     </>
   );

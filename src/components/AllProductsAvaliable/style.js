@@ -30,10 +30,12 @@ export const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   border-radius: 5px;
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  
   cursor: pointer;
 `;
 

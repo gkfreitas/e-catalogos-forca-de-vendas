@@ -19,7 +19,7 @@ import {
 
 export default function ProductCartCard({
   imageSrc, reference, name, colors, sizes, totalPrice,
-  quantity,
+  quantity, discount,
 }) {
   const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -29,7 +29,7 @@ export default function ProductCartCard({
     <CardContainer>
       <CardImageWithInfosContainer>
         <ContainerImage>
-          <CardImage src={ imageSrc } />
+          <CardImage src={ imageSrc[0].image } />
         </ContainerImage>
         <CardInfosContainer>
           <PrimaryText>
@@ -71,9 +71,9 @@ export default function ProductCartCard({
           </KeyValueContainer>
         </SizesContainer>
         <PrimaryText>
-          Descontos: R$
+          Descontos:
           {' '}
-          {0}
+          {BRL.format(discount)}
         </PrimaryText>
         <PrimaryText>
           Impostos: R$

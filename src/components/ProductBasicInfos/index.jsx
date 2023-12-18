@@ -19,6 +19,7 @@ export default function ProductBasicInfos() {
   return (
     <ProductBasicInfosContainer>
       <TextStyle>
+        <ProductTextStyle>{name?.split(' ')[0]}</ProductTextStyle>
         <RefTextStyle>
           REF:
           {' '}
@@ -30,7 +31,7 @@ export default function ProductBasicInfos() {
           <PriceTextNumbers>{price?.toFixed(2)}</PriceTextNumbers>
         </PriceTextCoin>
       </TextStyle>
-      <ProductTextStyle>{name?.replace(/├â/g, 'Ã')}</ProductTextStyle>
+
     </ProductBasicInfosContainer>
   );
 }

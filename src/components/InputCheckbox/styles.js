@@ -11,6 +11,7 @@ export const LabelInput = styled.label`
   display: flex;
   align-items: center;
   gap: 4px;
+  max-width: 100px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 
 const ProductContext = createContext();
 
@@ -8,51 +7,43 @@ function ProductProvider({ children }) {
   const [currentProduct, setCurrentProduct] = useState({ images: [], sizes: [] });
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
 
-  const selectNextProduct = () => {
-    const nextIndex = currentProductIndex + 1;
-    if (nextIndex < orderProducts.length) {
-      setCurrentProduct(orderProducts[nextIndex]);
-      setCurrentProductIndex(nextIndex);
-      return;
+  const changeProduct = useCallback((direction) => {
+    let newIndex;
+    if (direction === 'next') {
+      newIndex = (currentProductIndex + 1) % orderProducts.length;
+    } else {
+      newIndex = (currentProductIndex - 1 + orderProducts.length) % orderProducts.length;
     }
-    setCurrentProduct(orderProducts[0]);
-    setCurrentProductIndex(0);
-  };
-
-  const selectPreviousProduct = () => {
-    const previousIndex = currentProductIndex - 1;
-    if (previousIndex >= 0) {
-      setCurrentProduct(orderProducts[previousIndex]);
-      setCurrentProductIndex(previousIndex);
-      return;
-    }
-    setCurrentProduct(orderProducts[orderProducts.length - 1]);
-    setCurrentProductIndex(orderProducts.length - 1);
-  };
+    setCurrentProductIndex(newIndex);
+  }, [currentProductIndex, orderProducts]);
 
   useEffect(() => {
     const imageElement = document.getElementById(`image-${currentProductIndex}`);
     if (imageElement) {
       imageElement.scrollIntoView({ behavior: 'smooth' });
-      setCurrentProduct(orderProducts[currentProductIndex]);
     }
   }, [currentProductIndex, orderProducts]);
 
+  useEffect(() => {
+    setCurrentProduct(orderProducts[currentProductIndex]);
+  }, [currentProductIndex, orderProducts]);
+
+  const contextValue = useMemo(() => ({
+    currentProduct,
+    setCurrentProduct,
+    orderProducts,
+    currentProductIndex,
+    setCurrentProductIndex,
+    selectNextProduct: () => changeProduct('next'),
+    selectPreviousProduct: () => changeProduct('previous'),
+    setOrderProducts,
+  }), [currentProduct, orderProducts, currentProductIndex, changeProduct]);
+
   return (
-    <ProductContext.Provider
-      value={ {
-        currentProduct,
-        setCurrentProduct,
-        orderProducts,
-        currentProductIndex,
-        setCurrentProductIndex,
-        selectNextProduct,
-        selectPreviousProduct,
-        setOrderProducts,
-      } }
-    >
+    <ProductContext.Provider value={ contextValue }>
       {children}
     </ProductContext.Provider>
   );
 }
+
 export { ProductContext, ProductProvider };

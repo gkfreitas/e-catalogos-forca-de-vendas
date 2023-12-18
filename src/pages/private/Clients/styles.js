@@ -93,3 +93,11 @@ export const InputSearchContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const TablePriceCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+  gap: 20px;
+`;

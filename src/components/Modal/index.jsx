@@ -10,7 +10,7 @@ import {
 } from './styles';
 
 export default function Modal({ title, children, disable,
-  alignItems, padding }) {
+  alignItems, padding, height }) {
   return (
     <RelativeContainer>
       <ModalContainer>
@@ -20,7 +20,7 @@ export default function Modal({ title, children, disable,
           </CloseIcon>
           <ModalHeaderText>{title}</ModalHeaderText>
         </ModalHeader>
-        <ModalContent $padding={ padding } $alignItems={ alignItems }>
+        <ModalContent $padding={ padding } $alignItems={ alignItems } $height={ height }>
           {children}
         </ModalContent>
       </ModalContainer>

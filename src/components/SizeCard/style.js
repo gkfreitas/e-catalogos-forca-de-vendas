@@ -7,7 +7,7 @@ export const CardContainer = styled.div`
   background: #fff;
   color: #6f97ab;
   font-family: Roboto;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
 `;

@@ -39,11 +39,11 @@ export default function EmailModal({ disable, handleSuccess }) {
             onChange={ (e) => setEmailText(e.target.value) }
             value={ emailText }
           />
-
+          <PlusIconContainer>
+            <CiCirclePlus fill="#809CAA" size={ 28 } />
+          </PlusIconContainer>
         </ContainerSearchOrAdd>
-        <PlusIconContainer>
-          <CiCirclePlus fill="#809CAA" size={ 28 } />
-        </PlusIconContainer>
+
         <ContainerInputsCheckbox>
           {filteredEmails.map(({ email, phone }, i) => (
             <InputCheckbox

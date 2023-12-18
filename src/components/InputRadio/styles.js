@@ -10,6 +10,7 @@ export const InputRadioStyle = styled.input`
 export const LabelForInput = styled.label`
   color: #6A6A6A;
   font-family: Roboto;
+  width: ${({ $width }) => `${$width}%` || 'auto'};
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

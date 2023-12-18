@@ -49,6 +49,8 @@ export default function DeadlineModal({ disable }) {
           {
             dates.map(({ month, date }, i) => (
               <InputRadio
+                width="80"
+                name="deadline"
                 onChange={ () => handleChange(`${month} (${date})`) }
                 gap={ 10 }
                 size={ 20 }

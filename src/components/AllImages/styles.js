@@ -13,6 +13,7 @@ export const AllImagesContainer = styled.main`
 `;
 
 export const ImageContainer = styled.div`
+
   border: 1px solid #ddd;
   border-radius: 5px;
   cursor: pointer;

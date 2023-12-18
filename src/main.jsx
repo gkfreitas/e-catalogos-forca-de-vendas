@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ProductProvider } from './context/ProductContext';
 import { ProductOrderProvider } from './context/ProductOrderContext';
 import { ProductToolsProvider } from './context/ProductToolsContenxt';
+import { ContainerMobile } from './layout';
 import Routes from './routes/routes';
 import GlobalStyle from './styles/global.css';
 
@@ -12,8 +13,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ProductProvider>
       <ProductOrderProvider>
         <ProductToolsProvider>
-          <GlobalStyle />
-          <Routes />
+          <ContainerMobile>
+            <GlobalStyle />
+            <Routes />
+          </ContainerMobile>
         </ProductToolsProvider>
       </ProductOrderProvider>
     </ProductProvider>

@@ -19,7 +19,12 @@ import {
 } from './styles';
 
 export default function ExportPage() {
-  const { currentOrder } = useContext(ProductOrderContext);
+  const {
+    currentOrder,
+    setCurrentOrder,
+    setCurrentProductOrder,
+    emptyOrder,
+  } = useContext(ProductOrderContext);
 
   const {
     orderNumber,
@@ -29,7 +34,6 @@ export default function ExportPage() {
     paymentCondition,
     installmentsValue,
   } = currentOrder;
-  const { installments } = paymentCondition;
 
   const [exported, setExported] = useState(false);
 
@@ -47,10 +51,10 @@ export default function ExportPage() {
     clientName,
     clientCNPJ,
     BRL.format(totalValue),
-    'R$ 0,00',
+    BRL.format(totalValue * (paymentCondition?.discount || 0)),
     'R$ 0,00',
     <span key="Total Value">
-      {`${installments}x ${BRL.format(installmentsValue)}`}
+      {`${paymentCondition?.installments}x ${BRL.format(installmentsValue)}`}
       {' '}
       =
       {' '}
@@ -61,15 +65,28 @@ export default function ExportPage() {
   const [sendEmail, setSendEmail] = useState(false);
 
   const handleSuccess = (message) => {
-    setExported(true);
+    const localCurrentOrder = JSON.parse(localStorage.getItem('currentOrder'));
+    if (!Object.values(localCurrentOrder).length) return;
     toast.success(message);
-    localStorage.clear();
+    const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    setCurrentOrder(emptyOrder);
+    setCurrentProductOrder({});
+    setExported(true);
+    localStorage.setItem('orders', JSON.stringify([...currentOrders, localCurrentOrder]));
+    localStorage.removeItem('currentOrder');
+    localStorage.removeItem('currentProductOrder');
+    localStorage.removeItem('selectedProducts');
+    localStorage.removeItem('currentOrder');
   };
 
   return (
     <PageContainer>
       <ToastContainer />
-      <Header title="Exportar" routeBack={ exported ? '/clients' : '/order' } />
+      <Header
+        title="Exportar"
+        routeBack={ exported ? '/clients' : '/order' }
+        routeNext="/functions"
+      />
       <PageTitle>Resumo do pedido</PageTitle>
       <ContainerFields>
         {tags.map((tag, i) => (

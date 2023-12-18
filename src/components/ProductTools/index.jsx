@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cartIcon from '../../assets/icons/cart-icon.svg';
-import eyeIcon from '../../assets/icons/eye-icon.svg';
 import infoIcon from '../../assets/icons/info-icon.svg';
 import searchIcon from '../../assets/icons/search-icon.svg';
 import { ProductContext } from '../../context/ProductContext';
 import { ProductOrderContext } from '../../context/ProductOrderContext';
 import { ProductToolsContext } from '../../context/ProductToolsContenxt';
 import { Separator } from '../ImagesSlider/styles';
+import InfoCard from '../InfoCard';
 import { ImagePreview, ImagesContainer, ToolIcon, ToolsContainer } from './styles';
 
 export default function ProductTools({ setPreviewImage }) {
@@ -15,8 +15,6 @@ export default function ProductTools({ setPreviewImage }) {
   const {
     setInfoCard,
     setSearchCard,
-    setSeeAll,
-    seeAll,
     setErrorRef,
   } = useContext(ProductToolsContext);
 
@@ -56,10 +54,6 @@ export default function ProductTools({ setPreviewImage }) {
           ))}
         </ImagesContainer>
         <ToolIcon
-          src={ eyeIcon }
-          onClick={ () => setSeeAll(!seeAll) }
-        />
-        <ToolIcon
           src={ cartIcon }
           onClick={ goToCart }
         />
@@ -69,6 +63,7 @@ export default function ProductTools({ setPreviewImage }) {
         margin={ 20 }
         height={ 1 }
       />
+      {InfoCard && <InfoCard />}
     </>
   );
 }

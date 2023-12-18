@@ -13,6 +13,14 @@ const mockGenderName = mockProducts.map(({ group_name }) => group_name);
 const noRepeatedGenderName = mockGenderName
   .filter((filter, index) => mockGenderName.indexOf(filter) === index);
 
+const mockType = mockProducts.map(({ type }) => type);
+const noRepeatedType = mockType
+  .filter((filter, index) => mockType.indexOf(filter) === index);
+
+const mockSubCategoryName = mockProducts.map(({ sub_category }) => sub_category);
+const noRepeatedSubCategoryName = mockSubCategoryName
+  .filter((filter, index) => mockSubCategoryName.indexOf(filter) === index);
+
 export const mockFilters = [
   {
     filterName: 'Marca',
@@ -24,7 +32,7 @@ export const mockFilters = [
   },
   {
     filterName: 'Tipo',
-    options: ['Tipo 1', 'Tipo 2', 'Tipo 3', 'Tipo 4', 'Tipo 5', 'Tipo 6'],
+    options: noRepeatedType,
   },
   {
     filterName: 'Gênero',
@@ -34,7 +42,10 @@ export const mockFilters = [
     filterName: 'Categorias',
     subFilters: noRepeatedCategoryName.map((category) => ({
       filterName: category,
-      options: ['Subcategoria 1', 'Subcategoria 2', 'Subcategoria 3', 'Subcategoria 4'],
+      options: noRepeatedSubCategoryName
+        .filter((subcategory) => mockProducts
+          .some((product) => product.sub_category === subcategory
+          && product.category_name === category)),
     })),
 
   },

@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable max-lines */
-const mockProducts = [
+const mockProductsInitial = [
   {
     id: 7364,
     name: 'BLUSA FEM - M4753',
@@ -5880,7 +5880,21 @@ const mockProducts = [
   },
 ];
 
-console.log(mockProducts.length);
+function enrichProductData(products) {
+  const types = ['Importado', 'Nacional', 'Private Label'];
+  const subCategories = ['Algodão', 'Poliéster', 'Viscose', 'Seda', 'Linho'];
+  const deliveries = ['Pronta Entrega', 'Programado'];
+
+  return products.map((product) => {
+    const type = types[Math.floor(Math.random() * types.length)];
+    const subCategory = subCategories[Math.floor(Math.random() * subCategories.length)];
+    const delivery = deliveries[Math.floor(Math.random() * deliveries.length)];
+    return { ...product, type, sub_category: subCategory, delivery };
+  });
+}
+
+// Exemplo de uso
+const mockProducts = enrichProductData(mockProductsInitial);
 
 // const mockProducts = mockProcutsBase.map((product) => {
 //   const filteredImages = [];

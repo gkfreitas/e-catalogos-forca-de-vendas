@@ -100,7 +100,7 @@ export const NumbersContainer = styled.div`
 `;
 
 export const InputSelect = styled.select`
-  padding: 4px 8px;
+  padding: 2px 4px;
   justify-content: center;
   align-items: center;
   gap: 4px; 
@@ -109,7 +109,7 @@ export const InputSelect = styled.select`
   color: #FFF;
   text-align: center;
   font-family: Poppins;
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
 `;
@@ -129,5 +129,14 @@ export const ClearButton = styled.button`
   font-weight: 500;
   line-height: 14px; /* 140% */
   text-transform: uppercase;
+  cursor: pointer;
+`;
+
+export const Option = styled.option`
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+export const ShowSelectedButton = styled.button`
   cursor: pointer;
 `;

@@ -1,45 +1,52 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 
 const ProductOrderContext = createContext();
 
-function ProductOrderProvider({ children }) {
-  const emptyOrder = {
-    clientName: '',
-    clientCNPJ: '',
-    clientFantasyName: '',
-    orderNumber: '',
-    orderDate: '',
-    deadline: '',
-    shippment: '',
-    productsCart: [],
-    paymentCondition: {
-      method: '',
-      installments: '',
-    },
-    installmentsValue: '',
-    totalValue: '',
-  };
+const emptyOrder = {
+  clientName: '',
+  clientCNPJ: '',
+  clientFantasyName: '',
+  orderNumber: '',
+  orderDate: '',
+  deadline: '',
+  shippment: '',
+  hour: '',
+  productsCart: [],
+  paymentCondition: {
+    method: '',
+    installments: 0,
+    discount: 0,
+  },
+  installmentsValue: 0,
+  totalValue: 0,
+};
 
+function ProductOrderProvider({ children }) {
   const [currentOrder, setCurrentOrder] = useState(JSON.parse(localStorage
     .getItem('currentOrder')) || emptyOrder);
-
   const [currentProductOrder, setCurrentProductOrder] = useState(
     JSON.parse(localStorage.getItem('currentProductOrder')) || {},
   );
 
   useEffect(() => {
-    localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+    try {
+      localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+    } catch (error) {
+      console.error('Erro ao salvar no localStorage', error);
+    }
   }, [currentOrder]);
+
+  const contextValue = useMemo(() => ({
+    currentProductOrder,
+    setCurrentProductOrder,
+    currentOrder,
+    setCurrentOrder,
+    emptyOrder,
+  }), [currentProductOrder, currentOrder]);
 
   return (
     <ProductOrderContext.Provider
-      value={ {
-        currentProductOrder,
-        setCurrentProductOrder,
-        currentOrder,
-        setCurrentOrder,
-      } }
+      value={ contextValue }
     >
       {children}
     </ProductOrderContext.Provider>

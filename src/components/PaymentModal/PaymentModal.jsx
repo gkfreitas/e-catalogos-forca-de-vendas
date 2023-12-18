@@ -1,11 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import { ProductOrderContext } from '../../context/ProductOrderContext';
 import InputRadio from '../InputRadio/InputRadio';
 import LabelPayment from '../LabelPayment/LabelPayment';
 import Modal from '../Modal';
 import { Container } from './styles';
 
-export default function PaymentModal({ disable }) {
+export default function PaymentModal({ disable, totalValue }) {
   const paymentMethods = [
     {
       method: '90/120/150',
@@ -36,7 +37,14 @@ export default function PaymentModal({ disable }) {
 
   const { setCurrentOrder } = useContext(ProductOrderContext);
 
-  const handleChange = (paymentCondition) => {
+  const [value, setInputValue] = useState('');
+
+  const handleChange = (paymentCondition, minValue) => {
+    if (totalValue < minValue) {
+      toast.error('Valor mínimo do pedido não atingido');
+      return;
+    }
+    setInputValue(paymentCondition.method);
     setCurrentOrder((prevState) => ({
       ...prevState,
       paymentCondition,
@@ -45,6 +53,7 @@ export default function PaymentModal({ disable }) {
 
   return (
     <Modal title="PAGAMENTO" disable={ disable }>
+      <ToastContainer />
       <Container>
         {paymentMethods.map(({ method, minValue, discount }) => (
           <InputRadio
@@ -53,8 +62,10 @@ export default function PaymentModal({ disable }) {
             size={ 26 }
             gap={ 16 }
             onChange={ () => handleChange({ method,
-              installments: method.split('/').length || 1 }) }
-            value={ method }
+              installments: method.split('/').length || 1,
+              discount: (discount / 100) }, minValue) }
+            value={ value }
+            checked={ value === method }
             label={ <LabelPayment
               minValue={ minValue }
               discount={ discount }

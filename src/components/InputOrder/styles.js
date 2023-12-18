@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const InputContainer = styled.div`
   padding: 3px 6px;
   border-radius: 3px;
-  background: #F7F7F7;
+  background-color: ${({ $bgColor }) => $bgColor || '#F7F7F7'};
   width: ${({ $width }) => $width || '100%'};
   margin-top: 4px;
   flex-shrink: 0;

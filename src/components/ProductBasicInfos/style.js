@@ -50,7 +50,7 @@ export const PriceTextNumbers = styled.span`
 `;
 
 export const ProductTextStyle = styled.p`
-  color: #809CAA;
+  color: #000;
   font-family: Roboto;
   font-size: 16px;
   font-style: normal;

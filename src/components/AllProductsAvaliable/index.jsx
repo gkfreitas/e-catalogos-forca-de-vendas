@@ -30,7 +30,7 @@ export default function AllProductsAvaliable({ imagesPerView, filteredProducts,
 
   const handleErrorImage = (e, images) => {
     const currentImageIndex = images.findIndex((img) => img.image === e.target.src);
-    const nextImageIndex = (currentImageIndex + 1) % images.length;
+    const nextImageIndex = (currentImageIndex + 1);
     e.target.src = images[nextImageIndex]?.image || randomImageUrl;
   };
 
