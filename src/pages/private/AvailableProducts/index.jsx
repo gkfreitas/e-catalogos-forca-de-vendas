@@ -1,9 +1,11 @@
 /* eslint-disable no-magic-numbers */
 import { useContext, useEffect, useState } from 'react';
 import { FaEraser } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import eyeIcon from '../../../assets/icons/eye-icon.svg';
 import AllProductsAvaliable from '../../../components/AllProductsAvaliable';
 import FilterAvaliableProducts from '../../../components/FilterAvaliableProducts';
+import FooterEdit from '../../../components/FooterEdit/FooterEdit';
 import Header from '../../../components/Header';
 import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import { ProductToolsContext } from '../../../context/ProductToolsContenxt';
@@ -21,8 +23,7 @@ import {
 
 export default function AvailableProducts() {
   const { setSeeAll } = useContext(ProductToolsContext);
-  const { setCurrentProductOrder } = useContext(ProductOrderContext);
-
+  const { setCurrentProductOrder, currentOrder } = useContext(ProductOrderContext);
   const [imagesPerView, setImagesPerView] = useState(2);
   const [showSelected, setShowSelected] = useState(false);
   const [allProducts, setAllProducts] = useState(mockProcuts);
@@ -37,8 +38,10 @@ export default function AvailableProducts() {
   });
   const [subFilters, setSubFilters] = useState({});
   const [categorySelected, setCategorySelected] = useState('Todos');
-  console.log(subFilters);
   const [filteredProducts, setFilteredProducts] = useState(mockProcuts);
+
+  const navigate = useNavigate();
+
   const categories = Array.from(new Set(allProducts
     .map((product) => product.category_name)));
 
@@ -120,8 +123,18 @@ export default function AvailableProducts() {
     }
   }, [filteredProducts, selectedProducts, showSelected]);
 
+  useEffect(() => {
+    const { clientName } = currentOrder;
+    if (!clientName) {
+      navigate('/clients');
+    }
+  }, [currentOrder]);
+
   return (
     <Container>
+      {localStorage.getItem('editMode') && (
+        <FooterEdit />
+      )}
       <Header
         title={ `Produtos Disponíveis (${filteredProducts.length})` }
         routeBack="/clients"

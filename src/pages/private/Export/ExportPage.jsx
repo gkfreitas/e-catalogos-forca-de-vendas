@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AiFillSave, AiOutlineMail } from 'react-icons/ai';
 import { IoCloudUploadOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import EmailModal from '../../../components/EmailModal/EmailModal';
 import ExportFields from '../../../components/ExportFields/ExportFields';
@@ -33,10 +34,13 @@ export default function ExportPage() {
     totalValue,
     paymentCondition,
     installmentsValue,
+    productsCart,
   } = currentOrder;
 
   const [exported, setExported] = useState(false);
+  const [orderType, setOrderType] = useState(null);
 
+  const navigate = useNavigate();
   const BRL = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -66,6 +70,7 @@ export default function ExportPage() {
 
   const handleSuccess = (message) => {
     const localCurrentOrder = JSON.parse(localStorage.getItem('currentOrder'));
+    if (!orderType) return toast.error('Selecione pedido ou orçamento');
     if (!Object.values(localCurrentOrder).length) return;
     toast.success(message);
     const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -77,7 +82,27 @@ export default function ExportPage() {
     localStorage.removeItem('currentProductOrder');
     localStorage.removeItem('selectedProducts');
     localStorage.removeItem('currentOrder');
+    navigate('/functions');
   };
+
+  useEffect(() => {
+    const { shippment, deadline, paymentCondition: { method } } = currentOrder;
+
+    if (!clientName) {
+      navigate('/clients');
+    }
+
+    if (!JSON.parse(localStorage.getItem('selectedProducts')).length) {
+      navigate('/avaliableProducts');
+    }
+
+    if (productsCart.length === 0) {
+      navigate('/purchase');
+    }
+    if (!shippment || !deadline || !method) {
+      navigate('/order');
+    }
+  }, [clientName, currentOrder, navigate, productsCart.length]);
 
   return (
     <PageContainer>
@@ -85,7 +110,6 @@ export default function ExportPage() {
       <Header
         title="Exportar"
         routeBack={ exported ? '/clients' : '/order' }
-        routeNext="/functions"
       />
       <PageTitle>Resumo do pedido</PageTitle>
       <ContainerFields>
@@ -99,12 +123,18 @@ export default function ExportPage() {
       </ContainerFields>
       <InputsRadioContainer>
         <InputRadio
+          onChange={ () => setOrderType('order') }
           label={ <LabelText>Pedido</LabelText> }
           gap={ 6 }
           size={ 18 }
+          value="order"
+          checked={ orderType === 'order' }
           name="orderType"
         />
         <InputRadio
+          onChange={ () => setOrderType('budget') }
+          value="budget"
+          checked={ orderType === 'budget' }
           label={ <LabelText>Orçamento</LabelText> }
           gap={ 6 }
           size={ 18 }

@@ -1,3 +1,4 @@
+import PdfPreview from '../components/OrderPDF/PDFViewer';
 import AvailableProducts from '../pages/private/AvailableProducts';
 import Brands from '../pages/private/Brands';
 import Clients from '../pages/private/Clients';
@@ -50,5 +51,9 @@ export const publicRoutes = [
   {
     path: '/order/:id',
     component: OrderDetails,
+  },
+  {
+    path: '/order/pdf',
+    component: PdfPreview,
   },
 ];

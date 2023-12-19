@@ -21,7 +21,7 @@ export default function OrdersList() {
   const tags = ['N do pedido', 'CNPJ', 'Razão Social', 'Data e Hora'];
 
   useEffect(() => {
-    const localOrders = JSON.parse(localStorage.getItem('orders'));
+    const localOrders = JSON.parse(localStorage.getItem('orders')) || [];
     setOrders(localOrders);
   }, []);
 
@@ -44,6 +44,7 @@ export default function OrdersList() {
       const verifyDateLocal = initialDate && finalDate ? verifyDate(order) : true;
       return verifyOrderNumber && verifySocialReasonOrCNPJ && verifyDateLocal;
     });
+
     setFilteredOrders(filteredOrder);
   }, [orderNumber, socialReasonOrCNPJ, login, initialDate, finalDate, orders]);
 

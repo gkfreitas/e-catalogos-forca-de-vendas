@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import { ProductOrderContext } from '../../context/ProductOrderContext';
+import mockProducts from '../../mocks/mockProducts';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import EmailModal from '../EmailModal/EmailModal';
 import {
   DeleteButton,
   DuplicateButton,
@@ -9,11 +13,28 @@ import {
   Footer,
 } from './styles';
 
-export default function FooterOrderDetails({ orderNumber }) {
+export default function FooterOrderDetails({ currentOrder }) {
+  const { orderNumber } = currentOrder;
   const navigate = useNavigate();
-
+  const { setCurrentOrder, setCurrentProductOrder } = useContext(ProductOrderContext);
   const [modalDelete, setModalDelete] = useState(false);
   const [modalDuplicate, setModalDuplicate] = useState(false);
+  const [modalExport, setModalExport] = useState(false);
+
+  const handleEdit = () => {
+    setCurrentOrder(currentOrder);
+    const { productsCart } = currentOrder;
+    const productsCartIds = productsCart.map((product) => product.id);
+    const productsSelected = mockProducts
+      .filter((product) => productsCartIds.includes((product.id).toString()));
+    const currentProductOrder = {};
+
+    productsCart.forEach(({ id, ...rest }) => { currentProductOrder[id] = rest; });
+    setCurrentProductOrder(currentProductOrder);
+    localStorage.setItem('editMode', true);
+    localStorage.setItem('selectedProducts', JSON.stringify(productsSelected));
+    navigate('/avaliableProducts');
+  };
   const handleDelete = () => {
     const orders = JSON.parse(localStorage.getItem('orders'));
     const newOrders = orders.filter((order) => order.orderNumber !== orderNumber);
@@ -33,19 +54,23 @@ export default function FooterOrderDetails({ orderNumber }) {
     navigate('/orders/list');
   };
 
+  const handleSuccess = (message) => {
+    toast.success(message);
+  };
+
   return (
     <>
       <Footer>
         <DeleteButton onClick={ () => setModalDelete(true) }>
           Deletar
         </DeleteButton>
-        <EditButton>
+        <EditButton onClick={ handleEdit }>
           Editar
         </EditButton>
         <DuplicateButton onClick={ () => setModalDuplicate(true) }>
           Duplicar
         </DuplicateButton>
-        <ExportButton>
+        <ExportButton onClick={ () => setModalExport(true) }>
           Exportar
         </ExportButton>
       </Footer>
@@ -67,6 +92,15 @@ export default function FooterOrderDetails({ orderNumber }) {
           disable={ () => setModalDelete(false) }
         />
       )}
+      {
+        modalExport && (
+          <EmailModal
+            handleSuccess={ handleSuccess }
+            disable={ () => setModalExport(false) }
+          />
+        )
+      }
+      <ToastContainer />
     </>
   );
 }

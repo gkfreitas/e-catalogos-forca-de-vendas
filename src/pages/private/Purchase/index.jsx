@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import Div100vh from 'react-div-100vh';
+import { useNavigate } from 'react-router-dom';
 import AddProduct from '../../../components/AddProduct';
+import FooterEdit from '../../../components/FooterEdit/FooterEdit';
 import HeaderCategory from '../../../components/Header/HeaderCategory';
 import HiddenCards from '../../../components/HiddenCards';
 import ImagesSlider from '../../../components/ImagesSlider';
@@ -18,7 +20,8 @@ export default function PurchasePage() {
     setCurrentProduct,
   } = useContext(ProductContext);
 
-  const { currentProductOrder } = useContext(ProductOrderContext);
+  const { currentProductOrder, currentOrder } = useContext(ProductOrderContext);
+  const navigate = useNavigate();
 
   const [previewImage, setPreviewImage] = useState(false);
 
@@ -30,12 +33,27 @@ export default function PurchasePage() {
   }, [setCurrentProduct, setOrderProducts]);
 
   useEffect(() => {
+    const { clientName } = currentOrder;
+    if (!clientName) {
+      navigate('/clients');
+    }
+
+    if (!JSON.parse(localStorage.getItem('selectedProducts')).length) {
+      navigate('/avaliableProducts');
+    }
+  }, [currentOrder, navigate]);
+
+  useEffect(() => {
     setPreviewImage(false);
   }, [currentProductIndex]);
 
   return (
     <Div100vh>
+
       <PurchaseContainer>
+        {localStorage.getItem('editMode') && (
+          <FooterEdit />
+        )}
         <HeaderCategory
           routeBack="/avaliableProducts"
           routeNext={ Object.keys(currentProductOrder).length && '/order' }
@@ -43,10 +61,7 @@ export default function PurchasePage() {
         <ImagesSlider previewImage={ previewImage } />
         <ProductTools setPreviewImage={ setPreviewImage } />
         <ProductBasicInfos />
-        <AddProduct
-          accumulatedRef={ 50 }
-          accumulatedPrice={ 500 }
-        />
+        <AddProduct />
         <ProductSizes />
       </PurchaseContainer>
       <HiddenCards />

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { ProductOrderContext } from '../../context/ProductOrderContext';
 import DeadlineModal from '../DeadlineModal/DeadlineModal';
+import FooterEdit from '../FooterEdit/FooterEdit';
 import FooterOrderDetails from '../FooterOrderDetails/FooterOrderDetails';
 import Header from '../Header';
 import InputOrder from '../InputOrder/InputOrder';
@@ -33,7 +34,8 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
     currentProductOrder,
     setCurrentOrder,
   } = useContext(ProductOrderContext);
-  const { productsCart,
+  const {
+    productsCart,
     paymentCondition,
     totalValue,
     clientName,
@@ -42,8 +44,26 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
     deadline,
     orderNumber,
     orderDate,
-    installmentsValue } = currentOrder;
-  const { method, installments, discount } = paymentCondition;
+    installmentsValue } = currentOrder || {};
+  const { method, installments, discount } = paymentCondition || {};
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!detail) {
+      if (!clientName) {
+        navigate('/clients');
+      }
+
+      if (!(JSON.parse(localStorage.getItem('selectedProducts')) || []).length) {
+        navigate('/avaliableProducts');
+      }
+
+      if (productsCart.length === 0) {
+        navigate('/purchase');
+      }
+    }
+  }, [clientName, currentOrder, detail, navigate, productsCart.length]);
 
   useEffect(() => {
     const max = 2000000;
@@ -112,9 +132,10 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
   const halfWidthValues = ['Data', 'Total'];
 
   const handleNextPage = () => {
-    if (!deadline) return toast.error('Selecione um prazo de entrega');
     if (!shippment) return toast.error('Selecione uma transportadora');
     if (!method) return toast.error('Selecione uma condição de pagamento');
+    if (!deadline) return toast.error('Selecione um prazo de entrega');
+
     router('/export');
   };
 
@@ -122,6 +143,9 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
     <div className="print-container">
       <ToastContainer />
       <CoverPage>
+        {localStorage.getItem('editMode') && !detail && (
+          <FooterEdit />
+        )}
         <Header title="PEDIDO" routeBack={ routeBack } />
         <InputsContainer>
           {inputTags.map((tag, index) => (
@@ -171,16 +195,19 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
                   <FaRegCalendarAlt size={ 26 } fill="#809CAA" />
                 </IconContainer>
               </OrderTools>
-              <NextButton
-                onClick={ handleNextPage }
-              >
-                Avançar
-              </NextButton>
+              {!localStorage.getItem('editMode') && (
+                <NextButton
+                  onClick={ handleNextPage }
+                >
+                  Avançar
+                </NextButton>
+              )}
+
             </Footer>
           )
         }
         {detail && (
-          <FooterOrderDetails orderNumber={ currentOrder.orderNumber } />
+          <FooterOrderDetails currentOrder={ currentOrder } />
         )}
 
         {showShippment && <ShippmentModal disable={ () => setShowShippment(false) } />}

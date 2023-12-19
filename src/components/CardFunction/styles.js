@@ -4,6 +4,7 @@ export const CardsContainer = styled.main`
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 `;
 
 export const CardContainer = styled.div`

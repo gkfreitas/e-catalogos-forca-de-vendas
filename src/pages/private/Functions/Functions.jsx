@@ -5,7 +5,7 @@ import { FunctionsContainer } from './styles';
 export default function Functions() {
   return (
     <FunctionsContainer>
-      <Header title="Funções" routeBack="/export" />
+      <Header title="Funções" />
       <CardFunction />
     </FunctionsContainer>
   );

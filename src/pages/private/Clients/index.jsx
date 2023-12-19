@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
 import ClientCard from '../../../components/ClientCard';
+import FooterEdit from '../../../components/FooterEdit/FooterEdit';
 import Header from '../../../components/Header';
 import InputSearch from '../../../components/InputSearch';
 import Modal from '../../../components/Modal';
@@ -78,10 +79,14 @@ export default function ClientsPage() {
   return (
 
     <>
+      {localStorage.getItem('editMode') && (
+        <FooterEdit />
+      )}
       <Header
         title="Clientes"
         routeBack="/"
         routeNext={ currentClient && '/avaliableProducts' }
+
       />
       <InputSearchContainer>
         <InputSearch

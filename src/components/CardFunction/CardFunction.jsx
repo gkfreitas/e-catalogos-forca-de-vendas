@@ -9,6 +9,11 @@ export default function CardFunction() {
       iconSrc: orderListIcons,
       route: '/orders/list',
     },
+    {
+      name: 'Clientes',
+      iconSrc: orderListIcons,
+      route: '/clients',
+    },
   ];
 
   const navigate = useNavigate();

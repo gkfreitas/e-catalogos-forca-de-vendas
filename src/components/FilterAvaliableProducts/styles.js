@@ -7,6 +7,7 @@ export const FilterContainer = styled.div`
   max-width: ${({ $visible }) => ($visible ? '50%' : '0px')};
   border-radius: 0px 5px 5px 0px;
   background: #FAFAFA;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   position: fixed;
   bottom: 0px;
   margin-left: 2px;

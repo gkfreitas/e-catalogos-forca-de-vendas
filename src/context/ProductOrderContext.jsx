@@ -36,6 +36,23 @@ function ProductOrderProvider({ children }) {
     }
   }, [currentOrder]);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem('currentProductOrder', JSON.stringify(currentProductOrder));
+    } catch (error) {
+      console.error('Erro ao salvar no localStorage', error);
+    }
+    const productsCardIds = Object.keys(currentProductOrder);
+    setCurrentOrder((prevState) => ({
+      ...prevState,
+      productsCart: productsCardIds.map((id) => {
+        return { id, ...currentProductOrder[id] };
+      }),
+      totalValue: Object.values(currentProductOrder)
+        .reduce((acc, { total }) => acc + total, 0),
+    }));
+  }, [currentProductOrder]);
+
   const contextValue = useMemo(() => ({
     currentProductOrder,
     setCurrentProductOrder,
