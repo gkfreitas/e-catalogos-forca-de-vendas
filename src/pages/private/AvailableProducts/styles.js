@@ -140,3 +140,9 @@ export const Option = styled.option`
 export const ShowSelectedButton = styled.button`
   cursor: pointer;
 `;
+
+export const EyeIconImage = styled.img`
+cursor: pointer;
+width: 24px;
+height: 24px;
+`;

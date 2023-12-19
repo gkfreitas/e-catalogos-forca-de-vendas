@@ -1,22 +1,22 @@
 /* eslint-disable no-magic-numbers */
 import { useContext, useEffect, useState } from 'react';
 import { FaEraser } from 'react-icons/fa';
+import eyeIcon from '../../../assets/icons/eye-icon.svg';
+import AllProductsAvaliable from '../../../components/AllProductsAvaliable';
 import FilterAvaliableProducts from '../../../components/FilterAvaliableProducts';
 import Header from '../../../components/Header';
-import mockProcuts from '../../../mocks/mockProducts';
-
-import AllProductsAvaliable from '../../../components/AllProductsAvaliable';
 import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import { ProductToolsContext } from '../../../context/ProductToolsContenxt';
+import mockProcuts from '../../../mocks/mockProducts';
 import {
   AvailableProductsContainer,
   ButtonsContainer,
   ChangeImagesPerViewButton,
   Container,
+  EyeIconImage,
   InputSelect,
   NumbersContainer,
   Option,
-  ShowSelectedButton,
 } from './styles';
 
 export default function AvailableProducts() {
@@ -151,10 +151,11 @@ export default function AvailableProducts() {
           ))}
         </NumbersContainer>
 
-        <ShowSelectedButton onClick={ handleShowSelected }>
-          M
-        </ShowSelectedButton>
-
+        <EyeIconImage
+          cursor="pointer"
+          src={ eyeIcon }
+          onClick={ handleShowSelected }
+        />
         <FaEraser
           cursor="pointer"
           size={ 24 }

@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import { FaRegCalendarAlt, FaShippingFast } from 'react-icons/fa';
 import { HiOutlineCurrencyDollar } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import { ProductOrderContext } from '../../context/ProductOrderContext';
 import DeadlineModal from '../DeadlineModal/DeadlineModal';
+import FooterOrderDetails from '../FooterOrderDetails/FooterOrderDetails';
 import Header from '../Header';
 import InputOrder from '../InputOrder/InputOrder';
 import PaymentModal from '../PaymentModal/PaymentModal';
@@ -31,7 +33,16 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
     currentProductOrder,
     setCurrentOrder,
   } = useContext(ProductOrderContext);
-  const { productsCart, paymentCondition, totalValue } = currentOrder;
+  const { productsCart,
+    paymentCondition,
+    totalValue,
+    clientName,
+    clientCNPJ,
+    shippment,
+    deadline,
+    orderNumber,
+    orderDate,
+    installmentsValue } = currentOrder;
   const { method, installments, discount } = paymentCondition;
 
   useEffect(() => {
@@ -59,16 +70,6 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
   }, [installments, currentProductOrder, setCurrentOrder]);
 
   useEffect(() => {
-    const {
-      clientName,
-      clientCNPJ,
-      shippment,
-      deadline,
-      orderNumber,
-      orderDate,
-      installmentsValue,
-    } = currentOrder;
-
     const BRL = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
@@ -91,7 +92,18 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
     ];
     setInputTags(tags);
     setInputContents(contents);
-  }, [currentOrder, installments, method, productsCart, totalValue]);
+  }, [clientCNPJ,
+    clientName,
+    currentOrder,
+    deadline,
+    installments,
+    installmentsValue,
+    method,
+    orderDate,
+    orderNumber,
+    productsCart,
+    shippment,
+    totalValue]);
 
   const router = useNavigate();
 
@@ -99,8 +111,16 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
 
   const halfWidthValues = ['Data', 'Total'];
 
+  const handleNextPage = () => {
+    if (!deadline) return toast.error('Selecione um prazo de entrega');
+    if (!shippment) return toast.error('Selecione uma transportadora');
+    if (!method) return toast.error('Selecione uma condição de pagamento');
+    router('/export');
+  };
+
   return (
     <div className="print-container">
+      <ToastContainer />
       <CoverPage>
         <Header title="PEDIDO" routeBack={ routeBack } />
         <InputsContainer>
@@ -152,13 +172,16 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
                 </IconContainer>
               </OrderTools>
               <NextButton
-                onClick={ () => router('/export') }
+                onClick={ handleNextPage }
               >
                 Avançar
               </NextButton>
             </Footer>
           )
         }
+        {detail && (
+          <FooterOrderDetails orderNumber={ currentOrder.orderNumber } />
+        )}
 
         {showShippment && <ShippmentModal disable={ () => setShowShippment(false) } />}
         {showPayment && <PaymentModal

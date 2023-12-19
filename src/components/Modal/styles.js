@@ -44,10 +44,10 @@ export const ModalContent = styled.div`
   padding: ${({ $padding }) => ($padding || '30')} 0px;
   display: flex;
   gap: 0px;
+  min-height: 70svh;
   align-items: ${({ $alignItems }) => $alignItems || 'center'};
   flex-direction: column;
   border-radius: 0px 0px 3px 3px;
-  height: ${({ $height }) => $height || '60svh'};
 `;
 
 export const CloseIcon = styled.div`

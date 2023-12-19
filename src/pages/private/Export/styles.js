@@ -28,7 +28,7 @@ export const InputsRadioContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 14px;
-  padding: 14px 0;
+  padding: 4px 0;
 `;
 
 export const LabelText = styled.p`

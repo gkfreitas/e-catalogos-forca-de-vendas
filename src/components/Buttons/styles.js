@@ -2,18 +2,32 @@ import { styled } from 'styled-components';
 
 export const BasicButton = styled.button`
   font-family: Poppins;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   text-transform: uppercase;
 `;
 
 export const ButtonLoginStyle = styled.div`
-  margin-top: 18px;
-  border-radius: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
   background: #21C4E6;
-  padding: 5px 80px;
+  padding: 10px 20px;
   color: #FFF;
   font-size: 24px;
+  transition-duration: 200ms;
+  &:hover {
+  color: #001A1E;  
+}
+`;
+
+export const ButtonRegisterStyle = styled.div`
+  margin-top: 10px;
+  border-radius: 5px;
+  background: #21C4E6;
+  padding: 4px 20px;
+  color: #FFF;
+  font-size: 20px;
+  line-height: 20px;
   transition-duration: 200ms;
   &:hover {
   color: #001A1E;  

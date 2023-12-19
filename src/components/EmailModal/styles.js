@@ -4,8 +4,10 @@ export const ContentModal = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
+  min-height: 70svh;
   height: 70svh;
   position: relative;
+  background-color: #fff;
 `;
 
 export const ContainerSearchOrAdd = styled.div`

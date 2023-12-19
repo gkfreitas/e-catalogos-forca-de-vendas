@@ -16,7 +16,7 @@ export const FieldLabel = styled.label`
 `;
 
 export const Field = styled.div`
-  padding: 6px;
+  padding: 3px;
   border-radius: 3px;
   border-bottom: 1.5px solid #000;
   background: #F2F2F2;

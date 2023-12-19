@@ -28,7 +28,10 @@ export const IconContainer = styled.div`
 `;
 
 export const LabelInputLogin = styled.label`
-  margin: 0px 6px;
+  margin: 0px auto;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const LabelText = styled.p`
