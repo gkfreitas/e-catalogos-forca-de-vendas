@@ -23,7 +23,7 @@ export const CategoryContainer = styled.div`
   color: #809CAA;
   text-align: center;
   font-family: Poppins;
-  font-size: 14px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   padding: 3px;

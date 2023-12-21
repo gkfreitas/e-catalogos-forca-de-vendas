@@ -1,5 +1,18 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable max-lines */
+
+import img1 from '../assets/images/carrousel/img1.jpeg';
+import img10 from '../assets/images/carrousel/img10.jpeg';
+import img11 from '../assets/images/carrousel/img11.jpeg';
+import img2 from '../assets/images/carrousel/img2.jpeg';
+import img3 from '../assets/images/carrousel/img3.jpeg';
+import img4 from '../assets/images/carrousel/img4.jpeg';
+import img5 from '../assets/images/carrousel/img5.jpeg';
+import img6 from '../assets/images/carrousel/img6.jpeg';
+import img7 from '../assets/images/carrousel/img7.jpeg';
+import img8 from '../assets/images/carrousel/img8.jpeg';
+import img9 from '../assets/images/carrousel/img9.jpeg';
+
 const mockProductsInitial = [
   {
     id: 7364,
@@ -5880,6 +5893,470 @@ const mockProductsInitial = [
   },
 ];
 
+const mockProducts2 = [
+  {
+    id: 1,
+    name: 'Casaco Infantil',
+    reference: '64.41.0094',
+    brand_name: 'Marca Moda',
+    category_name: 'Infantil',
+    price: 37.99,
+    fixed_qtd: 5,
+    box_price: 151.96,
+    group_id: 6,
+    group_name: 'Feminino',
+    result_line: 4705,
+    sizes: {
+      P: 1,
+      M: 2,
+      G: 1,
+      GG: 1,
+    },
+    colors: [
+      {
+        color_name: 'ROSA',
+        cod_hex: 'f54298',
+      },
+    ],
+    images: [
+      {
+        image: img1,
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Jaqueta Rain',
+    reference: '61.31.2000',
+    brand_name: 'Marca Moda',
+    category_name: 'Jaqueta',
+    price: 59.99,
+    fixed_qtd: 10,
+    box_price: 151.96,
+    group_id: 6,
+    group_name: 'Masculino',
+    result_line: 4705,
+    sizes: {
+      P: 4,
+      M: 1,
+      G: 4,
+      GG: 1,
+    },
+    colors: [
+      {
+        color_name: 'AZUL',
+        cod_hex: '3b1ebd',
+      },
+    ],
+    images: [
+      {
+        image: img2,
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Jaqueta Rain Vermelha',
+    reference: '41.31.0000',
+    brand_name: 'Marca Moda',
+    category_name: 'Jaqueta',
+    price: 79.99,
+    fixed_qtd: 10,
+    group_id: 6,
+    group_name: 'Feminino',
+    sizes: {
+      P: 4,
+      M: 1,
+      G: 4,
+      GG: 1,
+    },
+    colors: [
+      {
+        color_name: 'Vermelho',
+        cod_hex: 'd93300',
+      },
+    ],
+    images: [
+      {
+        image: img3,
+      },
+      {
+        image: img11,
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Jaqueta Rain Cinza',
+    reference: '99.68.1000',
+    brand_name: 'Marca Moda',
+    category_name: 'Jaqueta',
+    price: 99.99,
+    fixed_qtd: 9,
+    group_id: 6,
+    group_name: 'Feminino',
+    sizes: {
+      P: 2,
+      M: 2,
+      G: 3,
+      GG: 2,
+    },
+    colors: [
+      {
+        color_name: 'Cinza',
+        cod_hex: '575757',
+      },
+    ],
+    images: [
+      {
+        image: img4,
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Camiseta Polo Cinza',
+    reference: '95.68.5000',
+    brand_name: 'Marca Moda',
+    category_name: 'Camiseta',
+    price: 120.49,
+    fixed_qtd: 9,
+    group_id: 6,
+    group_name: 'Masculino',
+    sizes: {
+      P: 2,
+      M: 2,
+      G: 3,
+      GG: 2,
+    },
+    colors: [
+      {
+        color_name: 'Cinza',
+        cod_hex: '575757',
+      },
+    ],
+    images: [
+      {
+        image: img7,
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: 'Biquini Rosa',
+    reference: '10.67.6000',
+    brand_name: 'Marca Moda',
+    category_name: 'Biquini',
+    price: 140.49,
+    fixed_qtd: 4,
+    group_id: 6,
+    group_name: 'Feminino',
+    sizes: {
+      P: 1,
+      M: 1,
+      G: 1,
+      GG: 1,
+    },
+    colors: [
+      {
+        color_name: 'Rosa',
+        cod_hex: 'f56ebf',
+      },
+    ],
+    images: [
+      {
+        image: img8,
+      },
+
+    ],
+  },
+  {
+    id: 7,
+    name: 'Casaco Inverno Infantil',
+    reference: '99.99.1000',
+    brand_name: 'Marca Moda',
+    category_name: 'Casaco',
+    price: 140.49,
+    fixed_qtd: 7,
+    group_id: 6,
+    group_name: 'Feminino',
+    sizes: {
+      P: 1,
+      M: 3,
+      G: 2,
+      GG: 1,
+    },
+    colors: [
+      {
+        color_name: 'Rosa Escuro',
+        cod_hex: 'c45a9a',
+      },
+    ],
+    images: [
+      {
+        image: img10,
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: 'Blusa de Moletom Vemelhas',
+    reference: '88.88.8000',
+    brand_name: 'Marca Moda',
+    category_name: 'Blusa',
+    price: 100.49,
+    fixed_qtd: 12,
+    group_id: 6,
+    group_name: 'Masculino',
+    sizes: {
+      P: 3,
+      M: 3,
+      G: 3,
+      GG: 3,
+    },
+    colors: [
+      {
+        color_name: 'Vermelho Escuro',
+        cod_hex: 'a81e1e',
+      },
+    ],
+    images: [
+      {
+        image: img9,
+      },
+    ],
+  },
+  {
+    id: 9,
+    name: 'Jaqueta Rain Cinza',
+    reference: '99.68.1000',
+    brand_name: 'Marca Moda',
+    category_name: 'Jaqueta',
+    price: 109.99,
+    fixed_qtd: 9,
+    group_id: 6,
+    group_name: 'Masculino',
+    sizes: {
+      P: 2,
+      M: 2,
+      G: 3,
+      GG: 2,
+    },
+    colors: [
+      {
+        color_name: 'Cinza',
+        cod_hex: '575757',
+      },
+    ],
+    images: [
+      {
+        image: img5,
+      },
+      {
+        image: img6,
+      },
+    ],
+  },
+  {
+    id: 7163,
+    name: 'CASACO #MO - JMW005',
+    reference: '66.08.0082',
+    company_id: 1,
+    brand_id: 21,
+    brand_name: 'MOSAICO',
+    category_id: 1036,
+    category_name: 'CASACO',
+    price: 34,
+    fixed_qtd: 18,
+    box_price: 612,
+    group_id: 4,
+    group_name: 'FEMININO',
+    result_line: 4705,
+    sizes: {
+      P: 3,
+      M: 6,
+      G: 6,
+      GG: 3,
+    },
+    colors: [],
+    images: [
+      {
+        id: 14523,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_16128750774mxmd6bnw6x1imt7ivb3r4.png',
+        order: 1,
+        product_id: 7163,
+      },
+      {
+        id: 14520,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_1612875074z4jjn4g7koa84f5q6dq95l.png',
+        order: 2,
+        product_id: 7163,
+      },
+      {
+        id: 14519,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_1612875074s88vx18riwa4g672povj.png',
+        order: 3,
+        product_id: 7163,
+      },
+    ],
+  },
+  {
+    id: 7164,
+    name: 'CASACO #MO - JMW018',
+    reference: '66.08.0095',
+    company_id: 1,
+    brand_id: 21,
+    brand_name: 'MOSAICO',
+    category_id: 1036,
+    category_name: 'CASACO',
+    price: 34,
+    fixed_qtd: 18,
+    box_price: 612,
+    group_id: 4,
+    group_name: 'FEMININO',
+    result_line: 4705,
+    sizes: {
+      P: 3,
+      M: 6,
+      G: 6,
+      GG: 3,
+    },
+    colors: [
+      {
+        color_name: 'PRETO/VERMELHO',
+        cod_hex: '000000',
+        cod_rgb: '0 0 0',
+        product_id: 7164,
+      },
+    ],
+    images: [
+      {
+        id: 14540,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_16128751255wbftngt5vhidxl8zq2ubk.png',
+        order: 1,
+        product_id: 7164,
+      },
+      {
+        id: 14545,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_1612875134rougpejl0dbp1zkvxix46d.png',
+        order: 2,
+        product_id: 7164,
+      },
+      {
+        id: 14537,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_1612875122a111pj6mbikzqoqwfbc57.png',
+        order: 3,
+        product_id: 7164,
+      },
+    ],
+  },
+  {
+    id: 7165,
+    name: 'CASACO #MO - JMW019',
+    reference: '66.08.0096',
+    company_id: 1,
+    brand_id: 21,
+    brand_name: 'MOSAICO',
+    category_id: 1036,
+    category_name: 'CASACO',
+    price: 34,
+    fixed_qtd: 18,
+    box_price: 612,
+    group_id: 4,
+    group_name: 'FEMININO',
+    result_line: 4705,
+    sizes: {
+      P: 3,
+      M: 6,
+      G: 6,
+      GG: 3,
+    },
+    colors: [
+      {
+        color_name: 'PRETO/VERMELHO',
+        cod_hex: '000000',
+        cod_rgb: '0 0 0',
+        product_id: 7165,
+      },
+    ],
+    images: [
+      {
+        id: 14541,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_1612875126vo8ba5qfabjfqj5zngn7w.png',
+        order: 1,
+        product_id: 7165,
+      },
+      {
+        id: 14532,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_16128751161qmewtycck32danbn96bx3.png',
+        order: 2,
+        product_id: 7165,
+      },
+      {
+        id: 14538,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_1612875123aez8uuoyx5xgjosth2bhe.png',
+        order: 3,
+        product_id: 7165,
+      },
+    ],
+  },
+  {
+    id: 7155,
+    name: 'CASACO MOL. ABER. FEM - M2267',
+    reference: '66.01.0059',
+    company_id: 1,
+    brand_id: 21,
+    brand_name: 'MOSAICO',
+    category_id: 1036,
+    category_name: 'CASACO',
+    price: 35.99,
+    fixed_qtd: 6,
+    box_price: 215.94,
+    group_id: 4,
+    group_name: 'FEMININO',
+    result_line: 4705,
+    sizes: {
+      P: 2,
+      M: 2,
+      G: 2,
+    },
+    colors: [
+      {
+        color_name: 'MESCLA ESCURO',
+        cod_hex: 'ababab',
+        cod_rgb: '171 171 171',
+        product_id: 7155,
+      },
+      {
+        color_name: 'PRETO/VERMELHO',
+        cod_hex: '000000',
+        cod_rgb: '0 0 0',
+        product_id: 7155,
+      },
+    ],
+    images: [
+      {
+        id: 14526,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_1612875078gaj026olxlgypfwvlgh5u.png',
+        order: 1,
+        product_id: 7155,
+      },
+      {
+        id: 14521,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_1612875075jlbuqrfwm7bszxaocvq6to.png',
+        order: 2,
+        product_id: 7155,
+      },
+      {
+        id: 14522,
+        image: 'https://marquente.painel.e-catalogos.net/storage/2463/2463_16128750757rmigbqbhx078i7f758ns4.png',
+        order: 3,
+        product_id: 7155,
+      },
+    ],
+  },
+];
+
 function enrichProductData(products) {
   const types = ['Importado', 'Nacional', 'Private Label'];
   const subCategories = ['Algodão', 'Poliéster', 'Viscose', 'Seda', 'Linho'];
@@ -5894,7 +6371,7 @@ function enrichProductData(products) {
 }
 
 // Exemplo de uso
-const mockProducts = enrichProductData(mockProductsInitial);
+const mockProducts = enrichProductData(mockProducts2);
 
 // const mockProducts = mockProcutsBase.map((product) => {
 //   const filteredImages = [];
