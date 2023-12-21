@@ -128,7 +128,7 @@ export default function AvailableProducts() {
     if (!clientName) {
       navigate('/clients');
     }
-  }, [currentOrder]);
+  }, [currentOrder, navigate]);
 
   return (
     <Container>

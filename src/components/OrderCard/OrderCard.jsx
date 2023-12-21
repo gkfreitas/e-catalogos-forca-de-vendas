@@ -18,7 +18,7 @@ export default function OrderCard({ tags, email, bgColor, orderInfo }) {
     const dateAndHour = `${orderDate} ${hour}`;
     setContents([orderNumber, clientCNPJ, clientName, dateAndHour]);
   }, [orderInfo]);
-
+  console.log(orderInfo);
   return (
     <Container $bgColor={ bgColor }>
       {tags.map((tag, index) => (

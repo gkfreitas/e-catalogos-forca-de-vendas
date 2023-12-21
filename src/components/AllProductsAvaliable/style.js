@@ -44,15 +44,14 @@ export const HeaderImage = styled.div`
   justify-content: center;
   padding: 2px 1px;
   border-radius: 5px 5px 0px 0px;
-  background: #fff;
+  background:  ${({ $selected }) => ($selected ? 'green' : '#fff')};
   text-align: center;
-  border: ${({ $selected }) => ($selected ? '2px solid green' : '1px solid #ddd;')};
   gap: 16px;
   width: 100%;
 `;
 
 export const SecundaryText = styled.span`
-  color: #323232;
+  
   text-align: center;
   font-family: Roboto;
   font-size: 10px;
@@ -61,7 +60,7 @@ export const SecundaryText = styled.span`
 `;
 
 export const HeaderImageText = styled.h1`
-  color: #000;
+  color:  ${({ $selected }) => ($selected ? '#FFF' : '#000')};
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;

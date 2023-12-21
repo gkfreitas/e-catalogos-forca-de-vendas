@@ -52,14 +52,17 @@ export default function AllProductsAvaliable({ imagesPerView, filteredProducts,
               .some((productSelected) => productSelected.id === product.id) }
           >
 
-            <HeaderImageText>
+            <HeaderImageText
+              $selected={ selectedProducts
+                .some((productSelected) => productSelected.id === product.id) }
+            >
               <SecundaryText>R$</SecundaryText>
               {' '}
               {filteredProducts[i]?.price.toFixed(2)}
             </HeaderImageText>
             <FaCheckCircle
               size={ 20 }
-              fill="green"
+              fill="white"
               style={ {
                 display: localStorageOrderProducts[product?.id]
                   ? 'block' : 'none',
