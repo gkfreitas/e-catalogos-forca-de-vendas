@@ -44,7 +44,6 @@ export default function ImagesSlider({ previewImage }) {
               <ImageStyle
                 src={ previewImage || images[0].image }
                 onError={ (e) => handleErrorImage(e, images) }
-                onClick={ () => handleImageModal(images[0].image) }
               />
 
             </ContainerImage>

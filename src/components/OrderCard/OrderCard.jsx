@@ -1,9 +1,12 @@
+import { pdf } from '@react-pdf/renderer';
+import { saveAs } from 'file-saver';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import cloudGreenIcon from '../../assets/icons/cloud-green.svg';
 import moneyIcon from '../../assets/icons/money.svg';
 import pdfIcon from '../../assets/icons/pdf.svg';
 import InputOrder from '../InputOrder/InputOrder';
+import { MyPdfDocument } from '../OrderPDF/MyPdfDocument';
 import { ButtonDetails, ButtonsContainer, Container, EmailText, Icon } from './styles';
 
 export default function OrderCard({ tags, email, bgColor, orderInfo }) {
@@ -18,7 +21,12 @@ export default function OrderCard({ tags, email, bgColor, orderInfo }) {
     const dateAndHour = `${orderDate} ${hour}`;
     setContents([orderNumber, clientCNPJ, clientName, dateAndHour]);
   }, [orderInfo]);
-  console.log(orderInfo);
+
+  const downloadPdfDocument = async () => {
+    const blob = await pdf(<MyPdfDocument order={ orderInfo } />).toBlob();
+    saveAs(blob, 'pedido.pdf');
+  };
+
   return (
     <Container $bgColor={ bgColor }>
       {tags.map((tag, index) => (
@@ -38,10 +46,12 @@ export default function OrderCard({ tags, email, bgColor, orderInfo }) {
             Detalhes
           </ButtonDetails>
         </Link>
-        <Icon
-          src={ pdfIcon }
-          alt="icone de um pdf"
-        />
+        <button onClick={ downloadPdfDocument }>
+          <Icon
+            src={ pdfIcon }
+            alt="icone de um pdf"
+          />
+        </button>
         <Icon src={ cloudGreenIcon } alt="icone de uma nuvem verde" />
         <Icon src={ moneyIcon } alt="icone de dinheiro" />
       </ButtonsContainer>

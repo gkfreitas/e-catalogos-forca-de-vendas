@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { AiOutlineIdcard, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { ButtonLogin } from '../Buttons';
-import ButtonRegister from '../Buttons/ButtonRegister';
 import InputText from '../InputLogin';
-import { ErrorMessage, ForgotPassword, FormContainer, InputContainer } from './styles';
+import { ErrorMessage, FormContainer, InputContainer } from './styles';
 
 export default function FormLogin() {
   const router = useNavigate();
@@ -94,12 +93,12 @@ export default function FormLogin() {
           placeholder="Sua senha"
         />
       </InputContainer>
-      <ForgotPassword>
+      {/* <ForgotPassword>
         Esqueci minha senha
-      </ForgotPassword>
+      </ForgotPassword> */}
       {errorInputs && <ErrorMessage>Preencha todos os valores!</ErrorMessage>}
       <ButtonLogin />
-      <ButtonRegister />
+      {/* <ButtonRegister /> */}
     </FormContainer>
   );
 }

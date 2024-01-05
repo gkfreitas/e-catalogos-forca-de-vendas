@@ -2,23 +2,23 @@
 import mockProducts from './mockProducts';
 
 const mockCategoryName = mockProducts.map(({ category_name }) => category_name);
-const noRepeatedCategoryName = mockCategoryName
+export const noRepeatedCategoryName = mockCategoryName
   .filter((filter, index) => mockCategoryName.indexOf(filter) === index);
 
 const mockBrandName = mockProducts.map(({ brand_name }) => brand_name);
-const noRepeatedBrandName = mockBrandName
+export const noRepeatedBrandName = mockBrandName
   .filter((filter, index) => mockBrandName.indexOf(filter) === index);
 
 const mockGenderName = mockProducts.map(({ group_name }) => group_name);
-const noRepeatedGenderName = mockGenderName
+export const noRepeatedGenderName = mockGenderName
   .filter((filter, index) => mockGenderName.indexOf(filter) === index);
 
 const mockType = mockProducts.map(({ type }) => type);
-const noRepeatedType = mockType
+export const noRepeatedType = mockType
   .filter((filter, index) => mockType.indexOf(filter) === index);
 
 const mockSubCategoryName = mockProducts.map(({ sub_category }) => sub_category);
-const noRepeatedSubCategoryName = mockSubCategoryName
+export const noRepeatedSubCategoryName = mockSubCategoryName
   .filter((filter, index) => mockSubCategoryName.indexOf(filter) === index);
 
 export const mockFilters = [

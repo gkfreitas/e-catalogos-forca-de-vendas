@@ -146,7 +146,7 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
         {localStorage.getItem('editMode') && !detail && (
           <FooterEdit />
         )}
-        <Header title="PEDIDO" routeBack={ routeBack } />
+        <Header title="PEDIDO" routeBack={ routeBack } routeFunction={ !detail } />
         <InputsContainer>
           {inputTags.map((tag, index) => (
             <InputOrder

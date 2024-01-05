@@ -18,11 +18,11 @@ export default function ProductCartCard({ product, discount }) {
   const objectSizes = Object.values(sizes);
 
   const discountValue = discount * total;
+
   const totalQuantity = objectSizes
-    .reduce((acc, cur) => acc + cur[1] * quantity, 0);
+    .reduce((acc, cur) => acc + cur * quantity, 0);
   const entriesSizes = Object.entries(sizes);
 
-  console.log(entriesSizes);
   const styles = StyleSheet.create({
     cardContainer: {
       width: '90%',
@@ -81,17 +81,19 @@ export default function ProductCartCard({ product, discount }) {
       flexDirection: 'row',
     },
     keyValueContainer: {
-      width: '20%',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
     },
     sizeContent: {
-      width: '100%',
+      minWidth: 30,
+      display: 'flex',
       color: '#000',
       textAlign: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
       fontSize: 18,
-      padding: 1,
+      padding: 4,
       borderRightWidth: 1,
       borderBottomWidth: 1,
       borderColor: '#D9D9D9',
@@ -138,10 +140,10 @@ export default function ProductCartCard({ product, discount }) {
           {entriesSizes.map((size) => (
             <View key={ size } style={ styles.keyValueContainer }>
               <Text style={ styles.sizeContent }>
-                P
+                { size[0]}
               </Text>
               <Text style={ styles.sizeContent }>
-                {10}
+                {size[1] * quantity}
               </Text>
             </View>
           ))}
@@ -150,7 +152,6 @@ export default function ProductCartCard({ product, discount }) {
             <Text style={ [styles.sizeContent, styles.totalSizeTag] }>TOTAL</Text>
             <Text style={ [styles.totalQuantitySize, styles.sizeContent] }>
               {totalQuantity}
-
             </Text>
           </View>
         </View>

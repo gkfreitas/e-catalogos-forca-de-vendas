@@ -1,8 +1,14 @@
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { HeaderContainer, HeaderTitle } from './styles';
+import { FunctionIcon, HeaderContainer, HeaderTitle } from './styles';
 
-export default function Header({ title, routeBack, routeNext, children, hasFunction }) {
+export default function Header({
+  title,
+  routeBack,
+  routeNext,
+  children,
+  routeFunction,
+  logo }) {
   const router = useNavigate();
   return (
     <HeaderContainer>
@@ -16,17 +22,26 @@ export default function Header({ title, routeBack, routeNext, children, hasFunct
       <HeaderTitle>
         {title }
       </HeaderTitle>
-      {hasFunction && (
-        <p>F</p>
-      )}
       {children}
       <AiOutlineRight
         onClick={ () => router(routeNext) }
-        style={ { visibility: routeNext ? 'visible' : 'hidden' } }
+        style={ {
+          visibility: (routeNext) ? 'visible' : 'hidden',
+          display: logo || routeFunction ? 'none' : 'block',
+        } }
         size={ 20 }
         fill="#ffffff"
         cursor="pointer"
       />
+      <FunctionIcon
+        style={ {
+          visibility: routeFunction ? 'visible' : 'hidden',
+          display: !routeFunction || logo ? 'none' : 'flex',
+        } }
+        onClick={ () => router('/functions') }
+      >
+        F
+      </FunctionIcon>
     </HeaderContainer>
   );
 }

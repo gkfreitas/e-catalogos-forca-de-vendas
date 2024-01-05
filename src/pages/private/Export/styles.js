@@ -81,11 +81,11 @@ export const ExportFooter = styled.footer`
 
 export const IconWithTextContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  gap: 4px;
+  gap: 6px;
 `;
 
 export const IconContainer = styled.div`
@@ -102,7 +102,7 @@ export const IconContainer = styled.div`
 export const IconText = styled.p`
   color: #FFF;
   font-family: Poppins;
-  font-size: 8px;
+  font-size: 10px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 400;
 `;

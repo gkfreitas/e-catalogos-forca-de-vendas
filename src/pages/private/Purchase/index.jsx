@@ -20,7 +20,7 @@ export default function PurchasePage() {
     setCurrentProduct,
   } = useContext(ProductContext);
 
-  const { currentProductOrder, currentOrder } = useContext(ProductOrderContext);
+  const { currentOrder } = useContext(ProductOrderContext);
   const navigate = useNavigate();
 
   const [previewImage, setPreviewImage] = useState(false);
@@ -49,14 +49,13 @@ export default function PurchasePage() {
 
   return (
     <Div100vh>
-
       <PurchaseContainer>
         {localStorage.getItem('editMode') && (
           <FooterEdit />
         )}
         <HeaderCategory
           routeBack="/avaliableProducts"
-          routeNext={ Object.keys(currentProductOrder).length && '/order' }
+          routeFunction
         />
         <ImagesSlider previewImage={ previewImage } />
         <ProductTools setPreviewImage={ setPreviewImage } />

@@ -1,0 +1,21 @@
+import { OptionContainer, SelectContainer } from './styles';
+
+export default function InputSelect({ name, options, onChange, ...rest }) {
+  return (
+    <SelectContainer
+      { ...rest }
+      name={ name }
+      onChange={ onChange }
+    >
+      {options.map((option, index) => (
+        <OptionContainer
+          disabled={ option.isDisabled }
+          key={ index }
+          value={ option.value }
+        >
+          {option.label}
+        </OptionContainer>
+      ))}
+    </SelectContainer>
+  );
+}

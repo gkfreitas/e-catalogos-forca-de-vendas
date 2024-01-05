@@ -13,6 +13,7 @@
     "@react-pdf/renderer": "^3.1.14",
     "@trybe/eslint-config-frontend": "^1.11.4",
     "axios": "^1.6.2",
+    "file-saver": "^2.0.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",

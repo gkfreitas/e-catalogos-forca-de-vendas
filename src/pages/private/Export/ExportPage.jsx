@@ -110,6 +110,7 @@ export default function ExportPage() {
       <Header
         title="Exportar"
         routeBack={ exported ? '/clients' : '/order' }
+        routeFunction
       />
       <PageTitle>Resumo do pedido</PageTitle>
       <ContainerFields>
@@ -152,7 +153,13 @@ export default function ExportPage() {
           <IconContainer>
             <AiFillSave size={ 24 } color="#809CAA" />
           </IconContainer>
-          <IconText>Salvar Pedido</IconText>
+          <IconText>
+            Salvar
+            {' '}
+            <br />
+            {' '}
+            Pedido
+          </IconText>
         </IconWithTextContainer>
         <IconWithTextContainer
           onClick={ () => setSendEmail(true) }
@@ -160,7 +167,12 @@ export default function ExportPage() {
           <IconContainer>
             <AiOutlineMail size={ 24 } color="#809CAA" />
           </IconContainer>
-          <IconText>Enviar para o E-Mail</IconText>
+          <IconText>
+            Enviar p/
+            {' '}
+            <br />
+            E-Mail
+          </IconText>
         </IconWithTextContainer>
         <IconWithTextContainer
           onClick={ () => handleSuccess('Pedido enviado para a fábrica com sucesso!') }
@@ -168,7 +180,13 @@ export default function ExportPage() {
           <IconContainer>
             <IoCloudUploadOutline size={ 24 } color="#809CAA" />
           </IconContainer>
-          <IconText>Enviar para fábrica</IconText>
+          <IconText>
+            Enviar p/
+            {' '}
+            <br />
+            {' '}
+            fábrica
+          </IconText>
         </IconWithTextContainer>
       </ExportFooter>
       {sendEmail && <EmailModal

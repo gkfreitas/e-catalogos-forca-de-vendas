@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import orderListIcons from '../../assets/icons/order-list.svg';
+import SupportModal from '../SupportModal/SupportModal';
 import { CardContainer, CardIcon, CardTitle, CardsContainer } from './styles';
 
 export default function CardFunction() {
+  const [supportModal, setSupportModal] = useState(false);
+
   const functions = [
     {
       name: 'Lista de pedidos',
@@ -14,9 +18,55 @@ export default function CardFunction() {
       iconSrc: orderListIcons,
       route: '/clients',
     },
+    {
+      name: (
+        <span>
+          Ir para login
+          {' '}
+          <br />
+          {' '}
+          Sair
+        </span>
+      ),
+      iconSrc: orderListIcons,
+      route: '/',
+    },
+    {
+      name: 'Suporte',
+      iconSrc: orderListIcons,
+      onClick: () => setSupportModal(true),
+    },
+    {
+      name: 'Link B2B',
+      iconSrc: orderListIcons,
+      route: '/clients',
+    },
+    {
+      name: 'Link B2B',
+      iconSrc: orderListIcons,
+      route: '/clients',
+    },
+    {
+      name: 'Agenda',
+      iconSrc: orderListIcons,
+      route: '/clients',
+    },
+    {
+      name: 'Alterar Senha',
+      iconSrc: orderListIcons,
+      route: '/clients',
+    },
   ];
 
   const navigate = useNavigate();
+
+  const handleClick = (func) => {
+    if (func.route) {
+      navigate(func.route);
+    } else {
+      func.onClick();
+    }
+  };
 
   return (
     <CardsContainer>
@@ -24,8 +74,7 @@ export default function CardFunction() {
         functions.map((func) => (
           <CardContainer
             key={ func.name }
-            to={ func.route }
-            onClick={ () => navigate(func.route) }
+            onClick={ () => handleClick(func) }
           >
             <CardIcon src={ func.iconSrc } />
             <CardTitle>
@@ -35,6 +84,7 @@ export default function CardFunction() {
         ))
 
       }
+      {supportModal && <SupportModal disable={ () => setSupportModal(false) } />}
     </CardsContainer>
   );
 }

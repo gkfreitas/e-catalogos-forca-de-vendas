@@ -1,3 +1,8 @@
+// eslint-disable-next-line max-len
+import AvailableProductsLink from '../Link/pages/AvailableProductsLink/AvailableProductsLink';
+import CreateLink from '../Link/pages/CreateLink/CreateLink';
+import SendLink from '../Link/pages/SendLink/SendLink';
+import Welcome from '../Link/pages/Welcome/Welcome';
 import PdfPreview from '../components/OrderPDF/PDFViewer';
 import AvailableProducts from '../pages/private/AvailableProducts';
 import Brands from '../pages/private/Brands';
@@ -10,7 +15,6 @@ import OrdersList from '../pages/private/OrdersList/OrdersList';
 import Purchase from '../pages/private/Purchase';
 import Login from '../pages/public/Login';
 
-// arquivo dedicado para armazenar as rotas de acordo com o login, para fazer um map no outro arquivo
 export const publicRoutes = [
   {
     path: '/',
@@ -55,5 +59,25 @@ export const publicRoutes = [
   {
     path: '/order/pdf',
     component: PdfPreview,
+  },
+  {
+    path: '/link/create',
+    component: CreateLink,
+  },
+  {
+    path: '/link/send',
+    component: SendLink,
+  },
+  {
+    path: '/link/:id',
+    component: Welcome,
+  },
+  {
+    path: '/link/:id',
+    component: Welcome,
+  },
+  {
+    path: '/link/availableProducts/:id',
+    component: AvailableProductsLink,
   },
 ];

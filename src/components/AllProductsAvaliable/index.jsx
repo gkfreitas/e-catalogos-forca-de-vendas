@@ -6,6 +6,7 @@ import {
   HeaderImage,
   HeaderImageText,
   ImageContainer,
+  ImageRenderContainer,
   SecundaryText,
 } from './style';
 
@@ -70,10 +71,12 @@ export default function AllProductsAvaliable({ imagesPerView, filteredProducts,
             />
 
           </HeaderImage>
-          <ImageRender
-            imageSrc={ product.images[0] }
-            onError={ (e) => handleErrorImage(e, product.images) }
-          />
+          <ImageRenderContainer>
+            <ImageRender
+              imageSrc={ product.images[0] }
+              onError={ (e) => handleErrorImage(e, product.images) }
+            />
+          </ImageRenderContainer>
           {/* <Image
             src={ product.images[0]?.image || randomImageUrl }
             onError={ (e) => handleErrorImage(e, product.images) }
