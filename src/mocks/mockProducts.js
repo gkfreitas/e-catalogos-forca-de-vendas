@@ -124,6 +124,7 @@ const bermudasProducts = bermudas.map((bermuda, index) => {
   const product = {
     id: index + 200,
     name: 'Bermuda',
+    colors: [],
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
     category_name: 'Bermudas',
@@ -156,6 +157,7 @@ const botasProducts = botas.map((bota, index) => {
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const product = {
     id: index + 300,
+    colors: [],
     name: 'Bota',
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
@@ -222,6 +224,7 @@ const chinelosProducts = chinelos.map((chinelo, index) => {
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const product = {
     id: index + 500,
+    colors: [],
     name: 'Chinelo',
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
@@ -288,6 +291,7 @@ const esculturasProducts = esculturas.map((escultura, index) => {
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const product = {
     id: index + 700,
+    colors: [],
     name: 'Escultura',
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
@@ -321,6 +325,7 @@ const ferramentasProducts = ferramentas.map((ferramenta, index) => {
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const product = {
     id: index + 800,
+    colors: [],
     name: 'Ferramenta',
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
@@ -347,9 +352,14 @@ const ferramentasProducts = ferramentas.map((ferramenta, index) => {
 const jaquetasProducts = jaquetas.map((jaqueta, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
   const randomPrice = Math.floor(Math.random() * 200) + 50;
+  const randomSize1 = Math.floor(Math.random() * 6) + 1;
+  const randomSize2 = Math.floor(Math.random() * 6) + 1;
+  const randomSize3 = Math.floor(Math.random() * 6) + 1;
+  const randomSize4 = Math.floor(Math.random() * 6) + 1;
   const fixedQtd = Math.floor(Math.random() * 6) + 1;
   const product = {
     id: index + 900,
+    colors: [],
     name: 'Jaqueta',
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
@@ -357,6 +367,12 @@ const jaquetasProducts = jaquetas.map((jaqueta, index) => {
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
+    sizes: {
+      P: randomSize1,
+      M: randomSize2,
+      G: randomSize3,
+      GG: randomSize4,
+    },
     images: [
       {
         image: jaqueta,
@@ -394,15 +410,27 @@ const mochilasProducts = mochilas.map((mochila, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
   const randomPrice = Math.floor(Math.random() * 1000) + 100;
   const fixedQtd = Math.floor(Math.random() * 6) + 1;
+  const randomSize1 = Math.floor(Math.random() * 6) + 1;
+  const randomSize2 = Math.floor(Math.random() * 6) + 1;
+  const randomSize3 = Math.floor(Math.random() * 6) + 1;
+  const randomSize4 = Math.floor(Math.random() * 6) + 1;
   const product = {
     id: index + 1100,
     name: 'Mochila',
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
     category_name: 'Mochilas',
+    group_name: '',
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
+    colors: [],
+    sizes: {
+      P: randomSize1,
+      M: randomSize2,
+      G: randomSize3,
+      GG: randomSize4,
+    },
     images: [
       {
         image: mochila,
