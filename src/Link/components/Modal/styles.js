@@ -10,6 +10,8 @@ export const ModalContainer = styled.div`
   border-radius: 5px;
   padding: 10px 4px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const BackgroundFocus = styled.div`

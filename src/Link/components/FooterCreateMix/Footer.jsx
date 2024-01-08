@@ -27,7 +27,10 @@ export default function FooterCreateMix({
     }
 
     const link = {
+      // eslint-disable-next-line no-magic-numbers
+      id: Math.floor(Math.random() * 100000),
       name: linkName,
+      representativeName: 'Michele',
       products: selectedProducts,
     };
     const links = JSON.parse(localStorage.getItem('links')) || [];

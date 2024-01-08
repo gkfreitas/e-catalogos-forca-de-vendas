@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-len
 import AvailableProductsLink from '../Link/pages/AvailableProductsLink/AvailableProductsLink';
 import CreateLink from '../Link/pages/CreateLink/CreateLink';
+import PurchaseLink from '../Link/pages/PurchaseLink/PurchaseLink';
 import SendLink from '../Link/pages/SendLink/SendLink';
 import Welcome from '../Link/pages/Welcome/Welcome';
 import PdfPreview from '../components/OrderPDF/PDFViewer';
@@ -73,11 +74,11 @@ export const publicRoutes = [
     component: Welcome,
   },
   {
-    path: '/link/:id',
-    component: Welcome,
-  },
-  {
     path: '/link/availableProducts/:id',
     component: AvailableProductsLink,
+  },
+  {
+    path: '/link/purchase/:id',
+    component: PurchaseLink,
   },
 ];

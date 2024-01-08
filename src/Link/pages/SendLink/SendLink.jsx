@@ -28,8 +28,12 @@ import {
 export default function SendLink() {
   const [filteredClients, setFilteredClients] = useState(companiesMock);
   const [searchValue, setSearchValue] = useState('');
-  const [link, setLink] = useState([]);
-  const [linkName, setLinkName] = useState('');
+  const [link, setLink] = useState({
+    id: '',
+    name: '',
+    products: [],
+    representativeName: '',
+  });
   const [options, setOptions] = useState([]);
   const [mix, setMix] = useState(false);
   const [modalRemove, setModalRemove] = useState(false);
@@ -44,15 +48,15 @@ export default function SendLink() {
   useEffect(() => {
     const optionsNames = JSON.parse(localStorage.getItem('links')) || [];
     const optionsState = optionsNames
-      .map(({ name, products }) => ({ value: JSON
-        .stringify({ name, products }),
+      .map(({ name, products, id, representativeName }) => ({ value: JSON
+        .stringify({ name, products, id, representativeName }),
       label: name }));
     setOptions([{ value: [],
       label: 'Selecione um LINK' }, ...optionsState]);
   }, []);
 
   const showMix = () => {
-    if (!link || link.length <= 0) {
+    if (!link.products || link.products.length <= 0) {
       toast.warn('Selecione um link');
       return;
     }
@@ -60,7 +64,7 @@ export default function SendLink() {
   };
 
   const showRemove = () => {
-    if (!link || link.length <= 0) {
+    if (!link.products || link.products.length <= 0) {
       toast.warn('Selecione um link');
       return;
     }
@@ -69,7 +73,7 @@ export default function SendLink() {
 
   const handleRemoveLink = () => {
     const links = JSON.parse(localStorage.getItem('links')) || [];
-    const newLinks = links.filter(({ name }) => name !== linkName);
+    const newLinks = links.filter(({ name }) => name !== link.name);
     localStorage.setItem('links', JSON.stringify(newLinks));
     const newLinksState = newLinks
       .map(({ name, products }) => ({ value: JSON
@@ -78,11 +82,11 @@ export default function SendLink() {
     setOptions([{ value: [],
       label: 'Selecione um LINK' }, ...newLinksState]);
     setLink([]);
+    setModalRemove(false);
   };
 
   const handleChangeLink = (value) => {
-    setLink(value.products);
-    setLinkName(value.name);
+    setLink(value);
   };
 
   return (
@@ -126,7 +130,9 @@ export default function SendLink() {
                 whatsapp={ whatsapp }
               />
               <ExportContainer
-                href={ `https://api.whatsapp.com/send?phone=${whatsapp.split('-').join('').split(' ').join('')}` }
+                href={ `https://api.whatsapp.com/send?phone=${whatsapp.split('-').join('').split(' ').join('')}
+                &text=192.168.15.20:5173/link/${link.id}-${whatsapp
+              .split('-').join('').split(' ').join('')}` }
                 target="_blank"
               >
                 <ExportIcon src={ exportIcon } alt="Icone de exportar" />
@@ -138,7 +144,11 @@ export default function SendLink() {
           ))}
         </ClientsCardContainer>
       </Container>
-      {mix && <ModalMix closeIcon products={ link } disable={ () => setMix(false) } />}
+      {mix && <ModalMix
+        closeIcon
+        products={ link.products }
+        disable={ () => setMix(false) }
+      />}
       {modalRemove && <ModalRemove
         disable={ () => setModalRemove(false) }
         remove={ handleRemoveLink }

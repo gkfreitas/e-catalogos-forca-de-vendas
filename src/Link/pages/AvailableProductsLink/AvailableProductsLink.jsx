@@ -2,12 +2,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaEraser } from 'react-icons/fa';
 import eyeIcon from '../../../assets/icons/eye-icon.svg';
-import AllProductsAvaliable from '../../../components/AllProductsAvaliable';
-import FooterEdit from '../../../components/FooterEdit/FooterEdit';
-import Header from '../../../components/Header';
-import { ProductOrderContext } from '../../../context/ProductOrderContext';
-import { ProductToolsContext } from '../../../context/ProductToolsContenxt';
-import mockProcuts from '../../../mocks/mockProducts';
+import AllProductsAvaliable from '../../components/AllProductsAvaliable';
+import FooterEdit from '../../components/FooterEdit/FooterEdit';
+import Header from '../../components/Header';
+import { LinkContext } from '../../context/LinkContext';
+import { LinkOrderContext } from '../../context/LinkOrderContext';
 import {
   AvailableProductsContainer,
   ButtonsContainer,
@@ -20,28 +19,21 @@ import {
 } from './styles';
 
 export default function AvailableProductsLink() {
-  const { setSeeAll } = useContext(ProductToolsContext);
-  const { setCurrentProductOrder } = useContext(ProductOrderContext);
+  const { pathname } = window.location;
+  const linkId = pathname.split('/').pop();
+  const links = JSON.parse(localStorage.getItem('links')) || [];
+
+  const { products } = links.find((link) => link.id === Number(linkId));
+  const { setSelectedProducts, selectedProducts } = useContext(LinkContext);
+  const { setCurrentProductOrder } = useContext(LinkOrderContext);
   const [imagesPerView, setImagesPerView] = useState(2);
   const [showSelected, setShowSelected] = useState(false);
-  const [allProducts, setAllProducts] = useState(mockProcuts);
-  const [selectedProducts, setSelectedProducts] = useState(JSON
-    .parse(localStorage.getItem('selectedProducts')) || []);
-  const [categorySelected, setCategorySelected] = useState('Todos');
-  const [filteredProducts, setFilteredProducts] = useState(mockProcuts);
-  const categories = Array.from(new Set(allProducts
+  const [categorySelected, setCategorySelected] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  const categories = Array.from(new Set(products
     .map((product) => product.category_name)));
 
   const imagesPerViewOptions = [1, 2, 3, 4];
-
-  useEffect(() => {
-    const filtered = mockProcuts.filter((product) => {
-      const verifyCategory = categorySelected.length ? categorySelected
-        .includes(product.category_name) : true;
-      return verifyCategory;
-    });
-    setFilteredProducts(filtered);
-  }, [categorySelected]);
 
   const handleChangeCategory = (e) => {
     if (e.target.value === 'Todos') {
@@ -51,33 +43,26 @@ export default function AvailableProductsLink() {
     setCategorySelected(e.target.value);
   };
 
-  const handleShowSelected = () => {
-    setShowSelected(!showSelected);
-  };
-
-  const handleClearSelectedProducts = () => {
+  const hadleClearSelectedProducts = () => {
     setSelectedProducts([]);
+    localStorage.removeItem('currentProductOrder');
     setCurrentProductOrder({});
-    localStorage.setItem('selectedProducts', JSON.stringify([]));
-    localStorage.setItem('currentProductOrder', JSON.stringify({}));
   };
 
   useEffect(() => {
     if (showSelected) {
       setFilteredProducts(selectedProducts);
+      return;
     }
-    if (!showSelected) {
-      setCategorySelected('');
-    }
+
+    const filtered = products.filter((product) => {
+      const verifyCategory = categorySelected.length ? categorySelected
+        .includes(product.category_name) : true;
+      return verifyCategory;
+    });
+
+    setFilteredProducts(filtered);
   }, [categorySelected, selectedProducts, showSelected]);
-
-  useEffect(() => {
-    setSeeAll(false);
-
-    if (mockProcuts.length === 0) {
-      setAllProducts(mockProcuts);
-    }
-  }, [allProducts, setSeeAll]);
 
   return (
     <Container>
@@ -87,7 +72,7 @@ export default function AvailableProductsLink() {
       <Header
         title={ `Produtos Disponíveis (${filteredProducts.length})` }
         routeBack="/clients"
-        routeNext={ selectedProducts.length && '/purchase' }
+        routeNext={ selectedProducts.length && '/link/purchase/:id' }
       />
       <ButtonsContainer>
         <InputSelect
@@ -116,13 +101,13 @@ export default function AvailableProductsLink() {
         <EyeIconImage
           cursor="pointer"
           src={ eyeIcon }
-          onClick={ handleShowSelected }
+          onClick={ () => setShowSelected(!showSelected) }
         />
         <FaEraser
           cursor="pointer"
           size={ 24 }
           fill="#809CAA"
-          onClick={ handleClearSelectedProducts }
+          onClick={ hadleClearSelectedProducts }
         />
       </ButtonsContainer>
       <AvailableProductsContainer>
