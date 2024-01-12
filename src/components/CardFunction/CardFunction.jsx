@@ -1,11 +1,40 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import backIcon from '../../assets/icons/back.svg';
+import changePasswordIcon from '../../assets/icons/changePassword.svg';
+import clientsIcon from '../../assets/icons/clients.svg';
+import cloudIcon from '../../assets/icons/cloud.svg';
+import createIcon from '../../assets/icons/create.svg';
+import eraserIcon from '../../assets/icons/eraser.svg';
+import leaveIcon from '../../assets/icons/leave.svg';
 import orderListIcons from '../../assets/icons/order-list.svg';
+import questionIcon from '../../assets/icons/question.svg';
+import sendIcon from '../../assets/icons/send.svg';
+import supportIcon from '../../assets/icons/support.svg';
+import tableIcon from '../../assets/icons/table.svg';
+import youtubeIcon from '../../assets/icons/youtube.svg';
 import SupportModal from '../SupportModal/SupportModal';
-import { CardContainer, CardIcon, CardTitle, CardsContainer } from './styles';
+import {
+  CardContainer,
+  CardIcon,
+  CardPrincipal,
+  CardTitle,
+  CardTitlePrincipal,
+  CardsContainer,
+} from './styles';
 
 export default function CardFunction() {
   const [supportModal, setSupportModal] = useState(false);
+
+  const navigate = useNavigate();
+  const backToOrder = () => {
+    const lastPage = localStorage.getItem('lastPage') || '';
+    navigate(lastPage);
+  };
+
+  const redirectYoutube = () => {
+    window.open('https://www.youtube.com/watch?v=1IMnONVpimw', '_blank');
+  };
 
   const functions = [
     {
@@ -15,50 +44,60 @@ export default function CardFunction() {
     },
     {
       name: 'Clientes',
-      iconSrc: orderListIcons,
+      iconSrc: clientsIcon,
       route: '/clients',
     },
     {
-      name: (
-        <span>
-          Ir para login
-          {' '}
-          <br />
-          {' '}
-          Sair
-        </span>
-      ),
-      iconSrc: orderListIcons,
-      route: '/',
+      name: 'Tutorial APP',
+      iconSrc: youtubeIcon,
+      onClick: redirectYoutube,
     },
     {
       name: 'Suporte',
-      iconSrc: orderListIcons,
+      iconSrc: supportIcon,
       onClick: () => setSupportModal(true),
     },
     {
-      name: 'Link B2B',
-      iconSrc: orderListIcons,
-      route: '/clients',
+      name: 'Enviar Link B2B',
+      iconSrc: sendIcon,
+      route: '/link/send',
     },
     {
-      name: 'Link B2B',
-      iconSrc: orderListIcons,
-      route: '/clients',
+      name: 'Criar Link B2B',
+      iconSrc: createIcon,
+      route: '/link/create',
     },
     {
-      name: 'Agenda',
-      iconSrc: orderListIcons,
-      route: '/clients',
+      name: 'Limpar Dados',
+      iconSrc: eraserIcon,
+      route: '/functions',
+    },
+    {
+      name: 'Dúvidas',
+      iconSrc: questionIcon,
+      route: '/functions',
+    },
+    {
+      name: 'Exportar Pedidos',
+      iconSrc: cloudIcon,
+      route: '/functions',
+    },
+    {
+      name: 'Tabela de Preços',
+      iconSrc: tableIcon,
+      route: '/functions',
     },
     {
       name: 'Alterar Senha',
-      iconSrc: orderListIcons,
-      route: '/clients',
+      iconSrc: changePasswordIcon,
+      route: '/functions',
+    },
+    {
+      name: 'Sair',
+      iconSrc: leaveIcon,
+      route: '/functions',
     },
   ];
-
-  const navigate = useNavigate();
 
   const handleClick = (func) => {
     if (func.route) {
@@ -69,22 +108,31 @@ export default function CardFunction() {
   };
 
   return (
-    <CardsContainer>
-      {
-        functions.map((func) => (
-          <CardContainer
-            key={ func.name }
-            onClick={ () => handleClick(func) }
-          >
-            <CardIcon src={ func.iconSrc } />
-            <CardTitle>
-              { func.name }
-            </CardTitle>
-          </CardContainer>
-        ))
+    <>
+      <CardPrincipal onClick={ backToOrder }>
+        <CardIcon src={ backIcon } />
+        <CardTitlePrincipal>
+          Voltar ao Pedido
+        </CardTitlePrincipal>
+      </CardPrincipal>
+      <CardsContainer>
 
-      }
-      {supportModal && <SupportModal disable={ () => setSupportModal(false) } />}
-    </CardsContainer>
+        {
+          functions.map((func) => (
+            <CardContainer
+              key={ func.name }
+              onClick={ () => handleClick(func) }
+            >
+              <CardIcon src={ func.iconSrc } />
+              <CardTitle>
+                { func.name }
+              </CardTitle>
+            </CardContainer>
+          ))
+
+        }
+        {supportModal && <SupportModal disable={ () => setSupportModal(false) } />}
+      </CardsContainer>
+    </>
   );
 }

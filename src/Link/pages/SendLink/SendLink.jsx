@@ -92,7 +92,7 @@ export default function SendLink() {
   return (
     <>
       <Container>
-        <Header title="ENVIAR LINK" />
+        <Header title="ENVIAR LINK" routeBack="/link/create" routeFunction />
         <InputsContainer>
           <InputContainer>
             <img src={ searchIcon } alt="Icone de uma lupa" />
@@ -130,9 +130,10 @@ export default function SendLink() {
                 whatsapp={ whatsapp }
               />
               <ExportContainer
-                href={ `https://api.whatsapp.com/send?phone=${whatsapp.split('-').join('').split(' ').join('')}
-                &text=192.168.15.20:5173/link/${link.id}-${whatsapp
-              .split('-').join('').split(' ').join('')}` }
+                href={ `https://api.whatsapp.com/send?phone=${whatsapp
+                  .split('-').join('').split(' ')
+                  .join('')}&text=192.168.15.20:5173/link/${link.id}-${whatsapp
+                  .split('-').join('').split(' ').join('')}` }
                 target="_blank"
               >
                 <ExportIcon src={ exportIcon } alt="Icone de exportar" />

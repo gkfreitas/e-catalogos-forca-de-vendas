@@ -1,3 +1,5 @@
+import { useContext, useState } from 'react';
+import { LinkOrderContext } from '../../context/LinkOrderContext';
 import Modal from '../Modal/Modal';
 import {
   ConfirmButton,
@@ -7,6 +9,15 @@ import {
 } from './styles';
 
 export default function ObservationModal({ disable }) {
+  const [observation, setObservation] = useState('');
+  const { setCurrentOrder } = useContext(LinkOrderContext);
+  const handleConfirm = () => {
+    disable();
+    setCurrentOrder((prevState) => ({
+      ...prevState,
+      observation,
+    }));
+  };
   return (
     <Modal
       disable={ disable }
@@ -17,10 +28,12 @@ export default function ObservationModal({ disable }) {
           Adicionar Observação
         </ObservationTitle>
         <TextArea
+          value={ observation }
+          onChange={ ({ target }) => setObservation(target.value) }
           placeholder="Insira sua observação"
         />
         <ConfirmButton
-          onClick={ disable }
+          onClick={ handleConfirm }
         >
           Confirmar
         </ConfirmButton>

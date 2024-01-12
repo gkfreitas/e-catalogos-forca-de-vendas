@@ -5,8 +5,10 @@ const LinkOrderContext = createContext();
 const emptyOrder = {
   clientName: '',
   clientCNPJ: '',
+  clientWhatsapp: '',
   orderNumber: '',
   orderDate: '',
+  observation: '',
   productsCart: [],
   paymentCondition: {
     method: '',
@@ -17,6 +19,7 @@ const emptyOrder = {
 };
 
 function LinkOrderProvider({ children }) {
+  const localStorageError = 'Erro ao salvar no localStorage';
   const [currentOrder, setCurrentOrder] = useState(JSON.parse(localStorage
     .getItem('currentLinkOrder')) || emptyOrder);
 
@@ -24,11 +27,22 @@ function LinkOrderProvider({ children }) {
     JSON.parse(localStorage.getItem('currentProductLinkOrder')) || {},
   );
 
+  const [orders, setOrders] = useState(JSON.parse(localStorage
+    .getItem('ordersLink')) || []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('ordersLink', JSON.stringify(orders));
+    } catch (error) {
+      console.error(localStorageError, error);
+    }
+  }, [orders]);
+
   useEffect(() => {
     try {
       localStorage.setItem('currentLinkOrder', JSON.stringify(currentOrder));
     } catch (error) {
-      console.error('Erro ao salvar no localStorage', error);
+      console.error(localStorageError, error);
     }
   }, [currentOrder]);
 
@@ -39,7 +53,7 @@ function LinkOrderProvider({ children }) {
         JSON.stringify(currentProductOrder),
       );
     } catch (error) {
-      console.error('Erro ao salvar no localStorage', error);
+      console.error(localStorageError, error);
     }
     const productsCardIds = Object.keys(currentProductOrder);
     setCurrentOrder((prevState) => ({
@@ -58,7 +72,9 @@ function LinkOrderProvider({ children }) {
     currentOrder,
     setCurrentOrder,
     emptyOrder,
-  }), [currentProductOrder, currentOrder]);
+    orders,
+    setOrders,
+  }), [currentProductOrder, currentOrder, orders]);
 
   return (
     <LinkOrderContext.Provider

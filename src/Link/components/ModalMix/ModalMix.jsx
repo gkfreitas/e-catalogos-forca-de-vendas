@@ -5,8 +5,8 @@ import { ContainerOverflow, InfosContainer, PrimaryText, SecundaryText } from '.
 export default function ModalMix({ products,
   disable, closeIcon, purchase, paymentMethod }) {
   const totalValue = products.reduce((acc, product) => acc + product.total, 0);
-
   const totalPacks = products.reduce((acc, product) => acc + product.quantity, 0);
+
   const BRL = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',

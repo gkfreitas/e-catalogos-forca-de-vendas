@@ -20,6 +20,8 @@ export default function PurchaseLink() {
   const { currentOrder } = useContext(LinkOrderContext);
   const navigate = useNavigate();
   const [previewImage, setPreviewImage] = useState(false);
+  const { pathname } = window.location;
+  const linkId = pathname.split('/').pop();
 
   useEffect(() => {
     const products = JSON.parse(localStorage.getItem('selectedProductsLink')) || [];
@@ -30,9 +32,9 @@ export default function PurchaseLink() {
 
   useEffect(() => {
     if (!JSON.parse(localStorage.getItem('selectedProductsLink')).length) {
-      navigate('/link/availableProducts/:id');
+      navigate(`/link/availableProducts/${linkId}`);
     }
-  }, [currentOrder, navigate]);
+  }, [currentOrder, linkId, navigate]);
 
   useEffect(() => {
     setPreviewImage(false);
@@ -42,7 +44,7 @@ export default function PurchaseLink() {
     <PurchaseContainer>
       <Header
         title="COMPRAR"
-        routeBack="/link/availableProducts/:id"
+        routeBack={ `/link/availableProducts/${linkId}` }
       />
       <ImagesSlider previewImage={ previewImage } />
       <ProductTools setPreviewImage={ setPreviewImage } />

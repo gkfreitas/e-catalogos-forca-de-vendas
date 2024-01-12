@@ -35,10 +35,20 @@ export default function CreateLink() {
   const [gender, setGender] = useState('');
   const [category, setCategory] = useState('');
   const [subcategory, setSubcategory] = useState('');
+  const [brandSelected, setBrandSelected] = useState('');
 
   useEffect(() => {
     setRefQuantity(filteredProducts.length);
   }, [filteredProducts]);
+
+  const handleSelectBrand = (e) => {
+    setBrandSelected(e.target.value);
+    setBrand(e.target.value);
+    const filterProducts = mockProducts.filter((product) => {
+      return product.brand_name === e.target.value;
+    });
+    setSelectedProducts(filterProducts);
+  };
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {
@@ -156,7 +166,7 @@ export default function CreateLink() {
             Total de referências:
           </RefQuantity>
           <RefQuantity>
-            9778
+            {refQuantity}
           </RefQuantity>
         </div>
         <InputSelect
@@ -165,7 +175,7 @@ export default function CreateLink() {
             color: '#fff',
           } }
           name="brandSelected"
-          onChange={ (e) => setBrand(e.target.value) }
+          onChange={ handleSelectBrand }
           options={ brandSelectedOptions }
         />
       </RefAndBrandBox>

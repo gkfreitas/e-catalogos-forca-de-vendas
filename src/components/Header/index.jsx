@@ -10,6 +10,11 @@ export default function Header({
   routeFunction,
   logo }) {
   const router = useNavigate();
+  const { pathname } = window.location;
+  const handleRouteFunction = () => {
+    localStorage.setItem('lastPage', pathname);
+    router('/functions');
+  };
   return (
     <HeaderContainer>
       <AiOutlineLeft
@@ -38,7 +43,7 @@ export default function Header({
           visibility: routeFunction ? 'visible' : 'hidden',
           display: !routeFunction || logo ? 'none' : 'flex',
         } }
-        onClick={ () => router('/functions') }
+        onClick={ handleRouteFunction }
       >
         F
       </FunctionIcon>

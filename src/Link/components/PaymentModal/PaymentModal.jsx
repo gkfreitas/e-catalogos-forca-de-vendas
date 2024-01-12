@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal';
 import { ConfirmButton, Container, InputsContainer, PaymentTitle } from './styles';
 
 export default function PaymentModal({ disable }) {
-  const { currentOrder, setCurrentOrder } = useContext(LinkOrderContext);
+  const { setCurrentOrder } = useContext(LinkOrderContext);
   const [paymentMethod, setPaymentMethod] = useState({
     name: '',
     value: '',
@@ -40,7 +40,6 @@ export default function PaymentModal({ disable }) {
         discount: 0,
       },
     }));
-    console.log(currentOrder);
   };
 
   return (

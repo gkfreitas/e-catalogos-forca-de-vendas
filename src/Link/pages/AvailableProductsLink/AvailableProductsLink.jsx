@@ -21,17 +21,15 @@ import {
 export default function AvailableProductsLink() {
   const { pathname } = window.location;
   const linkId = pathname.split('/').pop();
-  const links = JSON.parse(localStorage.getItem('links')) || [];
-
-  const { products } = links.find((link) => link.id === Number(linkId));
   const { setSelectedProducts, selectedProducts } = useContext(LinkContext);
   const { setCurrentProductOrder } = useContext(LinkOrderContext);
   const [imagesPerView, setImagesPerView] = useState(2);
   const [showSelected, setShowSelected] = useState(false);
   const [categorySelected, setCategorySelected] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  const categories = Array.from(new Set(products
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const categories = Array.from(new Set(filteredProducts
     .map((product) => product.category_name)));
+  const { clientWhatsapp } = JSON.parse(localStorage.getItem('currentLinkOrder')) || {};
 
   const imagesPerViewOptions = [1, 2, 3, 4];
 
@@ -50,6 +48,9 @@ export default function AvailableProductsLink() {
   };
 
   useEffect(() => {
+    const links = JSON.parse(localStorage.getItem('links')) || [];
+    const { products } = links.find((link) => link.id === Number(linkId)) || {};
+
     if (showSelected) {
       setFilteredProducts(selectedProducts);
       return;
@@ -62,7 +63,7 @@ export default function AvailableProductsLink() {
     });
 
     setFilteredProducts(filtered);
-  }, [categorySelected, selectedProducts, showSelected]);
+  }, [categorySelected, linkId, selectedProducts, showSelected]);
 
   return (
     <Container>
@@ -71,8 +72,8 @@ export default function AvailableProductsLink() {
       )}
       <Header
         title={ `Produtos Disponíveis (${filteredProducts.length})` }
-        routeBack="/clients"
-        routeNext={ selectedProducts.length && '/link/purchase/:id' }
+        routeBack={ `/link/${linkId}-${clientWhatsapp}` }
+        routeNext={ selectedProducts.length && `/link/purchase/${linkId}` }
       />
       <ButtonsContainer>
         <InputSelect

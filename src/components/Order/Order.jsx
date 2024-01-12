@@ -80,7 +80,6 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
     setCurrentOrder((prevState) => ({
       ...prevState,
       orderDate: prevState.orderDate || new Date().toLocaleDateString(),
-      hour: prevState.hour || new Date().toLocaleTimeString(),
       orderNumber: prevState.orderNumber || Math.floor(Math.random() * max, min),
       productsCart: newProducts,
       installmentsValue: newProducts
@@ -135,6 +134,11 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
     if (!shippment) return toast.error('Selecione uma transportadora');
     if (!method) return toast.error('Selecione uma condição de pagamento');
     if (!deadline) return toast.error('Selecione um prazo de entrega');
+
+    setCurrentOrder((prevState) => ({
+      ...prevState,
+      hour: new Date().toLocaleTimeString(),
+    }));
 
     router('/export');
   };
