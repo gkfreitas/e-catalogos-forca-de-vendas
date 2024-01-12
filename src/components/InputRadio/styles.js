@@ -11,7 +11,7 @@ export const LabelForInput = styled.label`
   color: #6A6A6A;
   font-family: Roboto;
   width: ${({ $width }) => `${$width}%` || 'auto'};
-  font-size: 16px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   padding-left: 6px;

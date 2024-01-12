@@ -5,6 +5,7 @@ export const Footer = styled.footer`
   background: #809CAA;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
 `;
 
@@ -45,4 +46,10 @@ export const ExportButton = styled.button`
  
   background-color: #809caa;
   cursor: pointer;
+`;
+
+export const Icon = styled.img`
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 `;

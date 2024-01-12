@@ -37,6 +37,7 @@ export const ContainerArrows = styled.div`
   display: flex;
   justify-content: center;
   margin: auto;
+  gap: 10px;
   align-items: center;
 `;
 

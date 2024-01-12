@@ -4,7 +4,7 @@ export const FieldLabel = styled.label`
   color: #3C3C3C;
   text-align: center;
   font-family: Roboto;
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   padding-bottom: 4px;
@@ -28,7 +28,7 @@ export const Field = styled.div`
 export const TextField = styled.p`
   color: #000;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
 `;

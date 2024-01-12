@@ -4,7 +4,7 @@ export const TitleDeadline = styled.p`
   color: #809CAA;
   text-align: center;
   font-family: Roboto;
-  font-size: 16px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   padding: 1px 0px;

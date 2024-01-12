@@ -590,7 +590,7 @@ const mockProducts2 = [
   },
   {
     id: 7163,
-    name: 'CASACO #MO - JMW005',
+    name: 'CASACO',
     reference: '66.08.0082',
     company_id: 1,
     brand_id: 21,

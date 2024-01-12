@@ -33,15 +33,24 @@ export default function ProductCartCard({
         </ContainerImage>
         <CardInfosContainer>
           <PrimaryText>
-            REF:
-            {' '}
-            <SecundaryText>
-              {reference}
-            </SecundaryText>
+            {reference}
           </PrimaryText>
           <PrimaryText>
             {name}
           </PrimaryText>
+          <SecundaryText>
+            UNIT.
+            {' '}
+            <span
+              style={ {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                color: '#000',
+              } }
+            >
+              {BRL.format(60)}
+            </span>
+          </SecundaryText>
           {colors.map(({ cod_hex, color_name }) => (
             <ColorContainer
               key={ cod_hex }
@@ -71,17 +80,12 @@ export default function ProductCartCard({
           </KeyValueContainer>
         </SizesContainer>
         <PrimaryText>
-          Descontos:
+          Desc:
           {' '}
-          {BRL.format(discount)}
+          {BRL.format(180)}
         </PrimaryText>
         <PrimaryText>
-          Impostos: R$
-          {' '}
-          {0}
-        </PrimaryText>
-        <PrimaryText>
-          Total
+          Total:
           {' '}
           {BRL.format(totalPrice)}
         </PrimaryText>

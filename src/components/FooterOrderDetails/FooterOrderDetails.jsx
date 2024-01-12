@@ -1,6 +1,11 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import deleteIcon from '../../assets/icons/delete.svg';
+import duplicateIcon from '../../assets/icons/duplicate.svg';
+import editIcon from '../../assets/icons/edit.svg';
+import emailIcon from '../../assets/icons/email.svg';
+import exportIcon from '../../assets/icons/export.svg';
 import { ProductOrderContext } from '../../context/ProductOrderContext';
 import mockProducts from '../../mocks/mockProducts';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
@@ -11,6 +16,7 @@ import {
   EditButton,
   ExportButton,
   Footer,
+  Icon,
 } from './styles';
 
 export default function FooterOrderDetails({ currentOrder }) {
@@ -62,16 +68,21 @@ export default function FooterOrderDetails({ currentOrder }) {
     <>
       <Footer>
         <DeleteButton onClick={ () => setModalDelete(true) }>
-          Deletar
+          <Icon
+            src={ deleteIcon }
+          />
         </DeleteButton>
         <EditButton onClick={ handleEdit }>
-          Editar
+          <Icon
+            src={ editIcon }
+          />
         </EditButton>
+        <Icon src={ emailIcon } />
         <DuplicateButton onClick={ () => setModalDuplicate(true) }>
-          Duplicar
+          <Icon src={ duplicateIcon } />
         </DuplicateButton>
         <ExportButton onClick={ () => setModalExport(true) }>
-          Exportar
+          <Icon src={ exportIcon } />
         </ExportButton>
       </Footer>
       {

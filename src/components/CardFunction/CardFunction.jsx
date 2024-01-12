@@ -9,6 +9,7 @@ import eraserIcon from '../../assets/icons/eraser.svg';
 import leaveIcon from '../../assets/icons/leave.svg';
 import orderListIcons from '../../assets/icons/order-list.svg';
 import questionIcon from '../../assets/icons/question.svg';
+import restoreIcon from '../../assets/icons/restore.svg';
 import sendIcon from '../../assets/icons/send.svg';
 import supportIcon from '../../assets/icons/support.svg';
 import tableIcon from '../../assets/icons/table.svg';
@@ -95,6 +96,11 @@ export default function CardFunction() {
     {
       name: 'Sair',
       iconSrc: leaveIcon,
+      route: '/functions',
+    },
+    {
+      name: 'Restaurar Pedidos',
+      iconSrc: restoreIcon,
       route: '/functions',
     },
   ];

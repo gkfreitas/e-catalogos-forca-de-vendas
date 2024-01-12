@@ -49,7 +49,7 @@ export const CardImage = styled.img`
 export const PrimaryText = styled.p`
   color: #000;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
 `;

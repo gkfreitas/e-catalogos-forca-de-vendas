@@ -28,6 +28,11 @@ export default function AddProduct() {
   const [accumulatedPrice, setAccumuledPrice] = useState(0);
   // const [accumulatedQuantity, setAccumulatedQuantity] = useState(0);
 
+  const BRL = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+
   const imageUrlVerify = (imagesVerify) => {
     const img = new Image();
     img.src = imagesVerify[0]?.image;
@@ -110,9 +115,7 @@ export default function AddProduct() {
       <CurrentAndAccumulatedBox>
         <CurrentTextStyle>Atual</CurrentTextStyle>
         <CurrentPriceStyle>
-          R$
-          {' '}
-          {priceProduct?.toFixed(2)}
+          {BRL.format(priceProduct)}
         </CurrentPriceStyle>
       </CurrentAndAccumulatedBox>
       <AddProductsBox>
@@ -125,9 +128,7 @@ export default function AddProduct() {
       <CurrentAndAccumulatedBox>
         <CurrentTextStyle>Acumulado</CurrentTextStyle>
         <CurrentPriceStyle>
-          R$
-          {' '}
-          {accumulatedPrice?.toFixed(2)}
+          {BRL.format(accumulatedPrice)}
         </CurrentPriceStyle>
       </CurrentAndAccumulatedBox>
     </FooterContainer>

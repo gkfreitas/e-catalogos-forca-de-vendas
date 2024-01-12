@@ -12,7 +12,7 @@ export const InputContainer = styled.div`
 export const InputTag = styled.p`
   color: #000;
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
 `;
@@ -20,7 +20,7 @@ export const InputTag = styled.p`
 export const InputContent = styled.span`
   color: #000;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 300;
 `;
