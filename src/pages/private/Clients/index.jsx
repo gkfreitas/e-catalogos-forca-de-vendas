@@ -84,7 +84,7 @@ export default function ClientsPage() {
       )}
       <Header
         title="Clientes"
-        routeBack="/"
+        routeBack="/functions"
         routeNext={ currentClient && '/avaliableProducts' }
 
       />

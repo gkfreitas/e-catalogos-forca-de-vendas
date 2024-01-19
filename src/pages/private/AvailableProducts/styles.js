@@ -146,3 +146,8 @@ cursor: pointer;
 width: 24px;
 height: 24px;
 `;
+
+export const SubCategoriesContainer = styled.div`
+
+  padding: 4px 20px;
+`;

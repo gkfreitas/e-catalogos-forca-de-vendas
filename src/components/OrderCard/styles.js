@@ -32,6 +32,20 @@ export const ButtonDetails = styled.button`
   cursor: pointer;
 `;
 
+export const AllButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+`;
+
+export const ButtonsFunctions = styled.div`
+  display: flex;
+`;
+
 export const Icon = styled.img`
+  cursor: pointer;
+`;
+
+export const ButtonFunction = styled.button`
   cursor: pointer;
 `;

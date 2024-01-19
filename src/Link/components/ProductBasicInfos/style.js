@@ -4,7 +4,7 @@ export const ProductBasicInfosContainer = styled.div`
   padding: 6px;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   gap: 24px;
 `;
 
@@ -13,6 +13,7 @@ export const Column = styled.div`
   flex-direction: column;
   gap: 12px;
   align-items: center;
+  justify-content: center;
 `;
 
 export const RefenceText = styled.p`

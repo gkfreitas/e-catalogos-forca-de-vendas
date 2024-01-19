@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AiOutlineIdcard, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { ButtonLogin } from '../Buttons';
+import ButtonRegister from '../Buttons/ButtonRegister';
 import InputText from '../InputLogin';
 import { ErrorMessage, FormContainer, InputContainer } from './styles';
 
@@ -9,22 +10,22 @@ export default function FormLogin() {
   const router = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
-    name: '',
-    login: '',
-    password: '',
+    key: '2463',
+    login: 'Lojas S/A',
+    password: '123456',
   });
 
-  const [errorName, setErrorName] = useState(false);
+  const [errorKey, setErrorKey] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorInputs, setErrorInputs] = useState(false);
 
   const verifyInputs = (name, value) => {
-    if (name === 'name') {
-      const minLengthName = 3;
-      const verifyName = value.length < minLengthName;
+    if (name === 'key') {
+      const minLengthKey = 3;
+      const verifyName = value.length < minLengthKey;
 
-      setErrorName(verifyName);
+      setErrorKey(verifyName);
     }
 
     if (name === 'login') {
@@ -57,7 +58,7 @@ export default function FormLogin() {
     if (Object.values(userInfo).some((input) => input === '')) {
       return setErrorInputs(true);
     }
-    if (errorName || errorLogin || errorPassword) return;
+    if (errorKey || errorLogin || errorPassword) return;
     router('/clients');
   };
 
@@ -65,16 +66,14 @@ export default function FormLogin() {
     <FormContainer onSubmit={ handleSubmit }>
       <InputContainer>
         <InputText
-          onChange={ handleChange }
-          error={ errorName }
-          name="name"
-          value={ userInfo.name }
-          label="Nome"
+          error={ errorKey }
+          name="key"
+          value={ userInfo.key }
+          label="Chave"
           icon={ AiOutlineIdcard }
-          placeholder="Seu nome"
+          placeholder="Sua chave"
         />
         <InputText
-          onChange={ handleChange }
           error={ errorLogin }
           name="login"
           value={ userInfo.login }
@@ -83,7 +82,6 @@ export default function FormLogin() {
           placeholder="Seu Login"
         />
         <InputText
-          onChange={ handleChange }
           error={ errorPassword }
           name="password"
           value={ userInfo.password }
@@ -98,7 +96,7 @@ export default function FormLogin() {
       </ForgotPassword> */}
       {errorInputs && <ErrorMessage>Preencha todos os valores!</ErrorMessage>}
       <ButtonLogin />
-      {/* <ButtonRegister /> */}
+      <ButtonRegister />
     </FormContainer>
   );
 }

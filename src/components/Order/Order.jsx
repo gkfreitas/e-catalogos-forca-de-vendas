@@ -25,6 +25,7 @@ import {
 } from './styles';
 
 export default function Order({ currentOrder, routeBack = '/purchase', detail }) {
+  const isLink = currentOrder.type === 'link';
   const [inputTags, setInputTags] = useState([]);
   const [inputContents, setInputContents] = useState([]);
   const [showShippment, setShowShippment] = useState(false);
@@ -165,11 +166,11 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
         <Separator height={ 2 } margin={ 60 } color="#E9E9E9" />
         <OrderProductsOverflow>
           {productsCart.map(({ imageUrl,
-            reference, name, colors, sizes, total, pack, quantity }) => (
+            reference, name, colors, sizes, total, pack, quantity }, i) => (
             (
               <ProductCartCard
                 discount={ total * discount }
-                key={ reference }
+                key={ `${reference}-${i}` }
                 imageSrc={ imageUrl }
                 reference={ reference }
                 name={ name }
@@ -192,9 +193,11 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
                     fill="#809CAA"
                   />
                 </IconContainer>
-                <IconContainer onClick={ () => setShowPayment(true) }>
-                  <HiOutlineCurrencyDollar size={ 26 } stroke="#809CAA" />
-                </IconContainer>
+                {!isLink && (
+                  <IconContainer onClick={ () => setShowPayment(true) }>
+                    <HiOutlineCurrencyDollar size={ 26 } stroke="#809CAA" />
+                  </IconContainer>
+                )}
                 <IconContainer onClick={ () => setShowDeadline(true) }>
                   <FaRegCalendarAlt size={ 26 } fill="#809CAA" />
                 </IconContainer>

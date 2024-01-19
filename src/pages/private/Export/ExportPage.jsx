@@ -25,6 +25,7 @@ export default function ExportPage() {
     setCurrentOrder,
     setCurrentProductOrder,
     emptyOrder,
+    setOrders,
   } = useContext(ProductOrderContext);
 
   const {
@@ -73,11 +74,10 @@ export default function ExportPage() {
     if (!orderType) return toast.error('Selecione pedido ou orçamento');
     if (!Object.values(localCurrentOrder).length) return;
     toast.success(message);
-    const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
     setCurrentOrder(emptyOrder);
     setCurrentProductOrder({});
     setExported(true);
-    localStorage.setItem('orders', JSON.stringify([...currentOrders, localCurrentOrder]));
+    setOrders((prevState) => [...prevState, localCurrentOrder]);
     localStorage.removeItem('currentOrder');
     localStorage.removeItem('currentProductOrder');
     localStorage.removeItem('selectedProducts');
@@ -148,7 +148,8 @@ export default function ExportPage() {
       </TextAreaContainer>
       <ExportFooter>
         <IconWithTextContainer
-          onClick={ () => handleSuccess('Pedido salvo com sucesso!') }
+          onClick={ () => handleSuccess(`
+          ${orderType === 'order' ? 'Pedido' : 'Orçamento'} salvo com sucesso!`) }
         >
           <IconContainer>
             <AiFillSave size={ 24 } color="#809CAA" />

@@ -63,7 +63,7 @@ export default function ModalMix({ products,
               </SecundaryText>
             </PrimaryText>
             <PrimaryText>
-              Forma de pagamento:
+              Metodo de Pagamento:
               {' '}
               <SecundaryText>
                 {paymentMethod || ''}

@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaEraser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 import eyeIcon from '../../../assets/icons/eye-icon.svg';
 import AllProductsAvaliable from '../../../components/AllProductsAvaliable';
 import FilterAvaliableProducts from '../../../components/FilterAvaliableProducts';
@@ -19,6 +20,7 @@ import {
   InputSelect,
   NumbersContainer,
   Option,
+  SubCategoriesContainer,
 } from './styles';
 
 export default function AvailableProducts() {
@@ -35,12 +37,21 @@ export default function AvailableProducts() {
     Gênero: [],
     Categorias: [],
     Entrega: [],
+    subCategories: [],
   });
-  const [subFilters, setSubFilters] = useState({});
-  const [categorySelected, setCategorySelected] = useState('Todos');
+  const [categorySelected, setCategorySelected] = useState('Categorias');
   const [filteredProducts, setFilteredProducts] = useState(mockProcuts);
 
   const navigate = useNavigate();
+  const filteredCategories = allProducts
+    .filter((product) => product.category_name === categorySelected);
+  const subCategoriesNoRepeated = Array.from(new Set(filteredCategories
+    .map((product) => product.sub_category)));
+
+  const subCategories = [
+    ...subCategoriesNoRepeated.map((subCategory) => (
+      { value: subCategory, label: subCategory })),
+  ];
 
   const categories = Array.from(new Set(allProducts
     .map((product) => product.category_name)));
@@ -68,21 +79,20 @@ export default function AvailableProducts() {
         .includes(product.type) : true;
       const verifyDelivery = delivery.length ? delivery
         .includes(product.delivery) : true;
-
-      const verifySubCategory = subFilters[categorySelected]?.length
-        ? subFilters[categorySelected].includes(product.sub_category) : true;
+      const verifySubCategory = filters.subCategories.length ? filters.subCategories
+        .includes(product.sub_category) : true;
 
       return verifyCategory && verifyBrand && verifyGender && verifyImages
       && verifyType && verifyDelivery && verifySubCategory;
     });
 
     setFilteredProducts(filtered);
-  }, [allProducts, brand, gender, category, type,
-    filters.subCategory, delivery, subFilters, categorySelected]);
+  }, [brand, category, delivery, filters.subCategories, gender, type]);
 
   const handleChangeCategory = (e) => {
     setCategorySelected(e.target.value);
-    if (e.target.value === 'Todos') {
+    setFilters((prevState) => ({ ...prevState, subCategories: [] }));
+    if (e.target.value === 'Categorias') {
       setFilters((prevState) => ({ ...prevState, Categorias: [] }));
       return;
     }
@@ -129,7 +139,6 @@ export default function AvailableProducts() {
       navigate('/clients');
     }
   }, [currentOrder, navigate]);
-
   return (
     <Container>
       {localStorage.getItem('editMode') && (
@@ -146,7 +155,7 @@ export default function AvailableProducts() {
           value={ categorySelected }
           onChange={ handleChangeCategory }
         >
-          <Option>Todos</Option>
+          <Option>Categorias</Option>
           {categories.map((categoryOption) => (
             <Option key={ categoryOption }>{categoryOption}</Option>
           ))}
@@ -176,6 +185,48 @@ export default function AvailableProducts() {
           onClick={ handleClearSelectedProducts }
         />
       </ButtonsContainer>
+      {(categorySelected !== 'Categorias' && subCategories.length > 1) && (
+        <SubCategoriesContainer>
+          <Select
+            options={ subCategories }
+            placeholder="Subcategorias"
+            isMulti
+            theme={ (theme) => ({
+              ...theme,
+              borderRadius: 0,
+              colors: {
+                ...theme.colors,
+                primary: '#809CAA',
+              },
+            }) }
+            styles={ {
+              multiValue: (provided) => ({
+                ...provided,
+                backgroundColor: '#809CAA',
+              }),
+              multiValueLabel: (provided) => ({
+                ...provided,
+                color: '#fff',
+                fontWeight: 'medium',
+              }),
+              menu: (provided) => ({
+                ...provided,
+                color: 'inherit',
+              }),
+              control: (provided) => ({
+                ...provided,
+                color: '#fff',
+                borderRadius: '5px',
+                padding: '4px',
+              }),
+            } }
+            onChange={ (e) => setFilters((prevState) => ({
+              ...prevState,
+              subCategories: e.map((subCategory) => subCategory.value),
+            })) }
+          />
+        </SubCategoriesContainer>
+      )}
       <AvailableProductsContainer>
         <AllProductsAvaliable
           imagesPerView={ imagesPerView }
@@ -185,7 +236,6 @@ export default function AvailableProducts() {
         />
         <FilterAvaliableProducts
           setFilters={ setFilters }
-          setSubFilters={ setSubFilters }
         />
       </AvailableProductsContainer>
     </Container>

@@ -1,11 +1,11 @@
 export const companiesMock = [
   {
-    nome: 'Empresa A Ltda.',
+    nome: 'Nalvez',
     cnpj: '12.345.678/0001-90',
     uf: 'SP',
     nomeFantasia: 'A Tech',
     email: 'contato@a-tech.com',
-    whatsapp: '11 98765-4321',
+    whatsapp: '11 97182-2802',
   },
   {
     nome: 'Empresa B S.A.',

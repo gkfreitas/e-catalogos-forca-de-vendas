@@ -28,11 +28,11 @@ function LinkOrderProvider({ children }) {
   );
 
   const [orders, setOrders] = useState(JSON.parse(localStorage
-    .getItem('ordersLink')) || []);
+    .getItem('orders')) || []);
 
   useEffect(() => {
     try {
-      localStorage.setItem('ordersLink', JSON.stringify(orders));
+      localStorage.setItem('orders', JSON.stringify(orders));
     } catch (error) {
       console.error(localStorageError, error);
     }

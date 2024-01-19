@@ -76,8 +76,8 @@ export default function SendLink() {
     const newLinks = links.filter(({ name }) => name !== link.name);
     localStorage.setItem('links', JSON.stringify(newLinks));
     const newLinksState = newLinks
-      .map(({ name, products }) => ({ value: JSON
-        .stringify({ name, products }),
+      .map(({ name, products, id, representativeName }) => ({ value: JSON
+        .stringify({ name, products, id, representativeName }),
       label: name }));
     setOptions([{ value: [],
       label: 'Selecione um LINK' }, ...newLinksState]);
@@ -132,7 +132,7 @@ export default function SendLink() {
               <ExportContainer
                 href={ `https://api.whatsapp.com/send?phone=${whatsapp
                   .split('-').join('').split(' ')
-                  .join('')}&text=192.168.15.20:5173/link/${link.id}-${whatsapp
+                  .join('')}&text=http://192.168.15.20:5173/link/${link.id}-${whatsapp
                   .split('-').join('').split(' ').join('')}` }
                 target="_blank"
               >

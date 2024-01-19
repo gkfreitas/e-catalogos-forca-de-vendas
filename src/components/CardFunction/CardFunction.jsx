@@ -34,7 +34,12 @@ export default function CardFunction() {
   };
 
   const redirectYoutube = () => {
-    window.open('https://www.youtube.com/watch?v=1IMnONVpimw', '_blank');
+    window.open('https://www.youtube.com/watch?v=1wLbtY5vEYc', '_blank');
+  };
+
+  const clearData = () => {
+    localStorage.clear();
+    window.location.reload();
   };
 
   const functions = [
@@ -71,7 +76,7 @@ export default function CardFunction() {
     {
       name: 'Limpar Dados',
       iconSrc: eraserIcon,
-      route: '/functions',
+      onClick: clearData,
     },
     {
       name: 'Dúvidas',
@@ -96,7 +101,7 @@ export default function CardFunction() {
     {
       name: 'Sair',
       iconSrc: leaveIcon,
-      route: '/functions',
+      route: '/',
     },
     {
       name: 'Restaurar Pedidos',

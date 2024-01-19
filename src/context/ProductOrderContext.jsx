@@ -27,6 +27,16 @@ function ProductOrderProvider({ children }) {
   const [currentProductOrder, setCurrentProductOrder] = useState(
     JSON.parse(localStorage.getItem('currentProductOrder')) || {},
   );
+  const [orders, setOrders] = useState(JSON.parse(localStorage
+    .getItem('orders')) || []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('orders', JSON.stringify(orders));
+    } catch (error) {
+      console.error('Erro ao salvar no localStorage', error);
+    }
+  });
 
   useEffect(() => {
     try {
@@ -59,7 +69,9 @@ function ProductOrderProvider({ children }) {
     currentOrder,
     setCurrentOrder,
     emptyOrder,
-  }), [currentProductOrder, currentOrder]);
+    orders,
+    setOrders,
+  }), [currentProductOrder, currentOrder, orders]);
 
   return (
     <ProductOrderContext.Provider

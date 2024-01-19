@@ -26,9 +26,10 @@ export default function Welcome() {
   const { pathname } = window.location;
   const [linkId, clientWhatsapp] = pathname.split('/').pop().split('-');
   const links = JSON.parse(localStorage.getItem('links')) || [];
-  const { nome, CNPJ } = companiesMock.find((company) => (company.whatsapp)
+  const { nome } = companiesMock.find((company) => (company.whatsapp)
     .split('-').join('').split(' ').join('')
   === clientWhatsapp);
+  const { cnpj } = companiesMock.find((company) => (company.whatsapp));
   const navigate = useNavigate();
   const { setCurrentProductOrder, setCurrentOrder } = useContext(LinkOrderContext);
   const { setSelectedProducts } = useContext(LinkContext);
@@ -36,10 +37,12 @@ export default function Welcome() {
   const handleNextPage = () => {
     setCurrentOrder({
       clientName: nome,
-      clientCNPJ: CNPJ,
+      clientCNPJ: cnpj,
+      hour: new Date().toLocaleTimeString(),
       clientWhatsapp,
-      orderDate: Date.now(),
+      orderDate: new Date().toLocaleDateString(),
       linkId: Number(linkId),
+      type: 'link',
       // eslint-disable-next-line no-magic-numbers
       orderNumber: Math.floor(Math.random() * 1000000),
       productsCart: [],

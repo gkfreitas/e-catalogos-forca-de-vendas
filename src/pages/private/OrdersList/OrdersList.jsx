@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Header from '../../../components/Header';
 import InputDate from '../../../components/InputDate/InputDate';
 import InputText from '../../../components/InputText/InputText';
 import OrderCard from '../../../components/OrderCard/OrderCard';
+import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import {
   ContainerPage,
   InputsDateContainer,
@@ -16,14 +17,9 @@ export default function OrdersList() {
   const [login, setLogin] = useState('');
   const [initialDate, setInitialDate] = useState('');
   const [finalDate, setFinalDate] = useState('');
-  const [orders, setOrders] = useState([{}]);
+  const { orders } = useContext(ProductOrderContext);
   const [filteredOrders, setFilteredOrders] = useState([{}]);
   const tags = ['N do pedido', 'CNPJ', 'Razão Social', 'Data e Hora'];
-
-  useEffect(() => {
-    const localOrders = JSON.parse(localStorage.getItem('orders')) || [];
-    setOrders(localOrders);
-  }, []);
 
   useEffect(() => {
     const verifyDate = (order) => {
@@ -45,7 +41,15 @@ export default function OrdersList() {
       return verifyOrderNumber && verifySocialReasonOrCNPJ && verifyDateLocal;
     });
 
-    setFilteredOrders(filteredOrder);
+    const sortedOrders = filteredOrder.sort((a, b) => {
+      const dateA = a?.orderDate?.split('/').reverse().join('-');
+      const dateB = b?.orderDate?.split('/').reverse().join('-');
+      const timeA = new Date(`${dateA}T${a?.hour}`).getTime();
+      const timeB = new Date(`${dateB}T${b?.hour}`).getTime();
+      return timeB - timeA;
+    });
+
+    setFilteredOrders(sortedOrders);
   }, [orderNumber, socialReasonOrCNPJ, login, initialDate, finalDate, orders]);
 
   return (

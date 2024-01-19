@@ -6,6 +6,11 @@ function ProductProvider({ children }) {
   const [orderProducts, setOrderProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({ images: [], sizes: [] });
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
+  // const [allProducts, setAllProducts] = useState([]);
+
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
 
   const changeProduct = useCallback((direction) => {
     let newIndex;

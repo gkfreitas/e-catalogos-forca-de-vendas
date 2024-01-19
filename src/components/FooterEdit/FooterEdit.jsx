@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Footer } from './styles';
+import { ButtonFinish, Footer } from './styles';
 
 export default function FooterEdit() {
   const navigate = useNavigate();
@@ -33,8 +33,8 @@ export default function FooterEdit() {
 
   return (
     <Footer>
-      <button onClick={ handleFinish }>Finalizar edição</button>
-      <button onClick={ handleCancel }>Cancelar edição</button>
+      <ButtonFinish onClick={ handleFinish }>Finalizar edição</ButtonFinish>
+      <ButtonFinish onClick={ handleCancel }>Cancelar edição</ButtonFinish>
     </Footer>
   );
 }

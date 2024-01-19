@@ -64,8 +64,8 @@ import img5 from '../assets/images/carrousel/img5.jpeg';
 import img6 from '../assets/images/carrousel/img6.jpeg';
 
 const banquetas = [banqueta1, banqueta2];
-const bermudas = [bermuda1, bermuda2, bermuda3, bermuda4,
-  bermuda5, bermuda6, bermuda7, bermuda8];
+const bermudasEstampadas = [bermuda1, bermuda2, bermuda3, bermuda4, bermuda5];
+const bermudasLisas = [bermuda6, bermuda7, bermuda8];
 const botas = [bota1, bota2, bota3, bota4, bota5, bota6, bota7];
 const camisas = [camisa1];
 const chinelos = [chinelo1, chinelo2, chinelo3, chinelo4, chinelo5];
@@ -113,7 +113,7 @@ const banquetasProducts = banquetas.map((banqueta, index) => {
   return product;
 });
 
-const bermudasProducts = bermudas.map((bermuda, index) => {
+const bermudasProducts = bermudasEstampadas.map((bermuda, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
   const randomPrice = Math.floor(Math.random() * 200) + 50;
   const randomSize1 = Math.floor(Math.random() * 6) + 1;
@@ -121,6 +121,7 @@ const bermudasProducts = bermudas.map((bermuda, index) => {
   const randomSize3 = Math.floor(Math.random() * 6) + 1;
   const randomSize4 = Math.floor(Math.random() * 6) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
+  const lisas = ['5153', '4470', '6377'];
   const product = {
     id: index + 200,
     name: 'Bermuda',
@@ -128,6 +129,45 @@ const bermudasProducts = bermudas.map((bermuda, index) => {
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
     category_name: 'Bermudas',
+    group_name: 'Masculino',
+    sub_category: 'Estampada',
+    price: randomPrice,
+    fixed_qtd: fixedQtd,
+    box_price: randomPrice * fixedQtd,
+    sizes: {
+      P: randomSize1,
+      M: randomSize2,
+      G: randomSize3,
+      GG: randomSize4,
+    },
+    images: [
+      {
+        image: bermuda,
+        product_id: index + 200,
+      },
+    ],
+  };
+  return product;
+});
+
+const bermudasProducts2 = bermudasLisas.map((bermuda, index) => {
+  const randomReference = Math.floor(Math.random() * 10000) + 1000;
+  const randomPrice = Math.floor(Math.random() * 200) + 50;
+  const randomSize1 = Math.floor(Math.random() * 6) + 1;
+  const randomSize2 = Math.floor(Math.random() * 6) + 1;
+  const randomSize3 = Math.floor(Math.random() * 6) + 1;
+  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
+  const lisas = ['5153', '4470', '6377'];
+  const product = {
+    id: index + 9900,
+    name: 'Bermuda',
+    colors: [],
+    reference: `67.15.${randomReference}`,
+    brand_name: 'Marca Moda',
+    category_name: 'Bermudas',
+    group_name: 'Masculino',
+    sub_category: 'Lisas',
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
@@ -162,6 +202,7 @@ const botasProducts = botas.map((bota, index) => {
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
     category_name: 'Botas',
+    group_name: 'Masculino',
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
@@ -229,6 +270,7 @@ const chinelosProducts = chinelos.map((chinelo, index) => {
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
     category_name: 'Chinelos',
+    group_name: 'Masculino',
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
@@ -292,10 +334,11 @@ const esculturasProducts = esculturas.map((escultura, index) => {
   const product = {
     id: index + 700,
     colors: [],
-    name: 'Escultura',
+    name: 'Marca arte',
     reference: `67.15.${randomReference}`,
-    brand_name: 'Marca Moda',
+    brand_name: 'Esculturas',
     category_name: 'Esculturas',
+    group_name: 'Masculino',
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
@@ -328,8 +371,9 @@ const ferramentasProducts = ferramentas.map((ferramenta, index) => {
     colors: [],
     name: 'Ferramenta',
     reference: `67.15.${randomReference}`,
-    brand_name: 'Marca Moda',
+    brand_name: 'Marca útil',
     category_name: 'Ferramentas',
+    group_name: 'Masculino',
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
@@ -363,6 +407,7 @@ const jaquetasProducts = jaquetas.map((jaqueta, index) => {
     name: 'Jaqueta',
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
+    group_name: 'Feminino',
     category_name: 'Jaquetas F',
     price: randomPrice,
     fixed_qtd: fixedQtd,
@@ -420,7 +465,7 @@ const mochilasProducts = mochilas.map((mochila, index) => {
     reference: `67.15.${randomReference}`,
     brand_name: 'Marca Moda',
     category_name: 'Mochilas',
-    group_name: '',
+    group_name: 'Masculino',
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
@@ -789,8 +834,9 @@ const mockProducts2 = [
 ];
 
 bermudasProducts.forEach((bermuda) => mockProducts2.push(bermuda));
-botasProducts.forEach((bota) => mockProducts2.push(bota));
-chinelosProducts.forEach((chinelo) => mockProducts2.push(chinelo));
+bermudasProducts2.forEach((bermuda) => mockProducts2.push(bermuda));
+chinelosProducts.forEach((chinelo) => mockProducts2.unshift(chinelo));
+botasProducts.forEach((bota) => mockProducts2.unshift(bota));
 esculturasProducts.forEach((escultura) => mockProducts2.push(escultura));
 ferramentasProducts.forEach((ferramenta) => mockProducts2.push(ferramenta));
 jaquetasProducts.forEach((jaqueta) => mockProducts2.push(jaqueta));
@@ -802,10 +848,9 @@ function enrichProductData(products) {
   const deliveries = ['Pronta Entrega', 'Programado'];
 
   return products.map((product) => {
-    const type = types[Math.floor(Math.random() * types.length)];
-    const subCategory = subCategories[Math.floor(Math.random() * subCategories.length)];
+    const type = types[Math.floor(Math.random() * 2)];
     const delivery = deliveries[Math.floor(Math.random() * deliveries.length)];
-    return { ...product, type, sub_category: subCategory, delivery };
+    return { ...product, type, delivery };
   });
 }
 

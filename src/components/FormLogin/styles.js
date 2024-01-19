@@ -37,3 +37,9 @@ export const ForgotPassword = styled.p`
   text-decoration-line: underline;
   cursor: pointer;
 `;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;

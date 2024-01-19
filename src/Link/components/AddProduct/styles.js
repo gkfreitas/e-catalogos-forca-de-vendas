@@ -10,7 +10,6 @@ export const AddProductsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column-reverse;
   gap: 4px;
 `;
 
