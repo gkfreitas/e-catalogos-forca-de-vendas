@@ -49,7 +49,8 @@ export default function ExportPage() {
 
   const tags = ['N° do Pedido', 'Data e hora', 'Razão Social', 'CNPJ', 'Valor Bruto',
     'Desconto', 'Impostos', 'Parcelas + Valor total', 'Endereço de entrega'];
-
+  console.log(orderType);
+  console.log(`${orderType === 'order' ? 'Pedido' : 'Orçamento'} salvo com sucesso!`);
   const tagsValue = [
     orderNumber,
     new Date().toLocaleString(),
@@ -176,7 +177,8 @@ export default function ExportPage() {
           </IconText>
         </IconWithTextContainer>
         <IconWithTextContainer
-          onClick={ () => handleSuccess('Pedido enviado para a fábrica com sucesso!') }
+          onClick={ () => handleSuccess(`
+          ${orderType === 'order' ? 'Pedido' : 'Orçamento'} salvo com sucesso!`) }
         >
           <IconContainer>
             <IoCloudUploadOutline size={ 24 } color="#809CAA" />
