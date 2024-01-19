@@ -16,7 +16,7 @@ import {
   IconWithTextContainer,
   InputsRadioContainer, LabelText,
   PageContainer,
-  PageTitle, TextArea, TextAreaContainer, TextAreaTitle,
+  PageTitle, TextArea, TextAreaContainer,
 } from './styles';
 
 export default function ExportPage() {
@@ -144,7 +144,6 @@ export default function ExportPage() {
         />
       </InputsRadioContainer>
       <TextAreaContainer>
-        <TextAreaTitle>Observações</TextAreaTitle>
         <TextArea placeholder="Digite sua observação aqui" />
       </TextAreaContainer>
       <ExportFooter>
