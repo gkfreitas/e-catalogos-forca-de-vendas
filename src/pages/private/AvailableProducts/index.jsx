@@ -200,6 +200,7 @@ export default function AvailableProducts() {
               },
             }) }
             styles={ {
+
               input: (provided) => ({
                 ...provided,
                 color: '#fff',
@@ -215,7 +216,7 @@ export default function AvailableProducts() {
               }),
               multiValueLabel: (provided) => ({
                 ...provided,
-                color: '#809CAA',
+                color: '#fff',
                 fontWeight: 'medium',
               }),
               control: (provided) => ({
