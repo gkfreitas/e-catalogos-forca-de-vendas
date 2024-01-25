@@ -14,6 +14,7 @@ import sendIcon from '../../assets/icons/send.svg';
 import supportIcon from '../../assets/icons/support.svg';
 import tableIcon from '../../assets/icons/table.svg';
 import youtubeIcon from '../../assets/icons/youtube.svg';
+import ModalRestoreOrders from '../ModalRestoreOrders/ModalRestoreOrders';
 import SupportModal from '../SupportModal/SupportModal';
 import {
   CardContainer,
@@ -26,7 +27,7 @@ import {
 
 export default function CardFunction() {
   const [supportModal, setSupportModal] = useState(false);
-
+  const [restoreModal, setRestoreModal] = useState(false);
   const navigate = useNavigate();
   const backToOrder = () => {
     const lastPage = localStorage.getItem('lastPage') || '';
@@ -86,7 +87,7 @@ export default function CardFunction() {
     {
       name: 'Exportar Pedidos',
       iconSrc: cloudIcon,
-      route: '/functions',
+      route: '/exportOrders',
     },
     {
       name: 'Tabela de Preços',
@@ -106,7 +107,7 @@ export default function CardFunction() {
     {
       name: 'Restaurar Pedidos',
       iconSrc: restoreIcon,
-      route: '/functions',
+      onClick: () => setRestoreModal(true),
     },
   ];
 
@@ -127,7 +128,6 @@ export default function CardFunction() {
         </CardTitlePrincipal>
       </CardPrincipal>
       <CardsContainer>
-
         {
           functions.map((func) => (
             <CardContainer
@@ -140,9 +140,9 @@ export default function CardFunction() {
               </CardTitle>
             </CardContainer>
           ))
-
         }
         {supportModal && <SupportModal disable={ () => setSupportModal(false) } />}
+        {restoreModal && <ModalRestoreOrders disable={ () => setRestoreModal(false) } />}
       </CardsContainer>
     </>
   );

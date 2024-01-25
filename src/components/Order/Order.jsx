@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { FaRegCalendarAlt, FaShippingFast } from 'react-icons/fa';
 import { HiOutlineCurrencyDollar } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { ProductOrderContext } from '../../context/ProductOrderContext';
 import DeadlineModal from '../DeadlineModal/DeadlineModal';
 import FooterEdit from '../FooterEdit/FooterEdit';
@@ -13,7 +13,6 @@ import PaymentModal from '../PaymentModal/PaymentModal';
 import ProductCartCard from '../ProductCartCard/ProductCartCard';
 import Separator from '../Separator';
 import ShippmentModal from '../ShippmentModal/ShippmentModal';
-import './print.css';
 import {
   CoverPage,
   Footer,
@@ -24,7 +23,7 @@ import {
   OrderTools,
 } from './styles';
 
-export default function Order({ currentOrder, routeBack = '/purchase', detail }) {
+export default function Order({ currentOrder, detail }) {
   const isLink = currentOrder.type === 'link';
   const [inputTags, setInputTags] = useState([]);
   const [inputContents, setInputContents] = useState([]);
@@ -45,8 +44,9 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
     deadline,
     orderNumber,
     orderDate,
-    installmentsValue } = currentOrder || {};
+  } = currentOrder || {};
   const { method, installments, discount } = paymentCondition || {};
+  const installmentsValue = totalValue / installments;
 
   const navigate = useNavigate();
 
@@ -132,9 +132,21 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
   const halfWidthValues = ['Data', 'Total'];
 
   const handleNextPage = () => {
-    if (!shippment) return toast.error('Selecione uma transportadora');
-    if (!method) return toast.error('Selecione uma condição de pagamento');
-    if (!deadline) return toast.error('Selecione um prazo de entrega');
+    if (!shippment) {
+      return toast.error('Selecione uma transportadora', {
+        position: 'top-center',
+      });
+    }
+    if (!method) {
+      return toast.error('Selecione uma condição de pagamento', {
+        position: 'top-center',
+      });
+    }
+    if (!deadline) {
+      return toast.error('Selecione um prazo de entrega', {
+        position: 'top-center',
+      });
+    }
 
     setCurrentOrder((prevState) => ({
       ...prevState,
@@ -145,85 +157,86 @@ export default function Order({ currentOrder, routeBack = '/purchase', detail })
   };
 
   return (
-    <div className="print-container">
-      <ToastContainer />
-      <CoverPage>
-        {localStorage.getItem('editMode') && !detail && (
-          <FooterEdit />
-        )}
-        <Header title="PEDIDO" routeBack={ routeBack } routeFunction={ !detail } />
-        <InputsContainer>
-          {inputTags.map((tag, index) => (
-            <InputOrder
-              key={ tag }
-              tag={ tag }
-              width={ (halfWidthValues.includes(tag) && '40%')
+    <CoverPage>
+      {localStorage.getItem('editMode') && !detail && (
+        <FooterEdit />
+      )}
+      <Header
+        title="PEDIDO"
+        routeBack
+        routeFunction={ !detail && !localStorage.getItem('editMode') }
+      />
+      <InputsContainer>
+        {inputTags.map((tag, index) => (
+          <InputOrder
+            key={ tag }
+            tag={ tag }
+            width={ (halfWidthValues.includes(tag) && '40%')
             || (mediumWidthValues.includes(tag) && '56%') }
-              content={ inputContents[index] }
+            content={ inputContents[index] }
+          />
+        ))}
+      </InputsContainer>
+      <Separator height={ 2 } margin={ 60 } color="#E9E9E9" />
+      <OrderProductsOverflow>
+        {productsCart.map(({ imageUrl,
+          reference, name, colors, sizes, total, pack, quantity }, i) => (
+          (
+            <ProductCartCard
+              discount={ total * discount }
+              key={ `${reference}-${i}` }
+              imageSrc={ imageUrl }
+              reference={ reference }
+              name={ name }
+              colors={ colors }
+              sizes={ Object.entries(sizes) }
+              totalPrice={ total }
+              pack={ pack }
+              quantity={ quantity }
             />
-          ))}
-        </InputsContainer>
-        <Separator height={ 2 } margin={ 60 } color="#E9E9E9" />
-        <OrderProductsOverflow>
-          {productsCart.map(({ imageUrl,
-            reference, name, colors, sizes, total, pack, quantity }, i) => (
-            (
-              <ProductCartCard
-                discount={ total * discount }
-                key={ `${reference}-${i}` }
-                imageSrc={ imageUrl }
-                reference={ reference }
-                name={ name }
-                colors={ colors }
-                sizes={ Object.entries(sizes) }
-                totalPrice={ total }
-                pack={ pack }
-                quantity={ quantity }
-              />
-            )
-          ))}
-        </OrderProductsOverflow>
-        {
-          !detail && (
-            <Footer>
-              <OrderTools>
-                <IconContainer onClick={ () => setShowShippment(true) }>
-                  <FaShippingFast
-                    size={ 26 }
-                    fill="#809CAA"
-                  />
-                </IconContainer>
-                {!isLink && (
-                  <IconContainer onClick={ () => setShowPayment(true) }>
-                    <HiOutlineCurrencyDollar size={ 26 } stroke="#809CAA" />
-                  </IconContainer>
-                )}
-                <IconContainer onClick={ () => setShowDeadline(true) }>
-                  <FaRegCalendarAlt size={ 26 } fill="#809CAA" />
-                </IconContainer>
-              </OrderTools>
-              {!localStorage.getItem('editMode') && (
-                <NextButton
-                  onClick={ handleNextPage }
-                >
-                  Avançar
-                </NextButton>
-              )}
-
-            </Footer>
           )
-        }
-        {detail && (
-          <FooterOrderDetails currentOrder={ currentOrder } />
-        )}
+        ))}
+      </OrderProductsOverflow>
+      {
+        !detail && (
+          <Footer>
+            <OrderTools>
+              <IconContainer onClick={ () => setShowShippment(true) }>
+                <FaShippingFast
+                  size={ 26 }
+                  fill="#809CAA"
+                />
+              </IconContainer>
+              {!isLink && (
+                <IconContainer onClick={ () => setShowPayment(true) }>
+                  <HiOutlineCurrencyDollar size={ 26 } stroke="#809CAA" />
+                </IconContainer>
+              )}
+              <IconContainer onClick={ () => setShowDeadline(true) }>
+                <FaRegCalendarAlt size={ 26 } fill="#809CAA" />
+              </IconContainer>
+            </OrderTools>
+            {!localStorage.getItem('editMode') && (
+              <NextButton
+                onClick={ handleNextPage }
+              >
+                Avançar
+              </NextButton>
+            )}
 
-        {showShippment && <ShippmentModal disable={ () => setShowShippment(false) } />}
-        {showPayment && <PaymentModal
-          disable={ () => setShowPayment(false) }
-          totalValue={ totalValue }
-        />}
-        {showDeadline && <DeadlineModal disable={ () => setShowDeadline(false) } />}
-      </CoverPage>
-    </div>
+          </Footer>
+        )
+      }
+      {detail && (
+        <FooterOrderDetails currentOrder={ currentOrder } />
+      )}
+
+      {showShippment && <ShippmentModal disable={ () => setShowShippment(false) } />}
+      {showPayment && <PaymentModal
+        disable={ () => setShowPayment(false) }
+        totalValue={ totalValue }
+      />}
+      {showDeadline && <DeadlineModal disable={ () => setShowDeadline(false) } />}
+    </CoverPage>
   );
 }

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AiFillSave, AiOutlineMail } from 'react-icons/ai';
 import { IoCloudUploadOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import EmailModal from '../../../components/EmailModal/EmailModal';
 import ExportFields from '../../../components/ExportFields/ExportFields';
 import Header from '../../../components/Header';
@@ -74,7 +74,9 @@ export default function ExportPage() {
     const localCurrentOrder = JSON.parse(localStorage.getItem('currentOrder'));
     if (!orderType) return toast.error('Selecione pedido ou orçamento');
     if (!Object.values(localCurrentOrder).length) return;
-    toast.success(message);
+    toast.success(message, {
+      position: 'top-center',
+    });
     setCurrentOrder(emptyOrder);
     setCurrentProductOrder({});
     setExported(true);
@@ -107,7 +109,6 @@ export default function ExportPage() {
 
   return (
     <PageContainer>
-      <ToastContainer />
       <Header
         title="Exportar"
         routeBack={ exported ? '/clients' : '/order' }

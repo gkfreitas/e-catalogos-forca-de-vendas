@@ -200,21 +200,27 @@ export default function AvailableProducts() {
               },
             }) }
             styles={ {
+              input: (provided) => ({
+                ...provided,
+                color: '#fff',
+              }),
+              placeholder: (provided) => ({
+                ...provided,
+                color: '#fff',
+              }),
               multiValue: (provided) => ({
                 ...provided,
                 backgroundColor: '#809CAA',
+                color: '#fff',
               }),
               multiValueLabel: (provided) => ({
                 ...provided,
-                color: '#fff',
+                color: '#809CAA',
                 fontWeight: 'medium',
-              }),
-              menu: (provided) => ({
-                ...provided,
-                color: 'inherit',
               }),
               control: (provided) => ({
                 ...provided,
+                backgroundColor: '#809CAA',
                 color: '#fff',
                 borderRadius: '5px',
                 padding: '4px',
