@@ -2,9 +2,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaEraser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import Select from 'react-select';
 import eyeIcon from '../../../assets/icons/eye-icon.svg';
 import AllProductsAvaliable from '../../../components/AllProductsAvaliable';
+import Dropdown from '../../../components/Dropdown/Dropdown';
 import FilterAvaliableProducts from '../../../components/FilterAvaliableProducts';
 import FooterEdit from '../../../components/FooterEdit/FooterEdit';
 import Header from '../../../components/Header';
@@ -17,10 +17,10 @@ import {
   ChangeImagesPerViewButton,
   Container,
   EyeIconImage,
+  HeaderTitleContainer,
   InputSelect,
   NumbersContainer,
   Option,
-  SubCategoriesContainer,
 } from './styles';
 
 export default function AvailableProducts() {
@@ -43,15 +43,12 @@ export default function AvailableProducts() {
   const [filteredProducts, setFilteredProducts] = useState(mockProcuts);
 
   const navigate = useNavigate();
+
   const filteredCategories = allProducts
     .filter((product) => product.category_name === categorySelected);
+
   const subCategoriesNoRepeated = Array.from(new Set(filteredCategories
     .map((product) => product.sub_category)));
-
-  const subCategories = [
-    ...subCategoriesNoRepeated.map((subCategory) => (
-      { value: subCategory, label: subCategory })),
-  ];
 
   const categories = Array.from(new Set(allProducts
     .map((product) => product.category_name)));
@@ -97,6 +94,21 @@ export default function AvailableProducts() {
       return;
     }
     setFilters((prevState) => ({ ...prevState, Categorias: [e.target.value] }));
+  };
+  const handleChangeSubcategory = (e) => {
+    if (filters.subCategories.includes(e.target.value)) {
+      setFilters((prevState) => ({
+        ...prevState,
+        subCategories: prevState.subCategories
+          .filter((subCategory) => subCategory !== e.target.value),
+      }));
+      return;
+    }
+
+    setFilters((prevState) => ({
+      ...prevState,
+      subCategories: [...prevState.subCategories, e.target.value],
+    }));
   };
 
   const handleShowSelected = () => {
@@ -145,7 +157,26 @@ export default function AvailableProducts() {
         <FooterEdit />
       )}
       <Header
-        title={ `Produtos Disponíveis (${filteredProducts.length})` }
+        title={
+          <HeaderTitleContainer>
+            Produtos Disponíveis (
+            {filteredProducts.length}
+            )
+            <NumbersContainer>
+              {imagesPerViewOptions.map((option) => (
+                <ChangeImagesPerViewButton
+                  key={ option }
+                  $selected={ option === imagesPerView }
+                  type="button"
+                  onClick={ () => setImagesPerView(option) }
+                >
+                  {option}
+                </ChangeImagesPerViewButton>
+              ))}
+            </NumbersContainer>
+          </HeaderTitleContainer>
+
+        }
         routeBack="/clients"
         routeNext={ selectedProducts.length && '/purchase' }
       />
@@ -160,19 +191,26 @@ export default function AvailableProducts() {
             <Option key={ categoryOption }>{categoryOption}</Option>
           ))}
         </InputSelect>
-        <NumbersContainer>
-          {imagesPerViewOptions.map((option) => (
-            <ChangeImagesPerViewButton
-              key={ option }
-              $selected={ option === imagesPerView }
-              type="button"
-              onClick={ () => setImagesPerView(option) }
+        <Dropdown
+          name="Subcategorias"
+          options={ subCategoriesNoRepeated }
+          onChange={ handleChangeSubcategory }
+        />
+        {/* {subCategories.length
+          ? (
+            <InputSelect
+              name="Subcategories"
+              onChange={ handleChangeSubcategory }
+              value={ subCategorySelected }
             >
-              {option}
-            </ChangeImagesPerViewButton>
-          ))}
-        </NumbersContainer>
-
+              <Option>Subcategorias</Option>
+              {subCategories.map((subCategory) => (
+                <Option key={ subCategory.value }>
+                  {subCategory.label}
+                </Option>
+              ))}
+            </InputSelect>
+          ) : ''} */}
         <EyeIconImage
           cursor="pointer"
           src={ eyeIcon }
@@ -185,55 +223,7 @@ export default function AvailableProducts() {
           onClick={ handleClearSelectedProducts }
         />
       </ButtonsContainer>
-      {(categorySelected !== 'Categorias' && subCategories.length > 1) && (
-        <SubCategoriesContainer>
-          <Select
-            options={ subCategories }
-            placeholder="Subcategorias"
-            isMulti
-            theme={ (theme) => ({
-              ...theme,
-              borderRadius: 0,
-              colors: {
-                ...theme.colors,
-                primary: '#809CAA',
-              },
-            }) }
-            styles={ {
 
-              input: (provided) => ({
-                ...provided,
-                color: '#fff',
-              }),
-              placeholder: (provided) => ({
-                ...provided,
-                color: '#fff',
-              }),
-              multiValue: (provided) => ({
-                ...provided,
-                backgroundColor: '#809CAA',
-                color: '#fff',
-              }),
-              multiValueLabel: (provided) => ({
-                ...provided,
-                color: '#fff',
-                fontWeight: 'medium',
-              }),
-              control: (provided) => ({
-                ...provided,
-                backgroundColor: '#809CAA',
-                color: '#fff',
-                borderRadius: '5px',
-                padding: '4px',
-              }),
-            } }
-            onChange={ (e) => setFilters((prevState) => ({
-              ...prevState,
-              subCategories: e.map((subCategory) => subCategory.value),
-            })) }
-          />
-        </SubCategoriesContainer>
-      )}
       <AvailableProductsContainer>
         <AllProductsAvaliable
           imagesPerView={ imagesPerView }

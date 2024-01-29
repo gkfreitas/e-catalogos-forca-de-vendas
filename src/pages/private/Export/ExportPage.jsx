@@ -49,8 +49,7 @@ export default function ExportPage() {
 
   const tags = ['N° do Pedido', 'Data e hora', 'Razão Social', 'CNPJ', 'Valor Bruto',
     'Desconto', 'Impostos', 'Parcelas + Valor total', 'Endereço de entrega'];
-  console.log(orderType);
-  console.log(`${orderType === 'order' ? 'Pedido' : 'Orçamento'} salvo com sucesso!`);
+
   const tagsValue = [
     orderNumber,
     new Date().toLocaleString(),

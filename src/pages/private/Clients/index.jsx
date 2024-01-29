@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import ClientCard from '../../../components/ClientCard';
 import FooterEdit from '../../../components/FooterEdit/FooterEdit';
 import Header from '../../../components/Header';
@@ -31,6 +32,8 @@ export default function ClientsPage() {
   const [priceTable, setPriceTable] = useState('');
   const { setCurrentOrder } = useContext(ProductOrderContext);
 
+  const router = useNavigate();
+
   const typesPriceTableMock = ['REPRESENTACAO',
     'CENTRO OESTE', 'NORDESTE', 'SUL / SUDOESTE'];
 
@@ -43,6 +46,7 @@ export default function ClientsPage() {
     setCurrentClient(temporaryClient);
     setPriceTable(type);
     setTableCard(false);
+    router('/avaliableProducts');
   };
 
   useEffect(() => {

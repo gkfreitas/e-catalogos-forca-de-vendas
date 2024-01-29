@@ -91,7 +91,6 @@ export default function ExportOrders() {
 
   const backPage = () => {
     setSelectedOrders([]);
-    console.log('aaaa');
     return '/functions';
   };
 
