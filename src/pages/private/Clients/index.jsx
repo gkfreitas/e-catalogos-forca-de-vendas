@@ -46,7 +46,9 @@ export default function ClientsPage() {
     setCurrentClient(temporaryClient);
     setPriceTable(type);
     setTableCard(false);
-    router('/avaliableProducts');
+    setTimeout(() => {
+      router('/avaliableProducts');
+    });
   };
 
   useEffect(() => {
