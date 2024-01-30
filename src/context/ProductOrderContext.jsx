@@ -33,7 +33,6 @@ function ProductOrderProvider({ children }) {
 
   const [orders, setOrders] = useState(JSON.parse(localStorage
     .getItem('orders')) || []);
-  const [selectedOrders, setSelectedOrders] = useState([]);
 
   useEffect(() => {
     try {
@@ -68,6 +67,7 @@ function ProductOrderProvider({ children }) {
     }));
   }, [currentProductOrder]);
 
+<<<<<<< HEAD
   useEffect(() => {
     try {
       localStorage.setItem('selectedOrders', JSON.stringify(selectedOrders));
@@ -76,6 +76,8 @@ function ProductOrderProvider({ children }) {
     }
   }, [selectedOrders]);
 
+=======
+>>>>>>> 50b7297044e8e1848156d08f7b36fd7b79e1dbaf
   const contextValue = useMemo(() => ({
     currentProductOrder,
     setCurrentProductOrder,
@@ -84,9 +86,7 @@ function ProductOrderProvider({ children }) {
     emptyOrder,
     orders,
     setOrders,
-    selectedOrders,
-    setSelectedOrders,
-  }), [currentProductOrder, currentOrder, orders, selectedOrders]);
+  }), [currentProductOrder, currentOrder, orders]);
 
   return (
     <ProductOrderContext.Provider

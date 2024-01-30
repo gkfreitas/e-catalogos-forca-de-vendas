@@ -25,21 +25,28 @@ export const mockFilters = [
   {
     filterName: 'Marca',
     options: noRepeatedBrandName,
-    type: 'checkbox',
   },
   {
     filterName: 'Entrega',
     options: ['Pronta Entrega', 'Programado'],
-    type: 'checkbox',
   },
   {
     filterName: 'Tipo',
     options: noRepeatedType,
-    type: 'checkbox',
   },
   {
     filterName: 'Gênero',
     options: noRepeatedGenderName,
-    type: 'checkbox',
+  },
+  {
+    filterName: 'Categorias',
+    subFilters: noRepeatedCategoryName.map((category) => ({
+      filterName: category,
+      options: noRepeatedSubCategoryName
+        .filter((subcategory) => mockProducts
+          .some((product) => product.sub_category === subcategory
+          && product.category_name === category)),
+    })),
+
   },
 ];

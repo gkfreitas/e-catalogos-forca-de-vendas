@@ -59,7 +59,7 @@ export default function Welcome() {
     navigate(`/link/availableProducts/${linkId}`);
   };
 
-  const { representativeName } = links.find((link) => link.id === Number(linkId)) || {};
+  const { representativeName } = links.find((link) => link.id === Number(linkId));
 
   return (
     <Container>
@@ -87,9 +87,7 @@ export default function Welcome() {
             Sua representante
           </PrimaryText>
         </BoxRepresentative>
-        <ButtonVideo
-          onClick={ () => window.open('https://www.youtube.com/watch?v=RX1BjMD_DpY&feature=youtu.be', '_blank') }
-        >
+        <ButtonVideo>
           <VideoIcon
             src={ playCircle }
           />

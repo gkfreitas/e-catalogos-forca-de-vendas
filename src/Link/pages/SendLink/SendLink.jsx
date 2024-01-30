@@ -57,9 +57,7 @@ export default function SendLink() {
 
   const showMix = () => {
     if (!link.products || link.products.length <= 0) {
-      toast.warn('Selecione um link', {
-        position: 'top-center',
-      });
+      toast.warn('Selecione um link');
       return;
     }
     setMix(true);
@@ -67,9 +65,7 @@ export default function SendLink() {
 
   const showRemove = () => {
     if (!link.products || link.products.length <= 0) {
-      toast.warn('Selecione um link', {
-        position: 'top-center',
-      });
+      toast.warn('Selecione um link');
       return;
     }
     setModalRemove(true);
@@ -77,15 +73,15 @@ export default function SendLink() {
 
   const handleRemoveLink = () => {
     const links = JSON.parse(localStorage.getItem('links')) || [];
-    const newLinks = links.filter(({ id }) => id !== link.id);
+    const newLinks = links.filter(({ name }) => name !== link.name);
     localStorage.setItem('links', JSON.stringify(newLinks));
     const newLinksState = newLinks
-      .map(({ name, products, id, representativeName }) => ({ value: JSON
-        .stringify({ name, products, id, representativeName }),
+      .map(({ name, products }) => ({ value: JSON
+        .stringify({ name, products }),
       label: name }));
     setOptions([{ value: [],
       label: 'Selecione um LINK' }, ...newLinksState]);
-    setLink({ name: '', products: [], representativeName: '' });
+    setLink([]);
     setModalRemove(false);
   };
 
@@ -109,7 +105,6 @@ export default function SendLink() {
           </InputContainer>
           <LinkContainer>
             <InputSelect
-              value={ link.name }
               name="links"
               onChange={ ({ target }) => handleChangeLink(target.value
                 ? JSON.parse(target.value) : []) }

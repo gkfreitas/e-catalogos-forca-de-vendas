@@ -24,21 +24,15 @@ export default function FooterPurchase() {
       linkId,
       clientWhatsapp } = currentOrder;
     if (!paymentCondition.method) {
-      toast.error('Selecione uma forma de pagamento', {
-        position: 'top-center',
-      });
+      toast.error('Selecione uma forma de pagamento');
       return;
     }
     if (!productsCart.length) {
-      toast.error('Adicione produtos ao carrinho', {
-        position: 'top-center',
-      });
+      toast.error('Adicione produtos ao carrinho');
       return;
     }
     setOrders([...orders, currentOrder]);
-    toast.success('Pedido exportado com sucesso', {
-      position: 'top-center',
-    });
+    toast.success('Pedido exportado com sucesso');
     setCurrentOrder({});
     setCurrentProductOrder({});
     const oneSecond = 1000;
@@ -80,6 +74,7 @@ export default function FooterPurchase() {
           disable={ () => setObservationModal(false) }
         />
       }
+
     </>
   );
 }

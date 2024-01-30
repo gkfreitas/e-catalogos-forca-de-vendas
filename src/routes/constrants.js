@@ -9,7 +9,6 @@ import AvailableProducts from '../pages/private/AvailableProducts';
 import Brands from '../pages/private/Brands';
 import Clients from '../pages/private/Clients';
 import ExportPage from '../pages/private/Export/ExportPage';
-import ExportOrders from '../pages/private/ExportOrder/ExportOrder';
 import Functions from '../pages/private/Functions/Functions';
 import OrderPage from '../pages/private/Order/OrderPage';
 import OrderDetails from '../pages/private/OrderDetails/OrderDetails';
@@ -81,9 +80,5 @@ export const publicRoutes = [
   {
     path: '/link/purchase/:id',
     component: PurchaseLink,
-  },
-  {
-    path: '/exportOrders',
-    component: ExportOrders,
   },
 ];
