@@ -11,7 +11,7 @@ export const BasicButton = styled.button`
 `;
 
 export const ButtonTime = styled.span`
-  font-size: 17px;
+  font-size: 19px;
   color: #FF0000;
   font-weight: 500;
 `;
