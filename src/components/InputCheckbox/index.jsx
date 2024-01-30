@@ -1,11 +1,11 @@
 import { Input, LabelInput } from './styles';
 
-export default function InputCheckbox({ text, size, ...rest }) {
+export default function InputCheckbox({ text, size, type, ...rest }) {
   return (
     <LabelInput>
       <Input
         $size={ size }
-        type="checkbox"
+        type={ type }
         { ...rest }
       />
       {text}

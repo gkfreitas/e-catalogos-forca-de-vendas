@@ -25,4 +25,7 @@ export const OrdersContainer = styled.main`
   flex-grow: 1;
   height: 1%;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;

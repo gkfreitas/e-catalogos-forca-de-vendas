@@ -43,7 +43,7 @@ export const FilterTitle = styled.h1`
 `;
 
 export const FilterSection = styled.div`
-  padding: 16px 20px;
+  padding: 16px 20px 16px 8px;
 `;
 
 export const FilterName = styled.p`

@@ -3,7 +3,6 @@ import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
 import ProductCartCard from './ProductCardPdf';
 
 export function MyPdfDocument({ order }) {
-  console.log(order);
   const {
     clientName,
     clientCNPJ,

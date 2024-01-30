@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import editIcon from '../../assets/icons/edit.svg';
 import emailIcon from '../../assets/icons/email.svg';
 import exportIcon from '../../assets/icons/export.svg';
@@ -38,7 +38,9 @@ export default function FooterOrderDetails({ currentOrder }) {
   };
 
   const handleSuccess = (message) => {
-    toast.success(message);
+    toast.success(message, {
+      position: 'top-center',
+    });
   };
 
   return (
@@ -63,7 +65,6 @@ export default function FooterOrderDetails({ currentOrder }) {
           />
         )
       }
-      <ToastContainer />
     </>
   );
 }
