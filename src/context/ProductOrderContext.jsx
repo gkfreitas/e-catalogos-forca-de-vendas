@@ -29,7 +29,6 @@ function ProductOrderProvider({ children }) {
   );
   const [orders, setOrders] = useState(JSON.parse(localStorage
     .getItem('orders')) || []);
-  const [selectedOrders, setSelectedOrders] = useState([]);
 
   useEffect(() => {
     try {
@@ -64,14 +63,6 @@ function ProductOrderProvider({ children }) {
     }));
   }, [currentProductOrder]);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem('selectedOrders', JSON.stringify(selectedOrders));
-    } catch (error) {
-      console.error('Erro ao salvar no localStorage', error);
-    }
-  }, [selectedOrders]);
-
   const contextValue = useMemo(() => ({
     currentProductOrder,
     setCurrentProductOrder,
@@ -80,9 +71,7 @@ function ProductOrderProvider({ children }) {
     emptyOrder,
     orders,
     setOrders,
-    selectedOrders,
-    setSelectedOrders,
-  }), [currentProductOrder, currentOrder, orders, selectedOrders]);
+  }), [currentProductOrder, currentOrder, orders]);
 
   return (
     <ProductOrderContext.Provider

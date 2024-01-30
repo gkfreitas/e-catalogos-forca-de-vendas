@@ -19,7 +19,7 @@ export const Field = styled.div`
   padding: 3px;
   border-radius: 3px;
   border-bottom: 1.5px solid #000;
-  background: #E4F5FE;
+  background: #F2F2F2;
   width: 80%;
   margin: 0 auto;
   text-align: center;

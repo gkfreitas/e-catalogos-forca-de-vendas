@@ -27,6 +27,7 @@ export default function OrdersList() {
       const orderTime = new Date(orderDate.split('/').reverse().join('-')).getTime();
       const initialTime = new Date(initialDate).getTime();
       const finalTime = new Date(finalDate).getTime();
+      console.log(orderTime, initialTime, finalTime);
       return orderTime >= initialTime && orderTime <= finalTime;
     };
 
@@ -43,7 +44,7 @@ export default function OrdersList() {
 
     const sortedOrders = filteredOrder.sort((a, b) => {
       const dateA = a?.orderDate?.split('/').reverse().join('-');
-      const dateB = b?.orderDate?.split('/').reverse().join('-');
+      const dateB = a?.orderDate?.split('/').reverse().join('-');
       const timeA = new Date(`${dateA}T${a?.hour}`).getTime();
       const timeB = new Date(`${dateB}T${b?.hour}`).getTime();
       return timeB - timeA;

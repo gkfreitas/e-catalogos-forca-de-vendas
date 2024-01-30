@@ -68,13 +68,16 @@ export default function PaymentModal({ disable }) {
         <InputsContainer>
           {
             inputsRadio.map(({ name, value, instalments }) => (
-              <InputRadio
-                key={ value }
-                name={ name }
-                value={ value }
-                onChange={ () => setPaymentMethod({ name, value, instalments }) }
-                selectedValue={ paymentMethod.value || paymentCondition.method }
-              />
+              <>
+                {console.log(paymentMethod.value, value)}
+                <InputRadio
+                  key={ value }
+                  name={ name }
+                  value={ value }
+                  onChange={ () => setPaymentMethod({ name, value, instalments }) }
+                  selectedValue={ paymentMethod.value || paymentCondition.method }
+                />
+              </>
             ))
           }
         </InputsContainer>

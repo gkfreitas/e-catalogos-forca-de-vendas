@@ -8,7 +8,8 @@ export default function LoginPage() {
     <LoginContainer>
       <LoginLogo src={ LogoImage } />
       <FormLogin />
-      <ButtonYT />
+      <ButtonYT name='Força de Vendas'/>
+      <ButtonYT name='Link do Ecommerce'/>
     </LoginContainer>
   );
 }

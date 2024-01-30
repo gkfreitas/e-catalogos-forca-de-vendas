@@ -34,7 +34,7 @@ export default function AvailableProductsLink() {
   const imagesPerViewOptions = [1, 2, 3, 4];
 
   const handleChangeCategory = (e) => {
-    if (e.target.value === 'Categorias') {
+    if (e.target.value === 'Todos') {
       setCategorySelected('');
       return;
     }
@@ -81,7 +81,7 @@ export default function AvailableProductsLink() {
           value={ categorySelected }
           onChange={ handleChangeCategory }
         >
-          <Option>Categorias</Option>
+          <Option>Todos</Option>
           {categories.map((categoryOption) => (
             <Option key={ categoryOption }>{categoryOption}</Option>
           ))}

@@ -11,7 +11,7 @@ export const CardContainer = styled.div`
   cursor: pointer;
   flex-shrink: 0;
   border: ${({ $currentClient }) => ($currentClient ? '1px solid #12A1B8' : 'none')};
-  background: #E4F5FE;
+  background: #F7F7F7;
   box-shadow: 0px 8px 8px -4px #809CAA;
   &:hover {
     box-shadow: 0px 10px 10px -5px #809CAA;

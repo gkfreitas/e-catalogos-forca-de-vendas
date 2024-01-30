@@ -22,18 +22,12 @@ export default function FilterAvaliableProducts({ setFilters, setSubFilters }) {
   const [showSubFilter, setShowSubFilter] = useState({});
 
   const handleFilters = ({ target }, filterName) => {
-    const { value, checked, type } = target;
-    if (type === 'radio') {
-      setFilters((prevState) => ({
-        ...prevState,
-        [filterName]: [value],
-      }));
-      return;
-    }
+    const { name, checked } = target;
+
     setFilters((prevState) => ({
       ...prevState,
-      [filterName]: checked ? [...prevState[filterName] || [], value]
-        : [...prevState[filterName]].filter((typeFilter) => typeFilter !== value),
+      [filterName]: checked ? [...prevState[filterName] || [], name]
+        : [...prevState[filterName]].filter((type) => type !== name),
     }));
   };
 
@@ -61,19 +55,17 @@ export default function FilterAvaliableProducts({ setFilters, setSubFilters }) {
           Filtrar
         </FilterTitle>
         {
-          mockFilters.map(({ filterName, options, subFilters, type }) => (
+          mockFilters.map(({ filterName, options, subFilters }) => (
             <div key={ filterName }>
               <FilterSection>
                 <FilterName>{filterName}</FilterName>
                 <InputsContainer>
-                  {options && options.map((option, i) => (
+                  {options && options.map((option) => (
                     <InputCheckbox
-                      name={ filterName }
-                      onChange={ (e) => handleFilters(e, filterName) }
-                      key={ i }
-                      value={ option }
+                      name={ option }
+                      onClick={ (e) => handleFilters(e, filterName) }
+                      key={ option }
                       text={ option }
-                      type={ type }
                     />
                   ))}
                   {subFilters && subFilters.map((subFilter) => (

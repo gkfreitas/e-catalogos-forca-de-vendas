@@ -10,22 +10,22 @@ export default function FormLogin() {
   const router = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
-    key: '2463',
-    login: 'Lojas S/A',
-    password: '123456',
+    name: '',
+    login: '',
+    password: '',
   });
 
-  const [errorKey, setErrorKey] = useState(false);
+  const [errorName, setErrorName] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorInputs, setErrorInputs] = useState(false);
 
   const verifyInputs = (name, value) => {
-    if (name === 'key') {
-      const minLengthKey = 3;
-      const verifyName = value.length < minLengthKey;
+    if (name === 'name') {
+      const minLengthName = 3;
+      const verifyName = value.length < minLengthName;
 
-      setErrorKey(verifyName);
+      setErrorName(verifyName);
     }
 
     if (name === 'login') {
@@ -58,7 +58,7 @@ export default function FormLogin() {
     if (Object.values(userInfo).some((input) => input === '')) {
       return setErrorInputs(true);
     }
-    if (errorKey || errorLogin || errorPassword) return;
+    if (errorName || errorLogin || errorPassword) return;
     router('/clients');
   };
 
@@ -66,14 +66,16 @@ export default function FormLogin() {
     <FormContainer onSubmit={ handleSubmit }>
       <InputContainer>
         <InputText
-          error={ errorKey }
-          name="key"
-          value={ userInfo.key }
-          label="Chave"
+          onChange={ handleChange }
+          error={ errorName }
+          name="name"
+          value={ userInfo.name }
+          label="Nome"
           icon={ AiOutlineIdcard }
-          placeholder="Sua chave"
+          placeholder="Seu nome"
         />
         <InputText
+          onChange={ handleChange }
           error={ errorLogin }
           name="login"
           value={ userInfo.login }
@@ -82,6 +84,7 @@ export default function FormLogin() {
           placeholder="Seu Login"
         />
         <InputText
+          onChange={ handleChange }
           error={ errorPassword }
           name="password"
           value={ userInfo.password }

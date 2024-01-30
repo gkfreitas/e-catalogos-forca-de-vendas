@@ -38,14 +38,16 @@ export const ButtonYTStyle = styled.div`
   display: flex;
   align-items: center;
   border-radius: 20px;
+  max-width: 200px;
   color: #FFF;
-  text-align: center;
-  font-size: 24px;
+  text-align: left;
+  line-height: 24px;
+  font-size: 21px;
   font-style: normal;
-  padding: 4px 25px;
+  padding: 4px 1px;
   background: #F00;
   margin-top: 18px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   transition-duration: 200ms;
   &:hover {

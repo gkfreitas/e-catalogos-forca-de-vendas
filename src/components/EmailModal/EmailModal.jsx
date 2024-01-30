@@ -47,7 +47,6 @@ export default function EmailModal({ disable, handleSuccess }) {
         <ContainerInputsCheckbox>
           {filteredEmails.map(({ email, phone }, i) => (
             <InputCheckbox
-              type="checkbox"
               text={ (
                 <EmailTextLabel>
                   <p>{email}</p>

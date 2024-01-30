@@ -14,7 +14,7 @@ import GlobalStyle from './styles/global.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-
+    <ToastContainer />
     <LinkProductProvider>
       <LinkOrderProvider>
         <LinkProvider>
@@ -22,7 +22,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <ProductOrderProvider>
               <ProductToolsProvider>
                 <ContainerMobile>
-                  <ToastContainer />
                   <GlobalStyle />
                   <Routes />
                 </ContainerMobile>
