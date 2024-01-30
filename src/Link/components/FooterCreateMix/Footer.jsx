@@ -18,11 +18,15 @@ export default function FooterCreateMix({
 
   const saveLink = () => {
     if (selectedProducts.length === 0) {
-      toast.warn('Selecione ao menos um produto');
+      toast.warn('Selecione ao menos um produto', {
+        position: 'top-center',
+      });
       return;
     }
     if (!linkName) {
-      toast.warn('Digite o nome do link');
+      toast.warn('Digite o nome do link', {
+        position: 'top-center',
+      });
       return;
     }
 

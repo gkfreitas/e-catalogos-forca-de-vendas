@@ -64,7 +64,7 @@ export const TextArea = styled.textarea`
   resize: none;
   color: #4D4D4D;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   max-height: 40px;

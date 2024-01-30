@@ -18,7 +18,8 @@ export default function Header({
   return (
     <HeaderContainer>
       <AiOutlineLeft
-        onClick={ () => router(routeBack) }
+        onClick={ routeBack?.length > 1 ? () => router(routeBack)
+          : () => window.history.back() }
         size={ 20 }
         fill="#ffffff"
         cursor="pointer"
