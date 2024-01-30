@@ -1,10 +1,19 @@
 import { styled } from 'styled-components';
 
 export const BasicButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-family: Poppins;
   font-weight: 700;
   cursor: pointer;
   text-transform: uppercase;
+`;
+
+export const ButtonTime = styled.span`
+  font-size: 17px;
+  color: #FF0000;
+  font-weight: 500;
 `;
 
 export const ButtonYTStyle = styled.div`
@@ -19,7 +28,6 @@ export const ButtonYTStyle = styled.div`
   font-style: normal;
   padding: 4px 1px;
   background: #F00;
-  margin-top: 18px;
   font-weight: 500;
   text-transform: uppercase;
   transition-duration: 200ms;
@@ -29,5 +37,6 @@ export const ButtonYTStyle = styled.div`
 `;
 
 export const ButtonLinkVideo = styled.a`
-    text-decoration:none,
-`
+    text-decoration:none;
+    margin-top: 18px;
+`;
