@@ -40,5 +40,4 @@ export const ButtonYTStyle = styled.div`
 
 export const ButtonLinkVideo = styled.a`
     text-decoration:none;
-    margin-top: 18px;
 `;
