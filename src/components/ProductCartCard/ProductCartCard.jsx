@@ -19,7 +19,7 @@ import {
 
 export default function ProductCartCard({
   imageSrc, reference, name, colors, sizes, totalPrice,
-  quantity, discount,
+  quantity, discount, grid,
 }) {
   const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -48,7 +48,7 @@ export default function ProductCartCard({
                 color: '#000',
               } }
             >
-              {BRL.format(totalPrice / totalQuantity)}
+              {BRL.format(totalPrice / (grid ? totalQuantity : 1))}
             </span>
           </SecundaryText>
           {colors.map(({ cod_hex, color_name }) => (
@@ -62,23 +62,25 @@ export default function ProductCartCard({
         </CardInfosContainer>
       </CardImageWithInfosContainer>
       <PricesWithSizesContainer>
-        <SizesContainer>
-          {sizes.map((size) => (
-            <KeyValueContainer key={ size }>
-              <SizeContent>
-                {size[0]}
-              </SizeContent>
-              <SizeContent>
-                {size[1] * quantity}
-              </SizeContent>
-            </KeyValueContainer>
-          ))}
+        {grid && (
+          <SizesContainer>
+            {sizes.map((size) => (
+              <KeyValueContainer key={ size }>
+                <SizeContent>
+                  {size[0]}
+                </SizeContent>
+                <SizeContent>
+                  {size[1] * quantity}
+                </SizeContent>
+              </KeyValueContainer>
+            ))}
 
-          <KeyValueContainer>
-            <TotalSizeTag>TOTAL</TotalSizeTag>
-            <TotalQuantitySize>{totalQuantity}</TotalQuantitySize>
-          </KeyValueContainer>
-        </SizesContainer>
+            <KeyValueContainer>
+              <TotalSizeTag>TOTAL</TotalSizeTag>
+              <TotalQuantitySize>{totalQuantity}</TotalQuantitySize>
+            </KeyValueContainer>
+          </SizesContainer>
+        )}
         <PrimaryText>
           Desc:
           {' '}

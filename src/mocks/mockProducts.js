@@ -344,7 +344,7 @@ const esculturasProducts = esculturas.map((escultura, index) => {
     category_name: 'Esculturas',
     group_name: 'Masculino',
     price: randomPrice,
-    fixed_qtd: fixedQtd,
+    fixed_qtd: 1,
     box_price: randomPrice * fixedQtd,
     grid: false,
     sizes: {
@@ -380,8 +380,7 @@ const ferramentasProducts = ferramentas.map((ferramenta, index) => {
     category_name: 'Ferramentas',
     group_name: 'Masculino',
     price: randomPrice,
-    fixed_qtd: fixedQtd,
-    grid: true,
+    fixed_qtd: 1,
     box_price: randomPrice * fixedQtd,
     grid: false,
     sizes: {
@@ -871,29 +870,6 @@ function enrichProductData(products) {
   });
 }
 
-// Exemplo de uso
 const mockProducts = enrichProductData(mockProducts2);
-
-// const mockProducts = mockProcutsBase.map((product) => {
-//   const filteredImages = [];
-//   product.images.forEach((image) => {
-//     try {
-//       const img = new Image();
-//       img.src = image.image;
-
-//       img.onload = () => {
-//         filteredImages.push(image);
-//       };
-
-//       img.onerror = () => {
-//         console.log(`Failed to load image: ${image.image}`);
-//       };
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   });
-
-//   return { ...product, images: filteredImages };
-// });
 
 export default mockProducts;
