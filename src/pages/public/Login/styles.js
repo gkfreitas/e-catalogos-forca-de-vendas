@@ -16,3 +16,10 @@ export const LoginLogo = styled.img`
   height: 25vh;
   cursor: pointer;
 `;
+
+export const LoginYTContainer = styled.div`
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;

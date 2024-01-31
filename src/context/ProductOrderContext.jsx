@@ -22,8 +22,6 @@ const emptyOrder = {
 };
 
 function ProductOrderProvider({ children }) {
-  const errorMessage = 'Erro ao salvar no localStorage';
-
   const [currentOrder, setCurrentOrder] = useState(JSON.parse(localStorage
     .getItem('currentOrder')) || emptyOrder);
 
@@ -39,7 +37,7 @@ function ProductOrderProvider({ children }) {
     try {
       localStorage.setItem('orders', JSON.stringify(orders));
     } catch (error) {
-      console.error(errorMessage, error);
+      console.error('Erro ao salvar no localStorage', error);
     }
   });
 
@@ -47,7 +45,7 @@ function ProductOrderProvider({ children }) {
     try {
       localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
     } catch (error) {
-      console.error(errorMessage, error);
+      console.error('Erro ao salvar no localStorage', error);
     }
   }, [currentOrder]);
 
@@ -55,7 +53,7 @@ function ProductOrderProvider({ children }) {
     try {
       localStorage.setItem('currentProductOrder', JSON.stringify(currentProductOrder));
     } catch (error) {
-      console.error(errorMessage, error);
+      console.error('Erro ao salvar no localStorage', error);
     }
     const productsCardIds = Object.keys(currentProductOrder);
     setCurrentOrder((prevState) => ({
@@ -72,7 +70,7 @@ function ProductOrderProvider({ children }) {
     try {
       localStorage.setItem('selectedOrders', JSON.stringify(selectedOrders));
     } catch (error) {
-      console.error(errorMessage, error);
+      console.error('Erro ao salvar no localStorage', error);
     }
   }, [selectedOrders]);
 

@@ -10,7 +10,7 @@ export default function PaymentModal({ disable, totalValue }) {
   const paymentMethods = [
     {
       method: '90/120/150',
-      minValue: 10000,
+      minValue: 300,
       discount: 7,
     },
     {
@@ -20,17 +20,17 @@ export default function PaymentModal({ disable, totalValue }) {
     },
     {
       method: '30/60/90/120',
-      minValue: 10000,
+      minValue: 500,
       discount: 7,
     },
     {
       method: '30/60/90',
-      minValue: 20000,
+      minValue: 700,
       discount: 14,
     },
     {
       method: '120/150',
-      minValue: 30000,
+      minValue: 1000,
       discount: 21,
     },
   ];
