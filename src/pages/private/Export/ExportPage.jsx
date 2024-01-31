@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AiFillSave, AiOutlineMail } from 'react-icons/ai';
 import { IoCloudUploadOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import EmailModal from '../../../components/EmailModal/EmailModal';
 import ExportFields from '../../../components/ExportFields/ExportFields';
 import Header from '../../../components/Header';
@@ -16,7 +16,7 @@ import {
   IconWithTextContainer,
   InputsRadioContainer, LabelText,
   PageContainer,
-  PageTitle, TextArea, TextAreaContainer, TextAreaTitle,
+  PageTitle, TextArea, TextAreaContainer,
 } from './styles';
 
 export default function ExportPage() {
@@ -25,6 +25,7 @@ export default function ExportPage() {
     setCurrentOrder,
     setCurrentProductOrder,
     emptyOrder,
+    setOrders,
   } = useContext(ProductOrderContext);
 
   const {
@@ -72,12 +73,13 @@ export default function ExportPage() {
     const localCurrentOrder = JSON.parse(localStorage.getItem('currentOrder'));
     if (!orderType) return toast.error('Selecione pedido ou orçamento');
     if (!Object.values(localCurrentOrder).length) return;
-    toast.success(message);
-    const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    toast.success(message, {
+      position: 'top-center',
+    });
     setCurrentOrder(emptyOrder);
     setCurrentProductOrder({});
     setExported(true);
-    localStorage.setItem('orders', JSON.stringify([...currentOrders, localCurrentOrder]));
+    setOrders((prevState) => [...prevState, localCurrentOrder]);
     localStorage.removeItem('currentOrder');
     localStorage.removeItem('currentProductOrder');
     localStorage.removeItem('selectedProducts');
@@ -106,7 +108,6 @@ export default function ExportPage() {
 
   return (
     <PageContainer>
-      <ToastContainer />
       <Header
         title="Exportar"
         routeBack={ exported ? '/clients' : '/order' }
@@ -143,12 +144,12 @@ export default function ExportPage() {
         />
       </InputsRadioContainer>
       <TextAreaContainer>
-        <TextAreaTitle>Observações</TextAreaTitle>
         <TextArea placeholder="Digite sua observação aqui" />
       </TextAreaContainer>
       <ExportFooter>
         <IconWithTextContainer
-          onClick={ () => handleSuccess('Pedido salvo com sucesso!') }
+          onClick={ () => handleSuccess(`
+          ${orderType === 'order' ? 'Pedido' : 'Orçamento'} salvo com sucesso!`) }
         >
           <IconContainer>
             <AiFillSave size={ 24 } color="#809CAA" />
@@ -175,7 +176,8 @@ export default function ExportPage() {
           </IconText>
         </IconWithTextContainer>
         <IconWithTextContainer
-          onClick={ () => handleSuccess('Pedido enviado para a fábrica com sucesso!') }
+          onClick={ () => handleSuccess(`
+          ${orderType === 'order' ? 'Pedido' : 'Orçamento'} salvo com sucesso!`) }
         >
           <IconContainer>
             <IoCloudUploadOutline size={ 24 } color="#809CAA" />

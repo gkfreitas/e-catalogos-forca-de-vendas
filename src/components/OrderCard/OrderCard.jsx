@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom';
 import cloudGreenIcon from '../../assets/icons/cloud-green.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 import duplicateIcon from '../../assets/icons/duplicate.svg';
-import moneyIcon from '../../assets/icons/money.svg';
 import pdfIcon from '../../assets/icons/pdf.svg';
 import { ProductOrderContext } from '../../context/ProductOrderContext';
-import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import InputOrder from '../InputOrder/InputOrder';
 
+import ConfirmActionModal from '../ConfirmActionModal/ConfirmActionModal';
 import { MyPdfDocument } from '../OrderPDF/MyPdfDocument';
 import {
   AllButtons,
@@ -23,7 +22,7 @@ import {
   Icon,
 } from './styles';
 
-export default function OrderCard({ tags, email, bgColor, orderInfo }) {
+export default function OrderCard({ tags, email, bgColor, orderInfo, exportOrder }) {
   const [contents, setContents] = useState([]);
   const [modalDelete, setModalDelete] = useState(false);
   const [modalDuplicate, setModalDuplicate] = useState(false);
@@ -92,34 +91,35 @@ export default function OrderCard({ tags, email, bgColor, orderInfo }) {
             />
           </button>
           <Icon src={ cloudGreenIcon } alt="icone de uma nuvem verde" />
-          <Icon src={ moneyIcon } alt="icone de dinheiro" />
         </ButtonsContainer>
-        <ButtonsFunctions>
-          <ButtonFunction onClick={ () => setModalDuplicate(true) }>
-            <Icon src={ duplicateIcon } />
-          </ButtonFunction>
-          <ButtonFunction
-            onClick={ () => setModalDelete(true) }
-          >
-            <Icon
-              src={ deleteIcon }
-            />
-          </ButtonFunction>
-        </ButtonsFunctions>
+        {!exportOrder && (
+          <ButtonsFunctions>
+            <ButtonFunction onClick={ () => setModalDuplicate(true) }>
+              <Icon src={ duplicateIcon } />
+            </ButtonFunction>
+            <ButtonFunction
+              onClick={ () => setModalDelete(true) }
+            >
+              <Icon
+                src={ deleteIcon }
+              />
+            </ButtonFunction>
+          </ButtonsFunctions>
+        )}
       </AllButtons>
       {modalDelete && (
-        <ConfirmModal
-          title="Deletar"
-          actionText="deletar"
+        <ConfirmActionModal
+          question="Você realmente deseja remover o pedido?"
+          actionText="REMOVER"
           action={ handleDelete }
           disable={ () => setModalDelete(false) }
         />
       )}
       {
         modalDuplicate && (
-          <ConfirmModal
-            title="Duplicar"
-            actionText="duplicar"
+          <ConfirmActionModal
+            question="Você realmente deseja duplicar o pedido?"
+            actionText="DUPLICAR"
             action={ handleDuplicate }
             disable={ () => setModalDuplicate(false) }
           />

@@ -1,6 +1,6 @@
 import { OptionContainer, SelectContainer } from './styles';
 
-export default function InputSelect({ name, options, onChange, ...rest }) {
+export default function InputSelect({ name, options, onChange, value, ...rest }) {
   return (
     <SelectContainer
       { ...rest }
