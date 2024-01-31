@@ -115,11 +115,11 @@ const banquetasProducts = banquetas.map((banqueta, index) => {
 
 const bermudasProducts = bermudasEstampadas.map((bermuda, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
-  const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 6) + 1;
-  const randomSize2 = Math.floor(Math.random() * 6) + 1;
-  const randomSize3 = Math.floor(Math.random() * 6) + 1;
-  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const randomPrice = Math.floor(Math.random() * 50) + 20;
+  const randomSize1 = Math.floor(Math.random() * 2) + 1;
+  const randomSize2 = Math.floor(Math.random() * 3) + 1;
+  const randomSize3 = Math.floor(Math.random() * 3) + 1;
+  const randomSize4 = Math.floor(Math.random() * 2) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const lisas = ['5153', '4470', '6377'];
   const product = {
@@ -153,11 +153,11 @@ const bermudasProducts = bermudasEstampadas.map((bermuda, index) => {
 
 const bermudasProducts2 = bermudasLisas.map((bermuda, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
-  const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 6) + 1;
-  const randomSize2 = Math.floor(Math.random() * 6) + 1;
-  const randomSize3 = Math.floor(Math.random() * 6) + 1;
-  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const randomPrice = Math.floor(Math.random() * 50) + 20;
+  const randomSize1 = Math.floor(Math.random() * 2) + 1;
+  const randomSize2 = Math.floor(Math.random() * 3) + 1;
+  const randomSize3 = Math.floor(Math.random() * 3) + 1;
+  const randomSize4 = Math.floor(Math.random() * 2) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const lisas = ['5153', '4470', '6377'];
   const product = {
@@ -191,11 +191,11 @@ const bermudasProducts2 = bermudasLisas.map((bermuda, index) => {
 
 const botasProducts = botas.map((bota, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
-  const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 6) + 1;
-  const randomSize2 = Math.floor(Math.random() * 6) + 1;
-  const randomSize3 = Math.floor(Math.random() * 6) + 1;
-  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const randomPrice = Math.floor(Math.random() * 1000) + 500;
+  const randomSize1 = Math.floor(Math.random() * 2) + 1;
+  const randomSize2 = Math.floor(Math.random() * 3) + 1;
+  const randomSize3 = Math.floor(Math.random() * 3) + 1;
+  const randomSize4 = Math.floor(Math.random() * 2) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const product = {
     id: index + 300,
@@ -260,11 +260,11 @@ const camisasProducts = camisas.map((camisa, index) => {
 
 const chinelosProducts = chinelos.map((chinelo, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
-  const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 6) + 1;
-  const randomSize2 = Math.floor(Math.random() * 6) + 1;
-  const randomSize3 = Math.floor(Math.random() * 6) + 1;
-  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const randomPrice = Math.floor(Math.random() * 40) + 10;
+  const randomSize1 = Math.floor(Math.random() * 2) + 1;
+  const randomSize2 = Math.floor(Math.random() * 3) + 1;
+  const randomSize3 = Math.floor(Math.random() * 3) + 1;
+  const randomSize4 = Math.floor(Math.random() * 2) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const product = {
     id: index + 500,
@@ -329,11 +329,11 @@ const coposProducts = copos.map((copo, index) => {
 
 const esculturasProducts = esculturas.map((escultura, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
-  const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 6) + 1;
-  const randomSize2 = Math.floor(Math.random() * 6) + 1;
-  const randomSize3 = Math.floor(Math.random() * 6) + 1;
-  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const randomPrice = Math.floor(Math.random() * 2000) + 800;
+  const randomSize1 = Math.floor(Math.random() * 2) + 1;
+  const randomSize2 = Math.floor(Math.random() * 3) + 1;
+  const randomSize3 = Math.floor(Math.random() * 3) + 1;
+  const randomSize4 = Math.floor(Math.random() * 2) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const product = {
     id: index + 700,
@@ -366,10 +366,10 @@ const esculturasProducts = esculturas.map((escultura, index) => {
 const ferramentasProducts = ferramentas.map((ferramenta, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
   const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 6) + 1;
-  const randomSize2 = Math.floor(Math.random() * 6) + 1;
-  const randomSize3 = Math.floor(Math.random() * 6) + 1;
-  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const randomSize1 = Math.floor(Math.random() * 2) + 1;
+  const randomSize2 = Math.floor(Math.random() * 3) + 1;
+  const randomSize3 = Math.floor(Math.random() * 3) + 1;
+  const randomSize4 = Math.floor(Math.random() * 2) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
   const product = {
     id: index + 800,
@@ -403,10 +403,10 @@ const ferramentasProducts = ferramentas.map((ferramenta, index) => {
 const jaquetasProducts = jaquetas.map((jaqueta, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
   const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 6) + 1;
-  const randomSize2 = Math.floor(Math.random() * 6) + 1;
-  const randomSize3 = Math.floor(Math.random() * 6) + 1;
-  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const randomSize1 = Math.floor(Math.random() * 2) + 1;
+  const randomSize2 = Math.floor(Math.random() * 3) + 1;
+  const randomSize3 = Math.floor(Math.random() * 3) + 1;
+  const randomSize4 = Math.floor(Math.random() * 2) + 1;
   const fixedQtd = Math.floor(Math.random() * 6) + 1;
   const product = {
     id: index + 900,
@@ -463,10 +463,10 @@ const mochilasProducts = mochilas.map((mochila, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
   const randomPrice = Math.floor(Math.random() * 1000) + 100;
   const fixedQtd = Math.floor(Math.random() * 6) + 1;
-  const randomSize1 = Math.floor(Math.random() * 6) + 1;
-  const randomSize2 = Math.floor(Math.random() * 6) + 1;
-  const randomSize3 = Math.floor(Math.random() * 6) + 1;
-  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const randomSize1 = Math.floor(Math.random() * 2) + 1;
+  const randomSize2 = Math.floor(Math.random() * 3) + 1;
+  const randomSize3 = Math.floor(Math.random() * 3) + 1;
+  const randomSize4 = Math.floor(Math.random() * 2) + 1;
   const product = {
     id: index + 1100,
     name: 'Mochila',

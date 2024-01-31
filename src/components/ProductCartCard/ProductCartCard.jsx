@@ -48,7 +48,7 @@ export default function ProductCartCard({
                 color: '#000',
               } }
             >
-              {BRL.format(totalPrice / quantity)}
+              {BRL.format(totalPrice / totalQuantity)}
             </span>
           </SecundaryText>
           {colors.map(({ cod_hex, color_name }) => (
