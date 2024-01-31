@@ -163,7 +163,7 @@ export default function Order({ currentOrder, detail }) {
       )}
       <Header
         title="PEDIDO"
-        routeBack
+        routeBack={ !detail ? '/purchase' : '/orders/list' }
         routeFunction={ !detail && !localStorage.getItem('editMode') }
       />
       <InputsContainer>
@@ -193,6 +193,7 @@ export default function Order({ currentOrder, detail }) {
               totalPrice={ total }
               pack={ pack }
               quantity={ quantity }
+              grid={ !(name === 'Marca arte' || name === 'Ferramenta') }
             />
           )
         ))}
