@@ -17,7 +17,7 @@ export const WelcomeImage = styled.img`
   object-fit: contain;
 `;
 
-export const HighlightText = styled.p`
+export const HighlightText = styled.a`
   color: #809CAA;
   text-align: center;
   font-family: Poppins;

@@ -1,25 +1,37 @@
 import { useContext, useEffect, useState } from 'react';
+import { AiOutlineMail } from 'react-icons/ai';
+import { IoCloudUploadOutline } from 'react-icons/io5';
+import { toast } from 'react-toastify';
+import EmailModal from '../../../components/EmailModal/EmailModal';
 import Header from '../../../components/Header';
 import InputDate from '../../../components/InputDate/InputDate';
 import InputText from '../../../components/InputText/InputText';
 import OrderCard from '../../../components/OrderCard/OrderCard';
+
 import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import {
   ContainerPage,
+  ExportFooter,
+  IconContainer,
+  IconText,
+  IconWithTextContainer,
   InputsDateContainer,
   InputsTextContainer,
+  OrderContainer,
   OrdersContainer,
+  SelectedOrdersText,
 } from './styles';
 
-export default function OrdersList() {
+export default function ExportOrders() {
   const [orderNumber, setOrderNumber] = useState('');
   const [socialReasonOrCNPJ, setSocialReasonOrCNPJ] = useState('');
   const [login, setLogin] = useState('');
   const [initialDate, setInitialDate] = useState('');
   const [finalDate, setFinalDate] = useState('');
-  const { orders } = useContext(ProductOrderContext);
+  const { orders, selectedOrders, setSelectedOrders } = useContext(ProductOrderContext);
   const [filteredOrders, setFilteredOrders] = useState([{}]);
   const tags = ['N do pedido', 'CNPJ', 'Razão Social', 'Data e Hora'];
+  const [sendEmail, setSendEmail] = useState(false);
 
   useEffect(() => {
     const verifyDate = (order) => {
@@ -52,9 +64,39 @@ export default function OrdersList() {
     setFilteredOrders(sortedOrders);
   }, [orderNumber, socialReasonOrCNPJ, login, initialDate, finalDate, orders]);
 
+  const handleSelectOrder = (order) => {
+    setSelectedOrders((prevState) => {
+      const verifyOrder = prevState.find((prevOrder) => prevOrder.orderNumber
+      === order.orderNumber);
+      if (verifyOrder) {
+        return prevState.filter((prevOrder) => prevOrder.orderNumber
+        !== order.orderNumber);
+      }
+      return [...prevState, order];
+    });
+  };
+
+  const handleSuccess = (message) => {
+    if (selectedOrders.length === 0) {
+      toast.error('Selecione pelo menos um pedido', {
+        position: 'top-center',
+      });
+      return;
+    }
+    toast.success(message, {
+      position: 'top-center',
+    });
+    setSelectedOrders([]);
+  };
+
+  const backPage = () => {
+    setSelectedOrders([]);
+    return '/functions';
+  };
+
   return (
     <ContainerPage>
-      <Header title="Pedidos" routeBack="/functions" />
+      <Header title="Exportar pedidos" routeBack={ () => backPage() } />
       <InputsTextContainer>
         <InputText
           labelText="Número do pedido"
@@ -87,16 +129,60 @@ export default function OrdersList() {
       <OrdersContainer>
         {
           filteredOrders.map((order, i) => (
-            <OrderCard
+            <OrderContainer
+              $selected={ selectedOrders
+                .find((selectedOrder) => selectedOrder.orderNumber
+                === order.orderNumber) }
+              onClick={ () => handleSelectOrder(order) }
               key={ i }
-              tags={ tags }
-              orderInfo={ order }
-              email="suporte@e-catalogos.net"
-              bgColor
-            />
+            >
+              <OrderCard
+                tags={ tags }
+                orderInfo={ order }
+                email="suporte@e-catalogos.net"
+                bgColor
+                exportOrder
+              />
+            </OrderContainer>
           ))
         }
       </OrdersContainer>
+      <ExportFooter>
+        <SelectedOrdersText>
+          {selectedOrders.length}
+          {' '}
+          Pedidos selecionados
+        </SelectedOrdersText>
+        <IconWithTextContainer onClick={ () => setSendEmail(true) }>
+          <IconContainer>
+            <AiOutlineMail size={ 24 } color="#809CAA" />
+          </IconContainer>
+          <IconText>
+            Enviar p/
+            {' '}
+            <br />
+            E-Mail
+          </IconText>
+        </IconWithTextContainer>
+        <IconWithTextContainer
+          onClick={ () => handleSuccess('Pedido(s) exportado(s) para a fábrica') }
+        >
+          <IconContainer>
+            <IoCloudUploadOutline size={ 24 } color="#809CAA" />
+          </IconContainer>
+          <IconText>
+            Enviar p/
+            {' '}
+            <br />
+            {' '}
+            fábrica
+          </IconText>
+        </IconWithTextContainer>
+      </ExportFooter>
+      {sendEmail && <EmailModal
+        handleSuccess={ handleSuccess }
+        disable={ () => setSendEmail(false) }
+      />}
     </ContainerPage>
 
   );

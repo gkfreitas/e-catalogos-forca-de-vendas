@@ -4,14 +4,13 @@ export const LabelInput = styled.label`
  color: #000;
   text-align: left;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 300;
-  line-height: 12px;
+  line-height: 16px;
   display: flex;
   align-items: center;
   gap: 4px;
-  max-width: 100px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -21,7 +20,8 @@ export const LabelInput = styled.label`
 `;
 
 export const Input = styled.input`
-  width: ${({ $size }) => `${$size}px` || '12px'};
-  height: ${({ $size }) => `${$size}px` || '12px'};
+  width: ${({ $size }) => `${$size}px` || '20x'};
+  height: ${({ $size }) => `${$size}px` || '20px'};
   cursor: pointer;
+  padding: 2px;
 `;

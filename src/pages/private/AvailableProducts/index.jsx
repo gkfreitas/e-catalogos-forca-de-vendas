@@ -4,6 +4,7 @@ import { FaEraser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import eyeIcon from '../../../assets/icons/eye-icon.svg';
 import AllProductsAvaliable from '../../../components/AllProductsAvaliable';
+import Dropdown from '../../../components/Dropdown/Dropdown';
 import FilterAvaliableProducts from '../../../components/FilterAvaliableProducts';
 import FooterEdit from '../../../components/FooterEdit/FooterEdit';
 import Header from '../../../components/Header';
@@ -16,6 +17,7 @@ import {
   ChangeImagesPerViewButton,
   Container,
   EyeIconImage,
+  HeaderTitleContainer,
   InputSelect,
   NumbersContainer,
   Option,
@@ -35,12 +37,18 @@ export default function AvailableProducts() {
     Gênero: [],
     Categorias: [],
     Entrega: [],
+    subCategories: [],
   });
-  const [subFilters, setSubFilters] = useState({});
-  const [categorySelected, setCategorySelected] = useState('Todos');
+  const [categorySelected, setCategorySelected] = useState('Categorias');
   const [filteredProducts, setFilteredProducts] = useState(mockProcuts);
 
   const navigate = useNavigate();
+
+  const filteredCategories = allProducts
+    .filter((product) => product.category_name === categorySelected);
+
+  const subCategoriesNoRepeated = Array.from(new Set(filteredCategories
+    .map((product) => product.sub_category)));
 
   const categories = Array.from(new Set(allProducts
     .map((product) => product.category_name)));
@@ -68,25 +76,39 @@ export default function AvailableProducts() {
         .includes(product.type) : true;
       const verifyDelivery = delivery.length ? delivery
         .includes(product.delivery) : true;
-
-      const verifySubCategory = subFilters[categorySelected]?.length
-        ? subFilters[categorySelected].includes(product.sub_category) : true;
+      const verifySubCategory = filters.subCategories.length ? filters.subCategories
+        .includes(product.sub_category) : true;
 
       return verifyCategory && verifyBrand && verifyGender && verifyImages
       && verifyType && verifyDelivery && verifySubCategory;
     });
 
     setFilteredProducts(filtered);
-  }, [allProducts, brand, gender, category, type,
-    filters.subCategory, delivery, subFilters, categorySelected]);
+  }, [brand, category, delivery, filters.subCategories, gender, type]);
 
   const handleChangeCategory = (e) => {
     setCategorySelected(e.target.value);
-    if (e.target.value === 'Todos') {
+    setFilters((prevState) => ({ ...prevState, subCategories: [] }));
+    if (e.target.value === 'Categorias') {
       setFilters((prevState) => ({ ...prevState, Categorias: [] }));
       return;
     }
     setFilters((prevState) => ({ ...prevState, Categorias: [e.target.value] }));
+  };
+  const handleChangeSubcategory = (e) => {
+    if (filters.subCategories.includes(e.target.value)) {
+      setFilters((prevState) => ({
+        ...prevState,
+        subCategories: prevState.subCategories
+          .filter((subCategory) => subCategory !== e.target.value),
+      }));
+      return;
+    }
+
+    setFilters((prevState) => ({
+      ...prevState,
+      subCategories: [...prevState.subCategories, e.target.value],
+    }));
   };
 
   const handleShowSelected = () => {
@@ -129,14 +151,32 @@ export default function AvailableProducts() {
       navigate('/clients');
     }
   }, [currentOrder, navigate]);
-
   return (
     <Container>
       {localStorage.getItem('editMode') && (
         <FooterEdit />
       )}
       <Header
-        title={ `Produtos Disponíveis (${filteredProducts.length})` }
+        title={
+          <HeaderTitleContainer>
+            Produtos Disponíveis (
+            {filteredProducts.length}
+            )
+            <NumbersContainer>
+              {imagesPerViewOptions.map((option) => (
+                <ChangeImagesPerViewButton
+                  key={ option }
+                  $selected={ option === imagesPerView }
+                  type="button"
+                  onClick={ () => setImagesPerView(option) }
+                >
+                  {option}
+                </ChangeImagesPerViewButton>
+              ))}
+            </NumbersContainer>
+          </HeaderTitleContainer>
+
+        }
         routeBack="/clients"
         routeNext={ selectedProducts.length && '/purchase' }
       />
@@ -146,24 +186,31 @@ export default function AvailableProducts() {
           value={ categorySelected }
           onChange={ handleChangeCategory }
         >
-          <Option>Todos</Option>
+          <Option>Categorias</Option>
           {categories.map((categoryOption) => (
             <Option key={ categoryOption }>{categoryOption}</Option>
           ))}
         </InputSelect>
-        <NumbersContainer>
-          {imagesPerViewOptions.map((option) => (
-            <ChangeImagesPerViewButton
-              key={ option }
-              $selected={ option === imagesPerView }
-              type="button"
-              onClick={ () => setImagesPerView(option) }
+        <Dropdown
+          name="Subcategorias"
+          options={ subCategoriesNoRepeated }
+          onChange={ handleChangeSubcategory }
+        />
+        {/* {subCategories.length
+          ? (
+            <InputSelect
+              name="Subcategories"
+              onChange={ handleChangeSubcategory }
+              value={ subCategorySelected }
             >
-              {option}
-            </ChangeImagesPerViewButton>
-          ))}
-        </NumbersContainer>
-
+              <Option>Subcategorias</Option>
+              {subCategories.map((subCategory) => (
+                <Option key={ subCategory.value }>
+                  {subCategory.label}
+                </Option>
+              ))}
+            </InputSelect>
+          ) : ''} */}
         <EyeIconImage
           cursor="pointer"
           src={ eyeIcon }
@@ -176,6 +223,7 @@ export default function AvailableProducts() {
           onClick={ handleClearSelectedProducts }
         />
       </ButtonsContainer>
+
       <AvailableProductsContainer>
         <AllProductsAvaliable
           imagesPerView={ imagesPerView }
@@ -185,7 +233,6 @@ export default function AvailableProducts() {
         />
         <FilterAvaliableProducts
           setFilters={ setFilters }
-          setSubFilters={ setSubFilters }
         />
       </AvailableProductsContainer>
     </Container>

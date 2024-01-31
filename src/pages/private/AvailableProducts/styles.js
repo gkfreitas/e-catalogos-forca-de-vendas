@@ -78,10 +78,11 @@ export const Image = styled.img`
 `;
 
 export const ChangeImagesPerViewButton = styled.button`
-  font-size: ${({ $selected }) => ($selected ? '18px' : '16px')};
+  font-size: ${({ $selected }) => ($selected ? '20px' : '18px')};
   padding: 4px 6px;
   font-weight: ${({ $selected }) => ($selected ? 'bold' : 'normal')};
   cursor: pointer;
+  color: #fff;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -96,7 +97,6 @@ export const NumbersContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
 `;
 
 export const InputSelect = styled.select`
@@ -145,4 +145,15 @@ export const EyeIconImage = styled.img`
 cursor: pointer;
 width: 24px;
 height: 24px;
+`;
+
+export const SubCategoriesContainer = styled.div`
+  padding: 4px 20px;
+`;
+
+export const HeaderTitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
 `;
