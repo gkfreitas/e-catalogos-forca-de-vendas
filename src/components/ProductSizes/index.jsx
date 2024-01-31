@@ -10,21 +10,23 @@ export default function ProductSizes() {
   const sizesName = Object.keys(sizes);
   const quantity = Object.values(sizes);
   const pack = quantity.reduce((acc, cur) => cur + acc, 0);
-  console.log('currentProduct?.grid', currentProduct?.grid);
-  if (!currentProduct?.grid) {
-    return;
-  }
+
   return (
     <SizesContainer>
-      {sizesName.map((size, i) => (
-        <SizeCard
-          key={ i }
-          quantity={ quantity[i] }
-          size={ size }
-        />
-      ))}
-      <EqualIcon src={ equalIcon } alt="Icone de igual;" />
-      <SizeCard isPack quantity={ pack } />
+      {currentProduct?.grid && (
+        <>
+          {sizesName.map((size, i) => (
+            <SizeCard
+              key={ i }
+              quantity={ quantity[i] }
+              size={ size }
+            />
+          ))}
+          <EqualIcon src={ equalIcon } alt="Icone de igual;" />
+          <SizeCard isPack quantity={ pack } />
+        </>
+      )}
+
     </SizesContainer>
   );
 }
