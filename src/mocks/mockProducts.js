@@ -134,6 +134,7 @@ const bermudasProducts = bermudasEstampadas.map((bermuda, index) => {
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
+    grid: true,
     sizes: {
       P: randomSize1,
       M: randomSize2,
@@ -170,6 +171,7 @@ const bermudasProducts2 = bermudasLisas.map((bermuda, index) => {
     sub_category: 'Lisas',
     price: randomPrice,
     fixed_qtd: fixedQtd,
+    grid: true,
     box_price: randomPrice * fixedQtd,
     sizes: {
       P: randomSize1,
@@ -205,6 +207,7 @@ const botasProducts = botas.map((bota, index) => {
     group_name: 'Masculino',
     price: randomPrice,
     fixed_qtd: fixedQtd,
+    grid: true,
     box_price: randomPrice * fixedQtd,
     sizes: {
       P: randomSize1,
@@ -273,6 +276,7 @@ const chinelosProducts = chinelos.map((chinelo, index) => {
     group_name: 'Masculino',
     price: randomPrice,
     fixed_qtd: fixedQtd,
+    grid: true,
     box_price: randomPrice * fixedQtd,
     sizes: {
       P: randomSize1,
@@ -342,6 +346,7 @@ const esculturasProducts = esculturas.map((escultura, index) => {
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
+    grid: false,
     sizes: {
       P: randomSize1,
       M: randomSize2,
@@ -376,7 +381,9 @@ const ferramentasProducts = ferramentas.map((ferramenta, index) => {
     group_name: 'Masculino',
     price: randomPrice,
     fixed_qtd: fixedQtd,
+    grid: true,
     box_price: randomPrice * fixedQtd,
+    grid: false,
     sizes: {
       P: randomSize1,
       M: randomSize2,
@@ -411,6 +418,7 @@ const jaquetasProducts = jaquetas.map((jaqueta, index) => {
     category_name: 'Jaquetas F',
     price: randomPrice,
     fixed_qtd: fixedQtd,
+    grid: true,
     box_price: randomPrice * fixedQtd,
     sizes: {
       P: randomSize1,
@@ -469,6 +477,7 @@ const mochilasProducts = mochilas.map((mochila, index) => {
     price: randomPrice,
     fixed_qtd: fixedQtd,
     box_price: randomPrice * fixedQtd,
+    grid: true,
     colors: [],
     sizes: {
       P: randomSize1,
@@ -522,6 +531,7 @@ const mockProducts2 = [
     group_id: 6,
     group_name: 'Masculino',
     result_line: 4705,
+    grid: true,
     sizes: {
       P: 4,
       M: 1,
@@ -550,6 +560,7 @@ const mockProducts2 = [
     box_price: 799.99,
     fixed_qtd: 10,
     group_id: 6,
+    grid: true,
     group_name: 'Feminino',
     sizes: {
       P: 4,
@@ -582,6 +593,7 @@ const mockProducts2 = [
     box_price: 899.1,
     fixed_qtd: 9,
     group_id: 6,
+    grid: true,
     group_name: 'Feminino',
     sizes: {
       P: 2,
@@ -611,6 +623,7 @@ const mockProducts2 = [
     box_price: 109.99 * 9,
     fixed_qtd: 9,
     group_id: 6,
+    grid: true,
     group_name: 'Masculino',
     sizes: {
       P: 2,
@@ -648,6 +661,7 @@ const mockProducts2 = [
     group_id: 4,
     group_name: 'FEMININO',
     result_line: 4705,
+    grid: true,
     sizes: {
       P: 3,
       M: 6,
@@ -681,6 +695,7 @@ const mockProducts2 = [
     name: 'CASACO #MO - JMW018',
     reference: '66.08.0095',
     company_id: 1,
+    grid: true,
     brand_id: 21,
     brand_name: 'MOSAICO',
     category_id: 1036,
@@ -734,6 +749,7 @@ const mockProducts2 = [
     brand_id: 21,
     brand_name: 'MOSAICO',
     category_id: 1036,
+    grid: true,
     category_name: 'CASACO',
     price: 34,
     fixed_qtd: 18,
@@ -782,6 +798,7 @@ const mockProducts2 = [
     reference: '66.01.0059',
     company_id: 1,
     brand_id: 21,
+    grid: true,
     brand_name: 'MOSAICO',
     category_id: 1036,
     category_name: 'CASACO',
