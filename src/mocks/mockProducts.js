@@ -90,8 +90,11 @@ import m9 from '../assets/expo1/m9.png';
 // Imports para as imagens de utilitários
 import u1 from '../assets/expo1/u1.jpeg';
 import u10 from '../assets/expo1/u10.jpg';
+import u15 from '../assets/expo1/u10.png';
 import u11 from '../assets/expo1/u11.jpeg';
+import u16 from '../assets/expo1/u11.png';
 import u12 from '../assets/expo1/u12.jpeg';
+import u17 from '../assets/expo1/u12.png';
 import u13 from '../assets/expo1/u13.jpeg';
 import u14 from '../assets/expo1/u14.jpeg';
 import u2 from '../assets/expo1/u2.jpeg';
@@ -103,10 +106,11 @@ import u7 from '../assets/expo1/u7.jpeg';
 import u8 from '../assets/expo1/u8.jpeg';
 import u9 from '../assets/expo1/u9.jpeg';
 
+
 // Arrays para organizar as imagens importadas
 const decoracao = [d1, d2, d3, d4, d5, d6, d7, d8, d9];
 const moveis = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12];
-const utilitarios = [u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14];
+const utilitarios = [u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15, u16, u17];
 
 const banquetas = [banqueta1, banqueta2];
 const bermudasEstampadas = [bermuda1, bermuda2, bermuda3, bermuda4, bermuda5];
