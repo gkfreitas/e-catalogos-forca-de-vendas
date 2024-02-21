@@ -22,7 +22,7 @@ export default function ProductSizes() {
               size={ size }
             />
           ))}
-          <EqualIcon src={ equalIcon } alt="Icone de igual;" />
+          <EqualIcon src={ equalIcon } alt="Icone de igual" />
           <SizeCard isPack quantity={ pack } />
         </>
       )}
