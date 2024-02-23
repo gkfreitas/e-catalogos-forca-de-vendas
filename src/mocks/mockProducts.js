@@ -900,9 +900,9 @@ jaquetasProducts.forEach((jaqueta) => mockProducts2.push(jaqueta));
 mochilasProducts.forEach((mochila) => mockProducts2.push(mochila));
 chinelosProducts.forEach((chinelo) => mockProducts2.unshift(chinelo));
 botasProducts.forEach((bota) => mockProducts2.unshift(bota));
-decoracaoProducts.forEach((decoracao1) => mockProducts2.unshift(decoracao1));
-moveisProducts.forEach((movel) => mockProducts2.unshift(movel));
-utilitariosProducts.forEach((utilitario) => mockProducts2.unshift(utilitario));
+// decoracaoProducts.forEach((decoracao1) => mockProducts2.unshift(decoracao1));
+// moveisProducts.forEach((movel) => mockProducts2.unshift(movel));
+// utilitariosProducts.forEach((utilitario) => mockProducts2.unshift(utilitario));
 
 function enrichProductData(products) {
   const types = ['Importado', 'Nacional', 'Private Label'];
