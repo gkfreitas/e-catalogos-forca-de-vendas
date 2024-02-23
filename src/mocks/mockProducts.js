@@ -106,7 +106,6 @@ import u7 from '../assets/expo1/u7.jpeg';
 import u8 from '../assets/expo1/u8.jpeg';
 import u9 from '../assets/expo1/u9.jpeg';
 
-
 // Arrays para organizar as imagens importadas
 const decoracao = [d1, d2, d3, d4, d5, d6, d7, d8, d9];
 const moveis = [m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12];
@@ -129,113 +128,113 @@ const mesas = [mesa1, mesa2, mesa3];
 const mochilas = [mochila1, mochila2, mochila3];
 const toucas = [touca1, touca2, touca3, touca4];
 
-const decoracaoProducts = decoracao.map((decoracao, index) => {
-  const randomReference = Math.floor(Math.random() * 10000) + 1000;
-  const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 2) + 1;
-  const randomSize2 = Math.floor(Math.random() * 3) + 1;
-  const randomSize3 = Math.floor(Math.random() * 3) + 1;
-  const randomSize4 = Math.floor(Math.random() * 2) + 1;
-  const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
-  const product = {
-    id: index + 4567,
-    colors: [],
-    name: 'Decoração',
-    reference: `67.15.${randomReference}`,
-    brand_name: 'Decoração',
-    category_name: 'Decoração',
-    group_name: 'Decoração',
-    price: randomPrice,
-    fixed_qtd: 1,
-    box_price: randomPrice * fixedQtd,
-    grid: false,
-    sizes: {
-      P: randomSize1,
-      M: randomSize2,
-      G: randomSize3,
-      GG: randomSize4,
-    },
-    images: [
-      {
-        image: decoracao,
-        product_id: index + 4567,
-      },
-    ],
-  };
-  return product;
-});
+// const decoracaoProducts = decoracao.map((decoracao, index) => {
+//   const randomReference = Math.floor(Math.random() * 10000) + 1000;
+//   const randomPrice = Math.floor(Math.random() * 200) + 50;
+//   const randomSize1 = Math.floor(Math.random() * 2) + 1;
+//   const randomSize2 = Math.floor(Math.random() * 3) + 1;
+//   const randomSize3 = Math.floor(Math.random() * 3) + 1;
+//   const randomSize4 = Math.floor(Math.random() * 2) + 1;
+//   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
+//   const product = {
+//     id: index + 4567,
+//     colors: [],
+//     name: 'Decoração',
+//     reference: `67.15.${randomReference}`,
+//     brand_name: 'Decoração',
+//     category_name: 'Decoração',
+//     group_name: 'Decoração',
+//     price: randomPrice,
+//     fixed_qtd: 1,
+//     box_price: randomPrice * fixedQtd,
+//     grid: false,
+//     sizes: {
+//       P: randomSize1,
+//       M: randomSize2,
+//       G: randomSize3,
+//       GG: randomSize4,
+//     },
+//     images: [
+//       {
+//         image: decoracao,
+//         product_id: index + 4567,
+//       },
+//     ],
+//   };
+//   return product;
+// });
 
-const moveisProducts = moveis.map((movel, index) => {
-  const randomReference = Math.floor(Math.random() * 10000) + 1000;
-  const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 2) + 1;
-  const randomSize2 = Math.floor(Math.random() * 3) + 1;
-  const randomSize3 = Math.floor(Math.random() * 3) + 1;
-  const randomSize4 = Math.floor(Math.random() * 2) + 1;
-  const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
-  const product = {
-    id: index + 5678,
-    colors: [],
-    name: 'Móvel',
-    reference: `67.15.${randomReference}`,
-    brand_name: 'Móveis',
-    category_name: 'Móveis',
-    group_name: 'Móveis',
-    price: randomPrice,
-    fixed_qtd: 1,
-    box_price: randomPrice * fixedQtd,
-    grid: false,
-    sizes: {
-      P: randomSize1,
-      M: randomSize2,
-      G: randomSize3,
-      GG: randomSize4,
-    },
-    images: [
-      {
-        image: movel,
-        product_id: index + 5678,
-      },
-    ],
-  };
-  return product;
-});
+// const moveisProducts = moveis.map((movel, index) => {
+//   const randomReference = Math.floor(Math.random() * 10000) + 1000;
+//   const randomPrice = Math.floor(Math.random() * 200) + 50;
+//   const randomSize1 = Math.floor(Math.random() * 2) + 1;
+//   const randomSize2 = Math.floor(Math.random() * 3) + 1;
+//   const randomSize3 = Math.floor(Math.random() * 3) + 1;
+//   const randomSize4 = Math.floor(Math.random() * 2) + 1;
+//   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
+//   const product = {
+//     id: index + 5678,
+//     colors: [],
+//     name: 'Móvel',
+//     reference: `67.15.${randomReference}`,
+//     brand_name: 'Móveis',
+//     category_name: 'Móveis',
+//     group_name: 'Móveis',
+//     price: randomPrice,
+//     fixed_qtd: 1,
+//     box_price: randomPrice * fixedQtd,
+//     grid: false,
+//     sizes: {
+//       P: randomSize1,
+//       M: randomSize2,
+//       G: randomSize3,
+//       GG: randomSize4,
+//     },
+//     images: [
+//       {
+//         image: movel,
+//         product_id: index + 5678,
+//       },
+//     ],
+//   };
+//   return product;
+// });
 
-const utilitariosProducts = utilitarios.map((utilitario, index) => {
-  const randomReference = Math.floor(Math.random() * 10000) + 1000;
-  const randomPrice = Math.floor(Math.random() * 200) + 50;
-  const randomSize1 = Math.floor(Math.random() * 2) + 1;
-  const randomSize2 = Math.floor(Math.random() * 3) + 1;
-  const randomSize3 = Math.floor(Math.random() * 3) + 1;
-  const randomSize4 = Math.floor(Math.random() * 2) + 1;
-  const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
-  const product = {
-    id: index + 6789,
-    colors: [],
-    name: 'Utilitário',
-    reference: `67.15.${randomReference}`,
-    brand_name: 'Utilitários',
-    category_name: 'Utilitários',
-    group_name: 'Utilitários',
-    price: randomPrice,
-    fixed_qtd: 1,
-    box_price: randomPrice * fixedQtd,
-    grid: false,
-    sizes: {
-      P: randomSize1,
-      M: randomSize2,
-      G: randomSize3,
-      GG: randomSize4,
-    },
-    images: [
-      {
-        image: utilitario,
-        product_id: index + 6789,
-      },
-    ],
-  };
-  return product;
-});
+// const utilitariosProducts = utilitarios.map((utilitario, index) => {
+//   const randomReference = Math.floor(Math.random() * 10000) + 1000;
+//   const randomPrice = Math.floor(Math.random() * 200) + 50;
+//   const randomSize1 = Math.floor(Math.random() * 2) + 1;
+//   const randomSize2 = Math.floor(Math.random() * 3) + 1;
+//   const randomSize3 = Math.floor(Math.random() * 3) + 1;
+//   const randomSize4 = Math.floor(Math.random() * 2) + 1;
+//   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
+//   const product = {
+//     id: index + 6789,
+//     colors: [],
+//     name: 'Utilitário',
+//     reference: `67.15.${randomReference}`,
+//     brand_name: 'Utilitários',
+//     category_name: 'Utilitários',
+//     group_name: 'Utilitários',
+//     price: randomPrice,
+//     fixed_qtd: 1,
+//     box_price: randomPrice * fixedQtd,
+//     grid: false,
+//     sizes: {
+//       P: randomSize1,
+//       M: randomSize2,
+//       G: randomSize3,
+//       GG: randomSize4,
+//     },
+//     images: [
+//       {
+//         image: utilitario,
+//         product_id: index + 6789,
+//       },
+//     ],
+//   };
+//   return product;
+// });
 
 const bermudasProducts = bermudasEstampadas.map((bermuda, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
