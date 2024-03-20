@@ -53,7 +53,7 @@ export const PrimaryText = styled.p`
   font-weight: 400;
 `;
 
-export const SecundaryText = styled.span`
+export const SecondaryText = styled.span`
   color: #656262;
   text-align: center;
   font-family: Roboto;
