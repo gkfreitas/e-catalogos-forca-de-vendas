@@ -62,29 +62,41 @@ import img3 from '../assets/images/carrousel/img3.jpeg';
 import img4 from '../assets/images/carrousel/img4.jpeg';
 import img5 from '../assets/images/carrousel/img5.jpeg';
 import img6 from '../assets/images/carrousel/img6.jpeg';
-import porcelanato7 from '../assets/revestir/Porcelanato-marmorizado-bege-Foto-Behancce.jpg';
+import porcelanato7
+  from '../assets/revestir/Porcelanato-marmorizado-bege-Foto-Behancce.jpg';
 import porcelanato6 from '../assets/revestir/612339-1200-1200.jpg';
 import porcelanato8 from '../assets/revestir/10x10-7170-samoabright.png';
 import porcelanato1 from '../assets/revestir/912551_2.jpg';
+import porcelanato1a from '../assets/revestir/912551.jpg';
 import porcelanato2 from '../assets/revestir/333305-600-auto.png';
-import porcelanato11 from '../assets/revestir/Cozinha-com-revestimento-bege-e-moveis-de-madeira-Foto-Contemporist.jpg';
+import porcelanato2a from '../assets/revestir/316972-600-auto.png';
+import porcelanato11
+  from '../assets/revestir/Cozinha-com-revestimento-bege-e-moveis-de-madeira-Foto-Contemporist.jpg';
 import porcelanato4 from '../assets/revestir/shopping.png';
-import porcelanato10 from '../assets/revestir/Tipos-de-piso-Lojas-Alves-Destacada-min.png';
+import porcelanato10
+  from '../assets/revestir/Tipos-de-piso-Lojas-Alves-Destacada-min.png';
 import madeiras3 from '../assets/revestir/shopping (1).png';
+import madeiras3a from '../assets/revestir/shopping (2).jpg';
+import madeiras3b from '../assets/revestir/D_NQ_NP_2X_897398-MLB54985039737_052023-F.jpg';
 import madeiras5 from '../assets/revestir/gris.jpg';
-import madeiras9 from '../assets/revestir/shopping (5).png';
+import madeiras9a from '../assets/revestir/shopping (5).png';
+import madeiras9 from '../assets/revestir/shopping (4).jpg';
 
 const porcelanatos = [
   porcelanato7,
   porcelanato6,
   porcelanato8,
-  porcelanato1,
-  porcelanato2,
+  [porcelanato1, porcelanato1a],
+  [porcelanato2, porcelanato2a],
   porcelanato11,
   porcelanato4,
   porcelanato10,
 ];
-const madeiras = [madeiras3, madeiras5, madeiras9];
+const madeiras = [
+  [madeiras3, madeiras3a, madeiras3b],
+  madeiras5,
+  [madeiras9, madeiras9a],
+];
 const banquetas = [banqueta1, banqueta2];
 const bermudasEstampadas = [bermuda1, bermuda2, bermuda3, bermuda4, bermuda5];
 const bermudasLisas = [bermuda6, bermuda7, bermuda8];
@@ -102,6 +114,7 @@ const mesas = [mesa1, mesa2, mesa3];
 const mochilas = [mochila1, mochila2, mochila3];
 const toucas = [touca1, touca2, touca3, touca4];
 
+/* eslint-disable react-func/max-lines-per-function */
 const porcelanatosProducts = porcelanatos.map((porcelanato, index) => {
   const randomReference = Math.floor(Math.random() * 10000) + 1000;
   const randomPrice = Math.floor(Math.random() * 200) + 50;
@@ -110,8 +123,33 @@ const porcelanatosProducts = porcelanatos.map((porcelanato, index) => {
   const randomSize3 = Math.floor(Math.random() * 6) + 1;
   const randomSize4 = Math.floor(Math.random() * 6) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
+  if (porcelanato[0] === '/') {
+    const product = {
+      id: index + 1300,
+      name: 'Porcelanato',
+      reference: `67.15.${randomReference}`,
+      brand_name: 'Porcelanato',
+      category_name: 'Porcelanato',
+      price: randomPrice,
+      fixed_qtd: fixedQtd,
+      box_price: randomPrice * fixedQtd,
+      sizes: {
+        P: randomSize1,
+        M: randomSize2,
+        G: randomSize3,
+        GG: randomSize4,
+      },
+      images: [
+        {
+          image: porcelanato,
+          product_id: index + 1300,
+        },
+      ],
+    };
+    return product;
+  }
   const product = {
-    id: index + 100,
+    id: index + 1300,
     name: 'Porcelanato',
     reference: `67.15.${randomReference}`,
     brand_name: 'Porcelanato',
@@ -125,12 +163,7 @@ const porcelanatosProducts = porcelanatos.map((porcelanato, index) => {
       G: randomSize3,
       GG: randomSize4,
     },
-    images: [
-      {
-        image: porcelanato,
-        product_id: index + 100,
-      },
-    ],
+    images: porcelanato.map((item) => ({ image: item })),
   };
   return product;
 });
@@ -143,8 +176,33 @@ const madeirasProducts = madeiras.map((madeira, index) => {
   const randomSize3 = Math.floor(Math.random() * 6) + 1;
   const randomSize4 = Math.floor(Math.random() * 6) + 1;
   const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
+  if (madeira[0] === '/') {
+    const product = {
+      id: index + 1400,
+      name: 'Madeiras',
+      reference: `67.15.${randomReference}`,
+      brand_name: 'Madeiras',
+      category_name: 'Madeiras',
+      price: randomPrice,
+      fixed_qtd: fixedQtd,
+      box_price: randomPrice * fixedQtd,
+      sizes: {
+        P: randomSize1,
+        M: randomSize2,
+        G: randomSize3,
+        GG: randomSize4,
+      },
+      images: [
+        {
+          image: madeira,
+          product_id: index + 1400,
+        },
+      ],
+    };
+    return product;
+  }
   const product = {
-    id: index + 100,
+    id: index + 1400,
     name: 'Madeiras',
     reference: `67.15.${randomReference}`,
     brand_name: 'Madeiras',
@@ -158,12 +216,7 @@ const madeirasProducts = madeiras.map((madeira, index) => {
       G: randomSize3,
       GG: randomSize4,
     },
-    images: [
-      {
-        image: madeira,
-        product_id: index + 100,
-      },
-    ],
+    images: madeira.map((item) => ({ image: item })),
   };
   return product;
 });
