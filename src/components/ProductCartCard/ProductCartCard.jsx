@@ -10,7 +10,7 @@ import {
   KeyValueContainer,
   PricesWithSizesContainer,
   PrimaryText,
-  SecundaryText,
+  SecondaryText,
   SizeContent,
   SizesContainer,
   TotalQuantitySize,
@@ -19,7 +19,7 @@ import {
 
 export default function ProductCartCard({
   imageSrc, reference, name, colors, sizes, totalPrice,
-  quantity, discount, grid,
+  quantity, discount,
 }) {
   const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -38,7 +38,7 @@ export default function ProductCartCard({
           <PrimaryText>
             {name}
           </PrimaryText>
-          <SecundaryText>
+          <SecondaryText>
             UNIT.
             {' '}
             <span
@@ -48,10 +48,10 @@ export default function ProductCartCard({
                 color: '#000',
               } }
             >
-              {BRL.format(totalPrice / (grid ? totalQuantity : quantity))}
+              {BRL.format(totalPrice / quantity)}
             </span>
-          </SecundaryText>
-          {colors.map(({ cod_hex, color_name }) => (
+          </SecondaryText>
+          {colors?.map(({ cod_hex, color_name }) => (
             <ColorContainer
               key={ cod_hex }
               color={ `#${cod_hex}` }
@@ -62,25 +62,23 @@ export default function ProductCartCard({
         </CardInfosContainer>
       </CardImageWithInfosContainer>
       <PricesWithSizesContainer>
-        {grid && (
-          <SizesContainer>
-            {sizes.map((size) => (
-              <KeyValueContainer key={ size }>
-                <SizeContent>
-                  {size[0]}
-                </SizeContent>
-                <SizeContent>
-                  {size[1] * quantity}
-                </SizeContent>
-              </KeyValueContainer>
-            ))}
-
-            <KeyValueContainer>
-              <TotalSizeTag>TOTAL</TotalSizeTag>
-              <TotalQuantitySize>{totalQuantity}</TotalQuantitySize>
+        <SizesContainer>
+          {sizes.map((size) => (
+            <KeyValueContainer key={ size }>
+              <SizeContent>
+                {size[0]}
+              </SizeContent>
+              <SizeContent>
+                {size[1] * quantity}
+              </SizeContent>
             </KeyValueContainer>
-          </SizesContainer>
-        )}
+          ))}
+
+          <KeyValueContainer>
+            <TotalSizeTag>TOTAL</TotalSizeTag>
+            <TotalQuantitySize>{totalQuantity}</TotalQuantitySize>
+          </KeyValueContainer>
+        </SizesContainer>
         <PrimaryText>
           Desc:
           {' '}
