@@ -70,6 +70,9 @@ import porcelanato2 from '../assets/revestir/333305-600-auto.png';
 import porcelanato11 from '../assets/revestir/Cozinha-com-revestimento-bege-e-moveis-de-madeira-Foto-Contemporist.jpg';
 import porcelanato4 from '../assets/revestir/shopping.png';
 import porcelanato10 from '../assets/revestir/Tipos-de-piso-Lojas-Alves-Destacada-min.png';
+import madeiras3 from '../assets/revestir/shopping (1).png';
+import madeiras5 from '../assets/revestir/gris.jpg';
+import madeiras9 from '../assets/revestir/shopping (5).png';
 
 const porcelanatos = [
   porcelanato7,
@@ -81,6 +84,7 @@ const porcelanatos = [
   porcelanato4,
   porcelanato10,
 ];
+const madeiras = [madeiras3, madeiras5, madeiras9];
 const banquetas = [banqueta1, banqueta2];
 const bermudasEstampadas = [bermuda1, bermuda2, bermuda3, bermuda4, bermuda5];
 const bermudasLisas = [bermuda6, bermuda7, bermuda8];
@@ -110,7 +114,7 @@ const porcelanatosProducts = porcelanatos.map((porcelanato, index) => {
     id: index + 100,
     name: 'Porcelanato',
     reference: `67.15.${randomReference}`,
-    brand_name: 'Porcelanto',
+    brand_name: 'Porcelanato',
     category_name: 'Porcelanato',
     price: randomPrice,
     fixed_qtd: fixedQtd,
@@ -124,6 +128,39 @@ const porcelanatosProducts = porcelanatos.map((porcelanato, index) => {
     images: [
       {
         image: porcelanato,
+        product_id: index + 100,
+      },
+    ],
+  };
+  return product;
+});
+
+const madeirasProducts = madeiras.map((madeira, index) => {
+  const randomReference = Math.floor(Math.random() * 10000) + 1000;
+  const randomPrice = Math.floor(Math.random() * 200) + 50;
+  const randomSize1 = Math.floor(Math.random() * 6) + 1;
+  const randomSize2 = Math.floor(Math.random() * 6) + 1;
+  const randomSize3 = Math.floor(Math.random() * 6) + 1;
+  const randomSize4 = Math.floor(Math.random() * 6) + 1;
+  const fixedQtd = randomSize1 + randomSize2 + randomSize3 + randomSize4;
+  const product = {
+    id: index + 100,
+    name: 'Madeiras',
+    reference: `67.15.${randomReference}`,
+    brand_name: 'Madeiras',
+    category_name: 'Madeiras',
+    price: randomPrice,
+    fixed_qtd: fixedQtd,
+    box_price: randomPrice * fixedQtd,
+    sizes: {
+      P: randomSize1,
+      M: randomSize2,
+      G: randomSize3,
+      GG: randomSize4,
+    },
+    images: [
+      {
+        image: madeira,
         product_id: index + 100,
       },
     ],
@@ -910,6 +947,7 @@ ferramentasProducts.forEach((ferramenta) => mockProducts2.push(ferramenta));
 jaquetasProducts.forEach((jaqueta) => mockProducts2.push(jaqueta));
 mochilasProducts.forEach((mochila) => mockProducts2.push(mochila));
 porcelanatosProducts.forEach((porcelanato) => mockProducts2.unshift(porcelanato));
+madeirasProducts.forEach((madeira) => mockProducts2.unshift(madeira));
 
 function enrichProductData(products) {
   const types = ['Importado', 'Nacional', 'Private Label'];
