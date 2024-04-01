@@ -999,8 +999,8 @@ esculturasProducts.forEach((escultura) => mockProducts2.push(escultura));
 ferramentasProducts.forEach((ferramenta) => mockProducts2.push(ferramenta));
 jaquetasProducts.forEach((jaqueta) => mockProducts2.push(jaqueta));
 mochilasProducts.forEach((mochila) => mockProducts2.push(mochila));
-porcelanatosProducts.forEach((porcelanato) => mockProducts2.unshift(porcelanato));
-madeirasProducts.forEach((madeira) => mockProducts2.unshift(madeira));
+// porcelanatosProducts.forEach((porcelanato) => mockProducts2.unshift(porcelanato));
+// madeirasProducts.forEach((madeira) => mockProducts2.unshift(madeira));
 
 function enrichProductData(products) {
   const types = ['Importado', 'Nacional', 'Private Label'];
