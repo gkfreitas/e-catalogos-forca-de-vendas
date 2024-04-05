@@ -3,14 +3,15 @@ import { useContext, useEffect, useState } from 'react';
 import { FaEraser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import eyeIcon from '../../../assets/icons/eye-icon.svg';
-import AllProductsAvaliable from '../../../components/AllProductsAvaliable';
+// import AllProductsAvailable from '../../../components/AllProductsAvailable';
+import { CardRender } from '../../../components/CardRender';
 import Dropdown from '../../../components/Dropdown/Dropdown';
-import FilterAvaliableProducts from '../../../components/FilterAvaliableProducts';
+import FilterAvailableProducts from '../../../components/FilterAvailableProducts';
 import FooterEdit from '../../../components/FooterEdit/FooterEdit';
 import Header from '../../../components/Header';
 import { ProductOrderContext } from '../../../context/ProductOrderContext';
-import { ProductToolsContext } from '../../../context/ProductToolsContenxt';
-import mockProcuts from '../../../mocks/mockProducts';
+import { ProductToolsContext } from '../../../context/ProductToolsContext';
+import mockProducts from '../../../mocks/mockProducts';
 import {
   AvailableProductsContainer,
   ButtonsContainer,
@@ -28,7 +29,7 @@ export default function AvailableProducts() {
   const { setCurrentProductOrder, currentOrder } = useContext(ProductOrderContext);
   const [imagesPerView, setImagesPerView] = useState(2);
   const [showSelected, setShowSelected] = useState(false);
-  const [allProducts, setAllProducts] = useState(mockProcuts);
+  const [allProducts, setAllProducts] = useState(mockProducts);
   const [selectedProducts, setSelectedProducts] = useState(JSON
     .parse(localStorage.getItem('selectedProducts')) || []);
   const [filters, setFilters] = useState({
@@ -40,7 +41,7 @@ export default function AvailableProducts() {
     subCategories: [],
   });
   const [categorySelected, setCategorySelected] = useState('Categorias');
-  const [filteredProducts, setFilteredProducts] = useState(mockProcuts);
+  const [filteredProducts, setFilteredProducts] = useState(mockProducts);
 
   const navigate = useNavigate();
 
@@ -64,7 +65,7 @@ export default function AvailableProducts() {
   } = filters;
 
   useEffect(() => {
-    const filtered = mockProcuts.filter((product) => {
+    const filtered = mockProducts.filter((product) => {
       const verifyImages = product.images.length;
       const verifyBrand = brand.length ? brand
         .includes(product.brand_name) : true;
@@ -134,8 +135,8 @@ export default function AvailableProducts() {
   useEffect(() => {
     setSeeAll(false);
 
-    if (mockProcuts.length === 0) {
-      setAllProducts(mockProcuts);
+    if (mockProducts.length === 0) {
+      setAllProducts(mockProducts);
     }
   }, [allProducts, setSeeAll]);
 
@@ -225,13 +226,23 @@ export default function AvailableProducts() {
       </ButtonsContainer>
 
       <AvailableProductsContainer>
-        <AllProductsAvaliable
+        {/* Componente original - Usar depois que terminar a integração */}
+        {/* <AllProductsAvailable
           imagesPerView={ imagesPerView }
           filteredProducts={ filteredProducts }
           selectedProducts={ selectedProducts }
           setSelectedProducts={ setSelectedProducts }
+        /> */}
+
+        {/* Card Render - Componente temporário para carregar o Skelleton */}
+        <CardRender
+          filteredProducts={ filteredProducts }
+          selectedProducts={ selectedProducts }
+          setSelectedProducts={ setSelectedProducts }
+          imagesPerview={ imagesPerView }
         />
-        <FilterAvaliableProducts
+
+        <FilterAvailableProducts
           setFilters={ setFilters }
         />
       </AvailableProductsContainer>

@@ -20,7 +20,7 @@ export const AllImagesContainer = styled.main`
   gap: 8px;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(${({ $imagesperview }) => $imagesperview}, 1fr);
+  grid-template-columns: repeat(${({ $imagesPerview }) => $imagesPerview}, 1fr);
   grid-gap: 8px;
   justify-content: center;
   align-items: center;
@@ -30,12 +30,9 @@ export const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 240px;
   border-radius: 5px;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  
+  border: 1px solid #ddd;
   cursor: pointer;
 `;
 
@@ -52,15 +49,17 @@ export const ImageRenderContainer = styled.div`
 export const HeaderImage = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 2px 1px;
   border-radius: 5px 5px 0px 0px;
-  background:  ${({ $selected }) => ($selected ? 'green' : '#fff')};
+  background:  ${({ $selected }) => ($selected ? 'green' : '#b6c8d1')};
   text-align: center;
-  gap: 16px;
+  padding: 2px 4px;
+  gap: 8px;
   width: 100%;
 `;
 
-export const SecundaryText = styled.span`
+export const SecondaryText = styled.span`
   
   text-align: center;
   font-family: Roboto;
@@ -69,10 +68,13 @@ export const SecundaryText = styled.span`
   font-weight: 700;
 `;
 
-export const HeaderImageText = styled.h1`
+export const HeaderImageText = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 11px;
   color:  ${({ $selected }) => ($selected ? '#FFF' : '#000')};
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 500;
 `;
