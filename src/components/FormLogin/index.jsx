@@ -20,38 +20,38 @@ export default function FormLogin() {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorInputs, setErrorInputs] = useState(false);
 
-  const verifyInputs = (name, value) => {
-    if (name === 'key') {
-      const minLengthKey = 3;
-      const verifyName = value.length < minLengthKey;
+  // const verifyInputs = (name, value) => {
+  //   if (name === 'key') {
+  //     const minLengthKey = 3;
+  //     const verifyName = value.length < minLengthKey;
+  //
+  //     setErrorKey(verifyName);
+  //   }
+  //
+  //   if (name === 'login') {
+  //     const minLengthLogin = 4;
+  //     const verifyLogin = value.length < minLengthLogin;
+  //
+  //     setErrorLogin(verifyLogin);
+  //   }
+  //
+  //   if (name === 'password') {
+  //     const minLengthPassword = 6;
+  //     const verifyPassword = value.length < minLengthPassword;
+  //
+  //     setErrorPassword(verifyPassword);
+  //   }
+  // };
 
-      setErrorKey(verifyName);
-    }
-
-    if (name === 'login') {
-      const minLengthLogin = 4;
-      const verifyLogin = value.length < minLengthLogin;
-
-      setErrorLogin(verifyLogin);
-    }
-
-    if (name === 'password') {
-      const minLengthPassword = 6;
-      const verifyPassword = value.length < minLengthPassword;
-
-      setErrorPassword(verifyPassword);
-    }
-  };
-
-  const handleChange = ({ target: { name, value } }) => {
-    setUserInfo((prevState) => (
-      {
-        ...prevState,
-        [name]: value,
-      }
-    ));
-    verifyInputs(name, value);
-  };
+  // const handleChange = ({ target: { name, value } }) => {
+  //   setUserInfo((prevState) => (
+  //     {
+  //       ...prevState,
+  //       [name]: value,
+  //     }
+  //   ));
+  //   verifyInputs(name, value);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();

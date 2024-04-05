@@ -8,6 +8,7 @@ import InputSearch from '../../../components/InputSearch';
 import Modal from '../../../components/Modal';
 import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import { companiesMock } from '../../../mocks/mockClients';
+import { SkeletonList } from '../../../components/Skeleton/SkeletonList';
 import {
   ClientsCardContainer,
   ClientsContainer,
@@ -30,6 +31,7 @@ export default function ClientsPage() {
   const [searchValue, setSearchValue] = useState('');
   const [tableCard, setTableCard] = useState(false);
   const [priceTable, setPriceTable] = useState('');
+  const [loading, setLoading] = useState(false);
   const { setCurrentOrder } = useContext(ProductOrderContext);
 
   const router = useNavigate();
@@ -61,13 +63,19 @@ export default function ClientsPage() {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
+
     const filtered = companiesMock
       .filter((client) => client.nome.toLowerCase()
         .includes(searchValue.toLowerCase()));
     setFilteredClients(filtered);
+
+    setLoading(false);
   }, [searchValue]);
 
   useEffect(() => {
+    setLoading(true);
+
     const clientData = filteredClients
       .find((client) => client.nome === currentClient);
     if (clientData) {
@@ -80,6 +88,8 @@ export default function ClientsPage() {
         priceTable,
       }));
     }
+
+    setLoading(false);
   }, [currentClient, filteredClients, priceTable, setCurrentOrder]);
 
   return (
@@ -118,19 +128,21 @@ export default function ClientsPage() {
               </TablePriceButtonTitle>
             </TablePriceButton>)}
           <ClientsCardContainer>
-            {filteredClients.map(({ nome, cnpj, uf, nomeFantasia, email, whatsapp }) => (
-              <ClientCard
-                currentClient={ currentClient }
-                onClick={ () => choseClient(nome) }
-                key={ cnpj }
-                clientName={ nome }
-                cnpj={ cnpj }
-                uf={ uf }
-                fantasyName={ nomeFantasia }
-                email={ email }
-                whatsapp={ whatsapp }
-              />
-            ))}
+            {loading
+              ? <SkeletonList width="250px" height="130px" />
+              : filteredClients.map((clients) => (
+                <ClientCard
+                  currentClient={ currentClient }
+                  onClick={ () => choseClient(clients.nome) }
+                  key={ clients.cnpj }
+                  clientName={ clients.nome }
+                  cnpj={ clients.cnpj }
+                  uf={ clients.uf }
+                  fantasyName={ clients.nomeFantasia }
+                  email={ clients.email }
+                  whatsapp={ clients.whatsapp }
+                />
+              ))}
           </ClientsCardContainer>
         </ClientsContainer>
         {tableCard && (

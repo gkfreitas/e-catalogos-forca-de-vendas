@@ -3,6 +3,7 @@ import Header from '../../../components/Header';
 import InputDate from '../../../components/InputDate/InputDate';
 import InputText from '../../../components/InputText/InputText';
 import OrderCard from '../../../components/OrderCard/OrderCard';
+import { SkeletonList } from '../../../components/Skeleton/SkeletonList';
 import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import {
   ContainerPage,
@@ -17,11 +18,14 @@ export default function OrdersList() {
   const [login, setLogin] = useState('');
   const [initialDate, setInitialDate] = useState('');
   const [finalDate, setFinalDate] = useState('');
-  const { orders } = useContext(ProductOrderContext);
   const [filteredOrders, setFilteredOrders] = useState([{}]);
+  const [loading, setLoading] = useState(false);
+  const { orders } = useContext(ProductOrderContext);
   const tags = ['N do pedido', 'CNPJ', 'Razão Social', 'Data e Hora'];
 
   useEffect(() => {
+    setLoading(true);
+
     const verifyDate = (order) => {
       const orderDate = order.orderDate.split(' ')[0];
       const orderTime = new Date(orderDate.split('/').reverse().join('-')).getTime();
@@ -50,6 +54,7 @@ export default function OrdersList() {
     });
 
     setFilteredOrders(sortedOrders);
+    setLoading(false);
   }, [orderNumber, socialReasonOrCNPJ, login, initialDate, finalDate, orders]);
 
   return (
@@ -85,19 +90,20 @@ export default function OrdersList() {
         />
       </InputsDateContainer>
       <OrdersContainer>
-        {
-          filteredOrders.map((order, i) => (
-            <OrderCard
-              key={ i }
-              tags={ tags }
-              orderInfo={ order }
-              email="suporte@e-catalogos.net"
-              bgColor
-            />
-          ))
-        }
+        {loading
+          ? <SkeletonList width="450px" height="200px" />
+          : (
+            filteredOrders.map((order, i) => (
+              <OrderCard
+                key={ i }
+                tags={ tags }
+                orderInfo={ order }
+                email="suporte@e-catalogos.net"
+                bgColor
+              />
+            ))
+          )}
       </OrdersContainer>
     </ContainerPage>
-
   );
 }

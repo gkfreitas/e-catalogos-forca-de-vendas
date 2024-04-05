@@ -24,20 +24,22 @@ function Dropdown({ name, options, onChange }) {
         { name }
         <FaAngleDown />
       </DropdownButton>
-      <DropdownContent $isOpen={ isOpen }>
-        { options.map((option, index) => (
-          <CheckboxLabel
-            key={ index }
-          >
-            <CheckboxInput
-              onClick={ onChange }
-              type="checkbox"
-              value={ option }
-            />
-            { option }
-          </CheckboxLabel>
-        )) }
-      </DropdownContent>
+      {isOpen && (
+        <DropdownContent>
+          { options.map((option, index) => (
+            <CheckboxLabel
+              key={ index }
+            >
+              <CheckboxInput
+                onClick={ onChange }
+                type="checkbox"
+                value={ option }
+              />
+              { option }
+            </CheckboxLabel>
+          ))}
+        </DropdownContent>
+      )}
     </DropdownContainer>
   );
 }

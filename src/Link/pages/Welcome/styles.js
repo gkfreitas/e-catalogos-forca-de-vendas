@@ -33,7 +33,7 @@ export const PrimaryText = styled.p`
   font-weight: 500;
 `;
 
-export const SecundaryText = styled.p`
+export const SecondaryText = styled.p`
   color: #000;
   text-align: center;
   font-family: Roboto;

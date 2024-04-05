@@ -1,13 +1,8 @@
 const videos = [
   {
-    name: 'Força de Vendas',
-    link: 'https://youtu.be/1wLbtY5vEYc?si=z8QFWMlyZyckHGBG',
-    duration: '4\'50\'\'',
-  },
-  {
-    name: 'Link do Ecommerce',
-    link: 'https://youtu.be/RX1BjMD_DpY?si=cot_ua9vUWhScxFg',
-    duration: '7\'52\'\'',
+    name: 'Tutorial App Força de Vendas',
+    link: 'https://youtu.be/sQ60e8PGcVk?si=W6Xe5VLbkMpe1K00',
+    duration: '7\'46\'\'',
   },
 ];
 

@@ -5,9 +5,8 @@ import infoIcon from '../../assets/icons/info-icon.svg';
 import searchIcon from '../../assets/icons/search-icon.svg';
 import { ProductContext } from '../../context/ProductContext';
 import { ProductOrderContext } from '../../context/ProductOrderContext';
-import { ProductToolsContext } from '../../context/ProductToolsContenxt';
+import { ProductToolsContext } from '../../context/ProductToolsContext';
 import { Separator } from '../ImagesSlider/styles';
-import InfoCard from '../InfoCard';
 import { ImagePreview, ImagesContainer, ToolIcon, ToolsContainer } from './styles';
 
 export default function ProductTools({ setPreviewImage }) {
@@ -63,7 +62,6 @@ export default function ProductTools({ setPreviewImage }) {
         margin={ 20 }
         height={ 1 }
       />
-      {InfoCard && <InfoCard />}
     </>
   );
 }

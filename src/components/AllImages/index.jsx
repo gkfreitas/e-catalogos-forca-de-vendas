@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { ProductContext } from '../../context/ProductContext';
-import { ProductToolsContext } from '../../context/ProductToolsContenxt';
+import { ProductToolsContext } from '../../context/ProductToolsContext';
 import { AllImagesContainer, HeaderImage, Image, ImageContainer } from './styles';
 
 export default function AllImages() {

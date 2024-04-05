@@ -5,6 +5,7 @@ import mockProducts from '../../../mocks/mockProducts';
 import FooterCreateMix from '../../components/FooterCreateMix/Footer';
 import InputSelect from '../../components/InputSelect/InputSelect';
 import ProductCartCard from '../../components/ProductCartCard/ProductCartCard';
+import { SkeletonList } from '../../../components/Skeleton/SkeletonList';
 import { LinkContext } from '../../context/LinkContext';
 import {
   brandOptions,
@@ -35,14 +36,15 @@ export default function CreateLink() {
   const [gender, setGender] = useState('');
   const [category, setCategory] = useState('');
   const [subcategory, setSubcategory] = useState('');
-  const [brandSelected, setBrandSelected] = useState('');
+  const [loading, setLoading] = useState(false);
+  // const [brandSelected, setBrandSelected] = useState('');
 
   useEffect(() => {
     setRefQuantity(filteredProducts.length);
   }, [filteredProducts]);
 
   const handleSelectBrand = (e) => {
-    setBrandSelected(e.target.value);
+    // setBrandSelected(e.target.value);
     setBrand(e.target.value);
     const filterProducts = mockProducts.filter((product) => {
       return product.brand_name === e.target.value;
@@ -52,6 +54,8 @@ export default function CreateLink() {
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
   useEffect(() => {
+    setLoading(true);
+
     // eslint-disable-next-line complexity
     const filterProducts = mockProducts.filter((product) => {
       const verifyBrand = brand && brand !== 'brand'
@@ -70,6 +74,8 @@ export default function CreateLink() {
       && verifyCategory && verifySubcategory;
     });
     setFilteredProducts(filterProducts.filter((product) => product.images.length > 0));
+
+    setLoading(false);
   }, [brand, type, delivery, gender, category, subcategory, setFilteredProducts]);
 
   useEffect(() => {
@@ -180,22 +186,34 @@ export default function CreateLink() {
         />
       </RefAndBrandBox>
       <ProductsContainer>
-        {filteredProducts.map((product, index) => (
-          <ProductCartCard
-            selected={ selectedProducts.includes(product) }
-            onClick={ () => selectProduct(product) }
-            key={ index }
-            imageSrc={ product.images }
-            reference={ product.reference }
-            colors={ product.colors }
-            sizes={ Object.entries(product.sizes) }
-            quantity={ 0 }
-            discount={ product.discount }
-            packPrice={ product.box_price }
-            price={ product.price }
-            brand={ product.brand_name }
-          />
-        ))}
+        {loading
+          ? (
+            <SkeletonList
+              style={ { marginTop: '10px', gap: '10px' } }
+              width="360px"
+              height="70px"
+              quantityCard={ 8 }
+            />
+          )
+          : (
+            filteredProducts.map((product, index) => (
+              <ProductCartCard
+                selected={ selectedProducts.includes(product) }
+                onClick={ () => selectProduct(product) }
+                key={ index }
+                imageSrc={ product.images }
+                reference={ product.reference }
+                colors={ product.colors }
+                sizes={ Object.entries(product.sizes) }
+                quantity={ 0 }
+                discount={ product.discount }
+                packPrice={ product.box_price }
+                price={ product.price }
+                brand={ product.brand_name }
+              />
+            ))
+
+          )}
       </ProductsContainer>
       <FooterCreateMix
         setSelectedProducts={ setSelectedProducts }

@@ -7,7 +7,7 @@ import Header from '../../../components/Header';
 import InputDate from '../../../components/InputDate/InputDate';
 import InputText from '../../../components/InputText/InputText';
 import OrderCard from '../../../components/OrderCard/OrderCard';
-
+import { SkeletonList } from '../../../components/Skeleton/SkeletonList';
 import { ProductOrderContext } from '../../../context/ProductOrderContext';
 import {
   ContainerPage,
@@ -28,12 +28,14 @@ export default function ExportOrders() {
   const [login, setLogin] = useState('');
   const [initialDate, setInitialDate] = useState('');
   const [finalDate, setFinalDate] = useState('');
-  const { orders, selectedOrders, setSelectedOrders } = useContext(ProductOrderContext);
   const [filteredOrders, setFilteredOrders] = useState([{}]);
+  const [emailModal, setEmailModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { orders, selectedOrders, setSelectedOrders } = useContext(ProductOrderContext);
   const tags = ['N do pedido', 'CNPJ', 'Razão Social', 'Data e Hora'];
-  const [sendEmail, setSendEmail] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const verifyDate = (order) => {
       const orderDate = order.orderDate.split(' ')[0];
       const orderTime = new Date(orderDate.split('/').reverse().join('-')).getTime();
@@ -42,7 +44,20 @@ export default function ExportOrders() {
       return orderTime >= initialTime && orderTime <= finalTime;
     };
 
-    const filteredOrder = orders?.filter((order) => {
+    const exportedOrders = JSON.parse(localStorage.getItem('exportedOrders'));
+    let ordersNotExported = [];
+
+    if (!exportedOrders) {
+      ordersNotExported = orders;
+    } else {
+      ordersNotExported = orders?.filter((order) => {
+        return !exportedOrders.some((exportedOrder) => {
+          return (exportedOrder.orderNumber === order.orderNumber);
+        });
+      });
+    }
+
+    const filteredOrder = ordersNotExported?.filter((order) => {
       if (Object.keys(order).length === 0) return false;
       const { orderNumber: orderNumberLocal } = order;
       const verifyOrderNumber = orderNumber ? String(orderNumberLocal)
@@ -62,7 +77,14 @@ export default function ExportOrders() {
     });
 
     setFilteredOrders(sortedOrders);
-  }, [orderNumber, socialReasonOrCNPJ, login, initialDate, finalDate, orders]);
+    setLoading(false);
+  }, [
+    orderNumber,
+    socialReasonOrCNPJ,
+    login, initialDate,
+    finalDate, orders,
+    selectedOrders,
+  ]);
 
   const handleSelectOrder = (order) => {
     setSelectedOrders((prevState) => {
@@ -76,22 +98,36 @@ export default function ExportOrders() {
     });
   };
 
-  const handleSuccess = (message) => {
-    if (selectedOrders.length === 0) {
-      toast.error('Selecione pelo menos um pedido', {
-        position: 'top-center',
-      });
-      return;
-    }
-    toast.success(message, {
+  const errorProductLength = () => {
+    toast.error('Selecione pelo menos um pedido', {
       position: 'top-center',
     });
+  };
+
+  const handleExportOrder = () => {
+    if (selectedOrders.length === 0) return errorProductLength();
+    const exportedOrders = JSON.parse(localStorage.getItem('exportedOrders'));
+    let newExportedOrdersList = [];
+
+    if (!exportedOrders) {
+      newExportedOrdersList = [...selectedOrders];
+    } else {
+      newExportedOrdersList = [...exportedOrders, ...selectedOrders];
+    }
+
+    localStorage.setItem('exportedOrders', JSON.stringify(newExportedOrdersList));
+    toast.success('Pedido(s) exportado(s) para a fábrica', { position: 'top-center' });
     setSelectedOrders([]);
   };
 
   const backPage = () => {
     setSelectedOrders([]);
     return '/functions';
+  };
+
+  const showEmailModal = () => {
+    if (selectedOrders.length === 0) return errorProductLength();
+    setEmailModal(true);
   };
 
   return (
@@ -127,25 +163,27 @@ export default function ExportOrders() {
         />
       </InputsDateContainer>
       <OrdersContainer>
-        {
-          filteredOrders.map((order, i) => (
-            <OrderContainer
-              $selected={ selectedOrders
-                .find((selectedOrder) => selectedOrder.orderNumber
+        {loading
+          ? <SkeletonList width="450px" height="200px" />
+          : (
+            filteredOrders.map((order, i) => (
+              <OrderContainer
+                $selected={ selectedOrders
+                  .find((selectedOrder) => selectedOrder.orderNumber
                 === order.orderNumber) }
-              onClick={ () => handleSelectOrder(order) }
-              key={ i }
-            >
-              <OrderCard
-                tags={ tags }
-                orderInfo={ order }
-                email="suporte@e-catalogos.net"
-                bgColor
-                exportOrder
-              />
-            </OrderContainer>
-          ))
-        }
+                onClick={ () => handleSelectOrder(order) }
+                key={ i }
+              >
+                <OrderCard
+                  tags={ tags }
+                  orderInfo={ order }
+                  email="suporte@e-catalogos.net"
+                  bgColor
+                  exportOrder
+                />
+              </OrderContainer>
+            ))
+          )}
       </OrdersContainer>
       <ExportFooter>
         <SelectedOrdersText>
@@ -153,7 +191,7 @@ export default function ExportOrders() {
           {' '}
           Pedidos selecionados
         </SelectedOrdersText>
-        <IconWithTextContainer onClick={ () => setSendEmail(true) }>
+        <IconWithTextContainer onClick={ showEmailModal }>
           <IconContainer>
             <AiOutlineMail size={ 24 } color="#809CAA" />
           </IconContainer>
@@ -165,7 +203,7 @@ export default function ExportOrders() {
           </IconText>
         </IconWithTextContainer>
         <IconWithTextContainer
-          onClick={ () => handleSuccess('Pedido(s) exportado(s) para a fábrica') }
+          onClick={ handleExportOrder }
         >
           <IconContainer>
             <IoCloudUploadOutline size={ 24 } color="#809CAA" />
@@ -179,11 +217,7 @@ export default function ExportOrders() {
           </IconText>
         </IconWithTextContainer>
       </ExportFooter>
-      {sendEmail && <EmailModal
-        handleSuccess={ handleSuccess }
-        disable={ () => setSendEmail(false) }
-      />}
+      {emailModal && <EmailModal disable={ () => setEmailModal(false) } />}
     </ContainerPage>
-
   );
 }

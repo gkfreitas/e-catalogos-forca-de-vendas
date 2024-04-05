@@ -15,7 +15,7 @@ import {
   PricesContainer,
   PricesWithSizesContainer,
   PrimaryText,
-  SecundaryText,
+  SecondaryText,
   SizeContent,
   SizesContainer,
   TotalQuantitySize,
@@ -46,9 +46,9 @@ export default function ProductCartCard({
           />
         </ContainerImage>
         <CardInfosContainer>
-          <SecundaryText>
+          <SecondaryText>
             {reference}
-          </SecundaryText>
+          </SecondaryText>
           <PrimaryText>
             {brand}
           </PrimaryText>

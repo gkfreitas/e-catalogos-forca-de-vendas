@@ -9,8 +9,7 @@ export default function LoginPage() {
       <LoginLogo src={ LogoImage } />
       <FormLogin />
       <LoginYTContainer>
-        <ButtonYT name="Força de Vendas" />
-        <ButtonYT name="Link do Ecommerce" />
+        <ButtonYT name="Tutorial App Força de Vendas" />
       </LoginYTContainer>
     </LoginContainer>
   );

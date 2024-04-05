@@ -12,7 +12,8 @@ import InputOrder from '../InputOrder/InputOrder';
 import PaymentModal from '../PaymentModal/PaymentModal';
 import ProductCartCard from '../ProductCartCard/ProductCartCard';
 import Separator from '../Separator';
-import ShippmentModal from '../ShippmentModal/ShippmentModal';
+import ShipmentModal from '../ShipmentModal/ShipmentModal';
+import { SkeletonList } from '../Skeleton/SkeletonList';
 import {
   CoverPage,
   Footer,
@@ -27,9 +28,10 @@ export default function Order({ currentOrder, detail }) {
   const isLink = currentOrder.type === 'link';
   const [inputTags, setInputTags] = useState([]);
   const [inputContents, setInputContents] = useState([]);
-  const [showShippment, setShowShippment] = useState(false);
+  const [showShipment, setShowShipment] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [showDeadline, setShowDeadline] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     currentProductOrder,
     setCurrentOrder,
@@ -40,7 +42,7 @@ export default function Order({ currentOrder, detail }) {
     totalValue,
     clientName,
     clientCNPJ,
-    shippment,
+    shipment,
     deadline,
     orderNumber,
     orderDate,
@@ -67,6 +69,7 @@ export default function Order({ currentOrder, detail }) {
   }, [clientName, currentOrder, detail, navigate, productsCart.length]);
 
   useEffect(() => {
+    setLoading(true);
     const max = 2000000;
     const min = 1000000;
 
@@ -87,9 +90,11 @@ export default function Order({ currentOrder, detail }) {
         .reduce((acc, { total }) => acc + total, 0) / installments,
       totalValue: newProducts.reduce((acc, { total }) => acc + total, 0),
     }));
+    setLoading(false);
   }, [installments, currentProductOrder, setCurrentOrder]);
 
   useEffect(() => {
+    setLoading(true);
     const BRL = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
@@ -105,13 +110,15 @@ export default function Order({ currentOrder, detail }) {
       orderNumber,
       orderDate,
       deadline,
-      shippment,
+      shipment,
       method,
       `${installments}x de ${BRL.format(installmentsValue)}`,
       BRL.format(totalValue),
     ];
     setInputTags(tags);
     setInputContents(contents);
+
+    setLoading(false);
   }, [clientCNPJ,
     clientName,
     currentOrder,
@@ -122,7 +129,7 @@ export default function Order({ currentOrder, detail }) {
     orderDate,
     orderNumber,
     productsCart,
-    shippment,
+    shipment,
     totalValue]);
 
   const router = useNavigate();
@@ -131,21 +138,21 @@ export default function Order({ currentOrder, detail }) {
 
   const halfWidthValues = ['Data', 'Total'];
 
+  const toastError = (message) => {
+    toast.error(message, {
+      position: 'top-center',
+    });
+  };
+
   const handleNextPage = () => {
-    if (!shippment) {
-      return toast.error('Selecione uma transportadora', {
-        position: 'top-center',
-      });
+    if (!shipment) {
+      return toastError('Selecione uma transportadora');
     }
     if (!method) {
-      return toast.error('Selecione uma condição de pagamento', {
-        position: 'top-center',
-      });
+      return toastError('Selecione uma condição de pagamento');
     }
     if (!deadline) {
-      return toast.error('Selecione um prazo de entrega', {
-        position: 'top-center',
-      });
+      return toastError('Selecione um prazo de entrega');
     }
 
     setCurrentOrder((prevState) => ({
@@ -163,7 +170,7 @@ export default function Order({ currentOrder, detail }) {
       )}
       <Header
         title="PEDIDO"
-        routeBack={ !detail ? '/purchase' : '/orders/list' }
+        routeBack
         routeFunction={ !detail && !localStorage.getItem('editMode') }
       />
       <InputsContainer>
@@ -179,30 +186,40 @@ export default function Order({ currentOrder, detail }) {
       </InputsContainer>
       <Separator height={ 2 } margin={ 60 } color="#E9E9E9" />
       <OrderProductsOverflow>
-        {productsCart.map(({ imageUrl,
-          reference, name, colors, sizes, total, pack, quantity }, i) => (
-          (
-            <ProductCartCard
-              discount={ total * discount }
-              key={ `${reference}-${i}` }
-              imageSrc={ imageUrl }
-              reference={ reference }
-              name={ name }
-              colors={ colors }
-              sizes={ Object.entries(sizes) }
-              totalPrice={ total }
-              pack={ pack }
-              quantity={ quantity }
-              grid={ !(name === 'Marca arte' || name === 'Ferramenta') }
+        {loading
+          ? (
+            <SkeletonList
+              style={ { marginTop: '10px', gap: '10px' } }
+              width="360px"
+              height="70px"
+              quantityCard={ 8 }
             />
           )
-        ))}
+          : (
+            productsCart.map(({ imageUrl,
+              reference, name, colors, sizes, total, pack, quantity }, i) => (
+              (
+                <ProductCartCard
+                  discount={ total * discount }
+                  key={ `${reference}-${i}` }
+                  imageSrc={ imageUrl }
+                  reference={ reference }
+                  name={ name }
+                  colors={ colors }
+                  sizes={ Object.entries(sizes) }
+                  totalPrice={ total }
+                  pack={ pack }
+                  quantity={ quantity }
+                />
+              )
+            ))
+          )}
       </OrderProductsOverflow>
       {
         !detail && (
           <Footer>
             <OrderTools>
-              <IconContainer onClick={ () => setShowShippment(true) }>
+              <IconContainer onClick={ () => setShowShipment(true) }>
                 <FaShippingFast
                   size={ 26 }
                   fill="#809CAA"
@@ -232,7 +249,7 @@ export default function Order({ currentOrder, detail }) {
         <FooterOrderDetails currentOrder={ currentOrder } />
       )}
 
-      {showShippment && <ShippmentModal disable={ () => setShowShippment(false) } />}
+      {showShipment && <ShipmentModal disable={ () => setShowShipment(false) } />}
       {showPayment && <PaymentModal
         disable={ () => setShowPayment(false) }
         totalValue={ totalValue }

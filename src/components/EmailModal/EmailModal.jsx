@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CiCirclePlus } from 'react-icons/ci';
+import { toast } from 'react-toastify';
 import mockEmails from '../../mocks/mockEmails';
 import InputCheckbox from '../InputCheckbox';
 import InputSearch from '../InputSearch';
@@ -14,7 +15,7 @@ import {
   SendButtonText,
 } from './styles';
 
-export default function EmailModal({ disable, handleSuccess }) {
+export default function EmailModal({ disable }) {
   const [filteredEmails, setFilteredEmails] = useState([]);
   const [emailText, setEmailText] = useState('');
   const emails = mockEmails;
@@ -27,7 +28,7 @@ export default function EmailModal({ disable, handleSuccess }) {
 
   const handleClick = () => {
     disable();
-    handleSuccess('E-mail enviado com sucesso!');
+    toast.success('E-mail enviado com sucesso!', { position: 'top-center' });
   };
 
   return (

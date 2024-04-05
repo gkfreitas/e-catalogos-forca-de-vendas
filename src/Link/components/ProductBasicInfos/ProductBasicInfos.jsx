@@ -11,8 +11,8 @@ import {
   Column,
   PrimaryText,
   ProductBasicInfosContainer,
-  RefenceText,
-  SecundaryText,
+  ReferenceText,
+  SecondaryText,
 } from './style';
 
 export default function ProductBasicInfos() {
@@ -30,33 +30,33 @@ export default function ProductBasicInfos() {
   return (
     <ProductBasicInfosContainer>
       <Column>
-        <RefenceText>
+        <ReferenceText>
           {reference}
-        </RefenceText>
+        </ReferenceText>
         <ProductSizes />
       </Column>
       <Column>
         <PrimaryText>
           V. Unit:
           {' '}
-          <SecundaryText>
+          <SecondaryText>
             {BRL.format(price)}
-          </SecundaryText>
+          </SecondaryText>
         </PrimaryText>
         <PrimaryText>
           V. Pack:
           {' '}
-          <SecundaryText>
+          <SecondaryText>
             {BRL.format(box_price)}
-          </SecundaryText>
+          </SecondaryText>
         </PrimaryText>
-        <SecundaryText>
+        <SecondaryText>
           Total =
           {' '}
           <PrimaryText>
             {total ? BRL.format(total) : BRL.format(0)}
           </PrimaryText>
-        </SecundaryText>
+        </SecondaryText>
         {colors && (
           <ColorContainer>
             {colors.map(({ color_name, cod_hex }) => (

@@ -31,8 +31,8 @@ export default function HeaderCategory({ routeBack, routeNext }) {
   const handleNextCategory = () => {
     const indexCurrentCategory = categories.indexOf(category);
     if (indexCurrentCategory === categories.length - 1) {
-      const previusCategory = categories[0];
-      const firstIndex = findFirstIndexOfCategory(previusCategory);
+      const previousCategory = categories[0];
+      const firstIndex = findFirstIndexOfCategory(previousCategory);
       return setCurrentProductIndex(firstIndex);
     }
     const nextCategory = categories[indexCurrentCategory + 1];
@@ -40,17 +40,17 @@ export default function HeaderCategory({ routeBack, routeNext }) {
     setCurrentProductIndex(firstIndex);
   };
 
-  const handlePreviusCategory = () => {
+  const handlePreviousCategory = () => {
     const indexCurrentCategory = categories.indexOf(category);
 
     if (indexCurrentCategory === 0) {
-      const previusCategory = categories[categories.length - 1];
-      const firstIndex = findFirstIndexOfCategory(previusCategory);
+      const previousCategory = categories[categories.length - 1];
+      const firstIndex = findFirstIndexOfCategory(previousCategory);
       return setCurrentProductIndex(firstIndex);
     }
-    const previusCategory = categories[indexCurrentCategory - 1];
+    const previousCategory = categories[indexCurrentCategory - 1];
 
-    const firstIndex = findFirstIndexOfCategory(previusCategory);
+    const firstIndex = findFirstIndexOfCategory(previousCategory);
 
     setCurrentProductIndex(firstIndex);
   };
@@ -63,7 +63,7 @@ export default function HeaderCategory({ routeBack, routeNext }) {
           size={ 20 }
           fill="#FFf"
           cursor="pointer"
-          onClick={ handlePreviusCategory }
+          onClick={ handlePreviousCategory }
         />
         <CategoryContainer>
 

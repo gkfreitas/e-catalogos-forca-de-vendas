@@ -25,7 +25,7 @@ export default function AddProduct() {
 
   const [quantity, setQuantity] = useState(0);
   const [priceProduct, setPriceProduct] = useState(0);
-  const [accumulatedPrice, setAccumuledPrice] = useState(0);
+  const [accumulatedPrice, setAccumulatedPrice] = useState(0);
   // const [accumulatedQuantity, setAccumulatedQuantity] = useState(0);
 
   const BRL = new Intl.NumberFormat('pt-BR', {
@@ -72,9 +72,9 @@ export default function AddProduct() {
   };
 
   const removeProduct = () => {
-    if (!currentProductOrder[id]) return;
+    const product = currentProductOrder[id];
 
-    if (currentProductOrder[id].quantity === 0) return;
+    if (!product || product.quantity === 0) return;
 
     setCurrentProductOrder((prevState) => ({
       ...prevState,
@@ -103,7 +103,7 @@ export default function AddProduct() {
     const accumulatedPrices = Object.values(currentProductOrder)
       .reduce((acc, cur) => acc + cur.total, 0);
     // setAccumulatedQuantity(accumulatedRef);
-    setAccumuledPrice(accumulatedPrices);
+    setAccumulatedPrice(accumulatedPrices);
   }, [currentProductOrder, price, id, fixed_qtd]);
 
   useEffect(() => {

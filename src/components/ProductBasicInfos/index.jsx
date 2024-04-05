@@ -13,9 +13,8 @@ import {
 export default function ProductBasicInfos() {
   const { currentProduct } = useContext(ProductContext);
 
-  const reference = currentProduct?.reference;
-  const price = currentProduct?.price;
-  const name = currentProduct?.name;
+  const { name, reference, price } = currentProduct || {};
+
   return (
     <ProductBasicInfosContainer>
       <TextStyle>

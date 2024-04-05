@@ -9,7 +9,7 @@ const emptyOrder = {
   orderNumber: '',
   orderDate: '',
   deadline: '',
-  shippment: '',
+  shipment: '',
   hour: '',
   productsCart: [],
   paymentCondition: {
@@ -33,11 +33,13 @@ function ProductOrderProvider({ children }) {
     .getItem('orders')) || []);
   const [selectedOrders, setSelectedOrders] = useState([]);
 
+  const errorMessage = 'Erro ao salvar no localStorage';
+
   useEffect(() => {
     try {
       localStorage.setItem('orders', JSON.stringify(orders));
     } catch (error) {
-      console.error('Erro ao salvar no localStorage', error);
+      console.error(errorMessage, error);
     }
   });
 
@@ -45,7 +47,7 @@ function ProductOrderProvider({ children }) {
     try {
       localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
     } catch (error) {
-      console.error('Erro ao salvar no localStorage', error);
+      console.error(errorMessage, error);
     }
   }, [currentOrder]);
 
@@ -53,7 +55,7 @@ function ProductOrderProvider({ children }) {
     try {
       localStorage.setItem('currentProductOrder', JSON.stringify(currentProductOrder));
     } catch (error) {
-      console.error('Erro ao salvar no localStorage', error);
+      console.error(errorMessage, error);
     }
     const productsCardIds = Object.keys(currentProductOrder);
     setCurrentOrder((prevState) => ({
@@ -70,7 +72,7 @@ function ProductOrderProvider({ children }) {
     try {
       localStorage.setItem('selectedOrders', JSON.stringify(selectedOrders));
     } catch (error) {
-      console.error('Erro ao salvar no localStorage', error);
+      console.error(errorMessage, error);
     }
   }, [selectedOrders]);
 

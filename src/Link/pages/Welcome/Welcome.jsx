@@ -17,7 +17,7 @@ import {
   HighlightText,
   LogoHeader,
   PrimaryText,
-  SecundaryText,
+  SecondaryText,
   VideoIcon,
   WelcomeImage,
 } from './styles';
@@ -74,10 +74,10 @@ export default function Welcome() {
           <HighlightText>
             {nome}
           </HighlightText>
-          <SecundaryText>
+          <SecondaryText>
             Separamos um link com produtos especiais para você
             escolher e efetuar suas compras
-          </SecundaryText>
+          </SecondaryText>
         </BoxCompany>
         <BoxRepresentative>
           <HighlightText>

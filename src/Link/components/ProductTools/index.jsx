@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import infoIcon from '../../../assets/icons/info-icon.svg';
-import { ProductToolsContext } from '../../../context/ProductToolsContenxt';
+import { ProductToolsContext } from '../../../context/ProductToolsContext';
 import { LinkProductContext } from '../../context/LinkProductContext';
 import { Separator } from '../ImagesSlider/styles';
 import InfoCard from '../InfoCard';

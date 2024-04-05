@@ -16,7 +16,7 @@ export const Column = styled.div`
   justify-content: center;
 `;
 
-export const RefenceText = styled.p`
+export const ReferenceText = styled.p`
   color: #001A1E;
   font-family: Roboto;
   font-size: 16px;
@@ -31,7 +31,7 @@ export const PrimaryText = styled.span`
   font-weight: 400;
 `;
 
-export const SecundaryText = styled.span`
+export const SecondaryText = styled.span`
   color: #000;
   font-family: Roboto;
   font-size: 10px;

@@ -3,6 +3,7 @@ import { saveAs } from 'file-saver';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import cloudGreenIcon from '../../assets/icons/cloud-green.svg';
+import cloudRedIcon from '../../assets/icons/cloud-red.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 import duplicateIcon from '../../assets/icons/duplicate.svg';
 import pdfIcon from '../../assets/icons/pdf.svg';
@@ -29,6 +30,11 @@ export default function OrderCard({ tags, email, bgColor, orderInfo, exportOrder
 
   const { orderNumber } = orderInfo;
   const { setOrders } = useContext(ProductOrderContext);
+
+  const exportedOrders = JSON.parse(localStorage.getItem('exportedOrders')) || [];
+  const orderStatus = exportedOrders.find((order) => order.orderNumber === orderNumber);
+  const orderStatusIcon = orderStatus ? cloudGreenIcon : cloudRedIcon;
+
   useEffect(() => {
     const clientCNPJ = orderInfo?.clientCNPJ || 'N/A';
     const clientName = orderInfo?.clientName || 'N/A';
@@ -90,7 +96,10 @@ export default function OrderCard({ tags, email, bgColor, orderInfo, exportOrder
               alt="icone de um pdf"
             />
           </button>
-          <Icon src={ cloudGreenIcon } alt="icone de uma nuvem verde" />
+          <Icon
+            src={ orderStatusIcon }
+            alt="icone de uma nuvem verde"
+          />
         </ButtonsContainer>
         {!exportOrder && (
           <ButtonsFunctions>

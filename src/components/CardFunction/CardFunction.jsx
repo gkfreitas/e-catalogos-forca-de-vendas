@@ -43,6 +43,8 @@ export default function CardFunction() {
     window.location.reload();
   };
 
+  const functionPath = '/functions';
+
   const functions = [
     {
       name: 'Lista de pedidos',
@@ -82,7 +84,7 @@ export default function CardFunction() {
     {
       name: 'Dúvidas',
       iconSrc: questionIcon,
-      route: '/functions',
+      route: functionPath,
     },
     {
       name: 'Exportar Pedidos',
@@ -92,12 +94,12 @@ export default function CardFunction() {
     {
       name: 'Tabela de Preços',
       iconSrc: tableIcon,
-      route: '/functions',
+      route: functionPath,
     },
     {
       name: 'Alterar Senha',
       iconSrc: changePasswordIcon,
-      route: '/functions',
+      route: functionPath,
     },
     {
       name: 'Sair',

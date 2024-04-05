@@ -24,6 +24,7 @@ import {
   MixButton,
   Separator,
 } from './styles';
+import { SkeletonList } from '../../../components/Skeleton/SkeletonList';
 
 export default function SendLink() {
   const [filteredClients, setFilteredClients] = useState(companiesMock);
@@ -37,40 +38,45 @@ export default function SendLink() {
   const [options, setOptions] = useState([]);
   const [mix, setMix] = useState(false);
   const [modalRemove, setModalRemove] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+
     const filtered = companiesMock
       .filter((client) => client.nome.toLowerCase()
         .includes(searchValue.toLowerCase()));
     setFilteredClients(filtered);
+
+    setLoading(false);
   }, [searchValue]);
 
   useEffect(() => {
     const optionsNames = JSON.parse(localStorage.getItem('links')) || [];
     const optionsState = optionsNames
-      .map(({ name, products, id, representativeName }) => ({ value: JSON
-        .stringify({ name, products, id, representativeName }),
-      label: name }));
+      .map((objectLink) => (
+        { value: JSON.stringify(objectLink), label: objectLink.name }
+      ));
     setOptions([{ value: [],
       label: 'Selecione um LINK' }, ...optionsState]);
   }, []);
 
+  const toastWarn = () => {
+    toast.warn('Selecione um link', {
+      position: 'top-center',
+    });
+  };
+
   const showMix = () => {
     if (!link.products || link.products.length <= 0) {
-      toast.warn('Selecione um link', {
-        position: 'top-center',
-      });
-      return;
+      return toastWarn();
     }
     setMix(true);
   };
 
   const showRemove = () => {
     if (!link.products || link.products.length <= 0) {
-      toast.warn('Selecione um link', {
-        position: 'top-center',
-      });
-      return;
+      return toastWarn();
     }
     setModalRemove(true);
   };
@@ -79,18 +85,26 @@ export default function SendLink() {
     const links = JSON.parse(localStorage.getItem('links')) || [];
     const newLinks = links.filter(({ id }) => id !== link.id);
     localStorage.setItem('links', JSON.stringify(newLinks));
-    const newLinksState = newLinks
-      .map(({ name, products, id, representativeName }) => ({ value: JSON
-        .stringify({ name, products, id, representativeName }),
-      label: name }));
+    const newLinksState = newLinks.map((objectLink) => (
+      { value: JSON.stringify(objectLink), label: objectLink.name }
+    ));
     setOptions([{ value: [],
       label: 'Selecione um LINK' }, ...newLinksState]);
     setLink({ name: '', products: [], representativeName: '' });
     setModalRemove(false);
   };
 
-  const handleChangeLink = (value) => {
-    setLink(value);
+  const handleSendLink = (whatsapp) => {
+    if (link.length <= 0) {
+      return toastWarn();
+    }
+
+    const whatsappPath = `https://api.whatsapp.com/send?phone=${whatsapp
+      .split('-').join('').split(' ')
+      .join('')}&text=http://192.168.15.20:5173/link/${link.id}-${whatsapp
+      .split('-').join('').split(' ').join('')}`;
+
+    window.open(whatsappPath, '_blank');
   };
 
   return (
@@ -109,13 +123,9 @@ export default function SendLink() {
           </InputContainer>
           <LinkContainer>
             <InputSelect
-              value={ link.name }
               name="links"
-              onChange={ ({ target }) => handleChangeLink(target.value
-                ? JSON.parse(target.value) : []) }
-              style={ {
-                width: '70%',
-              } }
+              style={ { width: '70%' } }
+              updateLink={ setLink }
               options={ options }
             />
             <MixButton onClick={ showMix }>MIX</MixButton>
@@ -124,30 +134,38 @@ export default function SendLink() {
         </InputsContainer>
         <Separator />
         <ClientsCardContainer>
-          {filteredClients.map(({ nome, cnpj, uf, nomeFantasia, email, whatsapp }) => (
-            <ContainerExportClients key={ cnpj }>
-              <ClientCard
-                clientName={ nome }
-                cnpj={ cnpj }
-                uf={ uf }
-                fantasyName={ nomeFantasia }
-                email={ email }
-                whatsapp={ whatsapp }
-              />
-              <ExportContainer
-                href={ `https://api.whatsapp.com/send?phone=${whatsapp
-                  .split('-').join('').split(' ')
-                  .join('')}&text=http://192.168.15.20:5173/link/${link.id}-${whatsapp
-                  .split('-').join('').split(' ').join('')}` }
-                target="_blank"
-              >
-                <ExportIcon src={ exportIcon } alt="Icone de exportar" />
-                <ExportText>
-                  Exportar
-                </ExportText>
-              </ExportContainer>
-            </ContainerExportClients>
-          ))}
+          {loading
+            ? (
+              <SkeletonList width="280px" height="120px">
+                <ExportContainer>
+                  <ExportIcon src={ exportIcon } alt="Icone de exportar" />
+                  <ExportText>
+                    Exportar
+                  </ExportText>
+                </ExportContainer>
+              </SkeletonList>
+            )
+            : (
+              filteredClients.map(({ nome, cnpj, uf, nomeFantasia, email, whatsapp }) => (
+                <ContainerExportClients key={ cnpj }>
+                  <ClientCard
+                    clientName={ nome }
+                    cnpj={ cnpj }
+                    uf={ uf }
+                    fantasyName={ nomeFantasia }
+                    email={ email }
+                    whatsapp={ whatsapp }
+                  />
+                  <ExportContainer onClick={ () => handleSendLink(whatsapp) }>
+                    <ExportIcon src={ exportIcon } alt="Icone de exportar" />
+                    <ExportText>
+                      Exportar
+                    </ExportText>
+                  </ExportContainer>
+                </ContainerExportClients>
+              ))
+
+            )}
         </ClientsCardContainer>
       </Container>
       {mix && <ModalMix

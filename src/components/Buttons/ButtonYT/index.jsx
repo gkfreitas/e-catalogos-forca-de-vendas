@@ -3,28 +3,22 @@ import { AiOutlineYoutube } from 'react-icons/ai';
 import { BasicButton, ButtonYTStyle, ButtonLinkVideo, ButtonTime } from './style';
 import videos from './linkVideos';
 
-function findIndexVideo(name, setVideoProps) {
-  const indexVideo = videos.findIndex((video) => video.name === name);
-  const { name: videoName, link: videoLink,
-    duration: videoDuration } = videos[indexVideo];
-
-  console.log(videoDuration);
-
-  setVideoProps({ name: videoName, videoLink, duration: videoDuration });
-}
-
 export default function ButtonYT({ name }) {
   const [videoProps, setVideoProps] = useState({ name: '', link: '', duration: '' });
 
-  console.log(videoProps.duration);
-
   useEffect(() => {
-    findIndexVideo(name, setVideoProps);
-  }, []);
+    function setCurrentVideo() {
+      const indexVideo = videos.findIndex((video) => video.name === name);
+      const { name: videoName, link, duration } = videos[indexVideo];
+      setVideoProps({ name: videoName, link, duration });
+    }
+
+    setCurrentVideo();
+  }, [name]);
 
   return (
     <ButtonLinkVideo
-      href={ `${videoProps.videoLink}` }
+      href={ `${videoProps.link}` }
       target="_blank"
     >
       <BasicButton>

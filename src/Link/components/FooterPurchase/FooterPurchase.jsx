@@ -14,8 +14,14 @@ export default function FooterPurchase() {
   const [paymentModal, setPaymentModal] = useState(false);
   const [cartModal, setCartModal] = useState(false);
   const [observationModal, setObservationModal] = useState(false);
-  const { currentProductOrder, currentOrder, setOrders,
-    orders, setCurrentOrder, setCurrentProductOrder } = useContext(LinkOrderContext);
+  const {
+    currentProductOrder,
+    currentOrder,
+    setOrders,
+    orders,
+    setCurrentOrder,
+    setCurrentProductOrder,
+  } = useContext(LinkOrderContext);
 
   const exportOrder = () => {
     const {
@@ -23,22 +29,27 @@ export default function FooterPurchase() {
       productsCart,
       linkId,
       clientWhatsapp } = currentOrder;
-    if (!paymentCondition.method) {
-      toast.error('Selecione uma forma de pagamento', {
+
+    const toastMessage = (action, message) => {
+      if (action === 'error') {
+        return toast.error(message, {
+          position: 'top-center',
+        });
+      }
+      toast.success(message, {
         position: 'top-center',
       });
-      return;
+    };
+
+    if (!paymentCondition.method) {
+      return toastMessage('error', 'Selecione uma forma de pagamento');
     }
     if (!productsCart.length) {
-      toast.error('Adicione produtos ao carrinho', {
-        position: 'top-center',
-      });
-      return;
+      return toastMessage('error', 'Adicione produtos ao carrinho');
     }
+
     setOrders([...orders, currentOrder]);
-    toast.success('Pedido exportado com sucesso', {
-      position: 'top-center',
-    });
+    toastMessage('success', 'Pedido exportado com sucesso');
     setCurrentOrder({});
     setCurrentProductOrder({});
     const oneSecond = 1000;

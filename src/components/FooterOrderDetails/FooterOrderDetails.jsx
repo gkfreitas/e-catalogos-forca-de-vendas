@@ -34,13 +34,21 @@ export default function FooterOrderDetails({ currentOrder }) {
   };
 
   const handleExport = () => {
-    toast.success('Pedido exportado com sucesso!');
-  };
+    const exportedOrders = JSON.parse(localStorage.getItem('exportedOrders')) || [];
+    const orderAlreadyExported = exportedOrders
+      .find(({ orderNumber }) => orderNumber === currentOrder.orderNumber);
 
-  const handleSuccess = (message) => {
-    toast.success(message, {
+    if (orderAlreadyExported) {
+      return toast.error('Esse pedido já foi exportado!', { position: 'top-center' });
+    }
+    const newExportedOrders = [...exportedOrders, currentOrder];
+    localStorage.setItem('exportedOrders', JSON.stringify(newExportedOrders));
+
+    toast.success('Pedido exportado com sucesso!', {
       position: 'top-center',
+      autoClose: 1400,
     });
+    setTimeout(() => navigate('/orders/list'), 1600);
   };
 
   return (
@@ -57,14 +65,7 @@ export default function FooterOrderDetails({ currentOrder }) {
           <Icon src={ exportIcon } />
         </ButtonFunction>
       </Footer>
-      {
-        modalExport && (
-          <EmailModal
-            handleSuccess={ handleSuccess }
-            disable={ () => setModalExport(false) }
-          />
-        )
-      }
+      { modalExport && <EmailModal disable={ () => setModalExport(false) } /> }
     </>
   );
 }

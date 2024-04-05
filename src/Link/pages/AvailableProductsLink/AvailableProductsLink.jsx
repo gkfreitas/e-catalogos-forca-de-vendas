@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaEraser } from 'react-icons/fa';
 import eyeIcon from '../../../assets/icons/eye-icon.svg';
-import AllProductsAvaliable from '../../components/AllProductsAvaliable';
+import AllProductsAvailable from '../../components/AllProductsAvailable';
 import FooterEdit from '../../components/FooterEdit/FooterEdit';
 import Header from '../../components/Header';
 import { LinkContext } from '../../context/LinkContext';
@@ -112,7 +112,7 @@ export default function AvailableProductsLink() {
         />
       </ButtonsContainer>
       <AvailableProductsContainer>
-        <AllProductsAvaliable
+        <AllProductsAvailable
           imagesPerView={ imagesPerView }
           filteredProducts={ filteredProducts }
           selectedProducts={ selectedProducts }

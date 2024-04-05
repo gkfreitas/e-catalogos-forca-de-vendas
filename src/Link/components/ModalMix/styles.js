@@ -13,7 +13,7 @@ export const PrimaryText = styled.p`
   font-weight: 600;
 `;
 
-export const SecundaryText = styled.span`
+export const SecondaryText = styled.span`
   color: #000;
   font-family: Roboto;
   font-size: 12px;

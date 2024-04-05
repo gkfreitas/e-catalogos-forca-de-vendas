@@ -1,6 +1,6 @@
 import Modal from '../Modal/Modal';
 import ProductCartCard from '../ProductCartCard/ProductCartCard';
-import { ContainerOverflow, InfosContainer, PrimaryText, SecundaryText } from './styles';
+import { ContainerOverflow, InfosContainer, PrimaryText, SecondaryText } from './styles';
 
 export default function ModalMix({ products,
   disable, closeIcon, purchase, paymentMethod }) {
@@ -33,9 +33,9 @@ export default function ModalMix({ products,
         <PrimaryText>
           Total de Referências:
           {' '}
-          <SecundaryText>
+          <SecondaryText>
             {products.length}
-          </SecundaryText>
+          </SecondaryText>
         </PrimaryText>
       )}
       {
@@ -44,30 +44,30 @@ export default function ModalMix({ products,
             <PrimaryText>
               Total de Referências:
               {' '}
-              <SecundaryText>
+              <SecondaryText>
                 {products.length}
-              </SecundaryText>
+              </SecondaryText>
             </PrimaryText>
             <PrimaryText>
               Total de packs:
               {' '}
-              <SecundaryText>
+              <SecondaryText>
                 {totalPacks || 0}
-              </SecundaryText>
+              </SecondaryText>
             </PrimaryText>
             <PrimaryText>
               Valor Total:
               {' '}
-              <SecundaryText>
+              <SecondaryText>
                 {BRL.format(totalValue)}
-              </SecundaryText>
+              </SecondaryText>
             </PrimaryText>
             <PrimaryText>
               Metodo de Pagamento:
               {' '}
-              <SecundaryText>
+              <SecondaryText>
                 {paymentMethod || ''}
-              </SecundaryText>
+              </SecondaryText>
             </PrimaryText>
           </InfosContainer>
         )

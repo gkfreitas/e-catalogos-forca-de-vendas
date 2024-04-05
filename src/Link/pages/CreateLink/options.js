@@ -6,7 +6,7 @@ import {
   noRepeatedType,
 } from '../../../mocks/mockFilters';
 
-export const brandOptions = [
+const brandOptions = [
   { value: 'brand', label: 'MARCA' },
   ...noRepeatedBrandName.map((brand) => ({
     value: brand,
@@ -14,7 +14,7 @@ export const brandOptions = [
   })),
 ];
 
-export const brandSelectedOptions = [
+const brandSelectedOptions = [
   { value: 'brand', label: 'MARCA COMPLETA' },
   ...noRepeatedBrandName.map((brand) => ({
     value: brand,
@@ -22,7 +22,7 @@ export const brandSelectedOptions = [
   })),
 ];
 
-export const typeOptions = [
+const typeOptions = [
   { value: 'tipo', label: 'TIPO' },
   ...noRepeatedType.map((type) => ({
     value: type,
@@ -30,13 +30,13 @@ export const typeOptions = [
   })),
 ];
 
-export const deliveryOptions = [
+const deliveryOptions = [
   { value: 'entrega', label: 'ENTREGA' },
   { value: 'Pronta Entrega', label: 'Pronta Entrega' },
   { value: 'Programado', label: 'Programado' },
 ];
 
-export const genderOptions = [
+const genderOptions = [
   { value: 'genero', label: 'GÊNERO' },
   ...noRepeatedGenderName.map((gender) => ({
     value: gender,
@@ -44,7 +44,7 @@ export const genderOptions = [
   })),
 ];
 
-export const categoryOptions = [
+const categoryOptions = [
   { value: 'categoria', label: 'CATEGORIA' },
   ...noRepeatedCategoryName.map((category) => ({
     value: category,
@@ -52,10 +52,20 @@ export const categoryOptions = [
   })),
 ];
 
-export const subcategoryOptions = [
+const subcategoryOptions = [
   { value: 'subcategoria', label: 'SUBCATEGORIA' },
   ...noRepeatedSubCategoryName.map((subcategory) => ({
     value: subcategory,
     label: subcategory,
   })),
 ];
+
+export {
+  brandOptions,
+  brandSelectedOptions,
+  typeOptions,
+  deliveryOptions,
+  genderOptions,
+  categoryOptions,
+  subcategoryOptions,
+};

@@ -24,7 +24,6 @@ export const DropdownButton = styled.button`
 `;
 
 export const DropdownContent = styled.div`
-  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: absolute;
   background-color: #f9f9f9;
   min-width: 146px;

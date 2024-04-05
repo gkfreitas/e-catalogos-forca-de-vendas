@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { useContext } from 'react';
-import { ProductToolsContext } from '../../../context/ProductToolsContenxt';
+import { ProductToolsContext } from '../../../context/ProductToolsContext';
 import { LinkProductContext } from '../../context/LinkProductContext';
 import Modal from '../Modal/Modal';
 import {

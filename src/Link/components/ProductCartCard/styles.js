@@ -56,7 +56,7 @@ export const PrimaryText = styled.p`
   font-weight: 600;
 `;
 
-export const SecundaryText = styled.span`
+export const SecondaryText = styled.span`
   text-align: center;
   font-family: Roboto;
   font-size: 16px;

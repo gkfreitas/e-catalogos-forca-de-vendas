@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FooterPurchase from '../../components/FooterPurchase/FooterPurchase';
 import Header from '../../components/Header';
-import HiddenCards from '../../components/HiddenCards';
 import ImagesSlider from '../../components/ImagesSlider';
 import ProductBasicInfos from '../../components/ProductBasicInfos/ProductBasicInfos';
 import ProductTools from '../../components/ProductTools';
 import { LinkOrderContext } from '../../context/LinkOrderContext';
 import { LinkProductContext } from '../../context/LinkProductContext';
 import { PurchaseContainer } from './styles';
+import InfoCard from '../../components/InfoCard';
 
 export default function PurchaseLink() {
   const {
@@ -49,7 +49,7 @@ export default function PurchaseLink() {
       <ImagesSlider previewImage={ previewImage } />
       <ProductTools setPreviewImage={ setPreviewImage } />
       <ProductBasicInfos />
-      <HiddenCards />
+      <InfoCard />
       <FooterPurchase />
     </PurchaseContainer>
   );

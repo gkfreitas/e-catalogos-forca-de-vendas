@@ -16,18 +16,18 @@ export default function FooterCreateMix({
 
   const navigate = useNavigate();
 
+  const toastWarn = (message) => {
+    toast.warn(message, {
+      position: 'top-center',
+    });
+  };
+
   const saveLink = () => {
     if (selectedProducts.length === 0) {
-      toast.warn('Selecione ao menos um produto', {
-        position: 'top-center',
-      });
-      return;
+      return toastWarn('Selecione ao menos um produto');
     }
     if (!linkName) {
-      toast.warn('Digite o nome do link', {
-        position: 'top-center',
-      });
-      return;
+      return toastWarn('Digite o nome do link');
     }
 
     const link = {
@@ -57,10 +57,7 @@ export default function FooterCreateMix({
         placeholder="Digite o nome do link"
       />
       <SelectedQuantity>
-        {selectedQuantity}
-        {' '}
-        Produtos
-        {' '}
+        {`${selectedQuantity} Produtos`}
         <br />
         Selecionados
       </SelectedQuantity>

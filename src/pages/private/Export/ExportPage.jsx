@@ -88,7 +88,7 @@ export default function ExportPage() {
   };
 
   useEffect(() => {
-    const { shippment, deadline, paymentCondition: { method } } = currentOrder;
+    const { shipment, deadline, paymentCondition: { method } } = currentOrder;
 
     if (!clientName) {
       navigate('/clients');
@@ -101,7 +101,7 @@ export default function ExportPage() {
     if (productsCart.length === 0) {
       navigate('/purchase');
     }
-    if (!shippment || !deadline || !method) {
+    if (!shipment || !deadline || !method) {
       navigate('/order');
     }
   }, [clientName, currentOrder, navigate, productsCart.length]);

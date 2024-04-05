@@ -17,7 +17,7 @@ import {
   SubFilterNameContainer,
 } from './styles';
 
-export default function FilterAvaliableProducts({ setFilters, setSubFilters }) {
+export default function FilterAvailableProducts({ setFilters, setSubFilters }) {
   const [filterVisible, setFilterVisible] = useState(false);
   const [showSubFilter, setShowSubFilter] = useState({});
 

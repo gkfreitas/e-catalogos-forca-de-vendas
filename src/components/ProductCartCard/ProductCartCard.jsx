@@ -51,7 +51,7 @@ export default function ProductCartCard({
               {BRL.format(totalPrice / quantity)}
             </span>
           </SecondaryText>
-          {colors?.map(({ cod_hex, color_name }) => (
+          {colors.map(({ cod_hex, color_name }) => (
             <ColorContainer
               key={ cod_hex }
               color={ `#${cod_hex}` }

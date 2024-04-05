@@ -20,15 +20,15 @@ export const ButtonTime = styled.span`
 export const ButtonYTStyle = styled.div`
   display: flex;
   align-items: center;
-  border-radius: 20px;
-  max-width: 182px;
-  max-height: 48px;
+  border-radius: 8px;
+  max-width: 70%;
+  max-height: 50px;
   color: #FFF;
   text-align: left;
   line-height: 24px;
   font-size: 18px;
   font-style: normal;
-  padding: 4px 1.5px;
+  padding: 5px;
   background: #F00;
   font-weight: 500;
   text-transform: uppercase;

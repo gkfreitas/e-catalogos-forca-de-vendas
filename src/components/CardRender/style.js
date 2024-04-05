@@ -63,8 +63,8 @@ export const HeaderImage = styled.div`
   border-radius: 5px 5px 0px 0px;
   background:  ${({ $selected }) => ($selected ? 'green' : '#b6c8d1')};
   text-align: center;
-  padding: 2px 4px;
-  gap: 8px;
+  padding: 2px;
+  gap: 2px;
   width: 100%;
 `;
 
@@ -80,7 +80,7 @@ export const SecondaryText = styled.span`
 export const HeaderImageText = styled.div`
   display: flex;
   justify-content: center;
-  gap: 11px;
+  gap: 4px;
   color:  ${({ $selected }) => ($selected ? '#FFF' : '#000')};
   font-family: Roboto;
   font-size: 13px;

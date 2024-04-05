@@ -32,7 +32,8 @@ export const OrdersContainer = styled.main`
 
 export const OrderContainer = styled.div`
   cursor: pointer;
-  border: ${({ $selected }) => ($selected ? '3px solid #071EE9' : 'none')};
+  outline: ${({ $selected }) => ($selected ? '3px solid #6aca4f' : 'none')};
+  margin: 2px 0;
 `;
 
 export const IconWithTextContainer = styled.div`
@@ -68,7 +69,7 @@ export const ExportFooter = styled.footer`
   width: 100%;
   padding: 4px 30px;
   display: flex;
-  gap: 8px;
+  gap: 30px;
   justify-content: center;
   align-items: center;
   margin-top: auto;

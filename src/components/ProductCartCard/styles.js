@@ -13,6 +13,7 @@ export const CardImageWithInfosContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+  width: 100%;
 `;
 
 export const CardInfosContainer = styled.div`

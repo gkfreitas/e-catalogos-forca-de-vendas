@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { useContext } from 'react';
 import { ProductContext } from '../../context/ProductContext';
-import { ProductToolsContext } from '../../context/ProductToolsContenxt';
+import { ProductToolsContext } from '../../context/ProductToolsContext';
 import Modal from '../Modal';
 import {
   ColorContainer,

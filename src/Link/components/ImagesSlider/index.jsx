@@ -1,8 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import arrowLeft from '../../../assets/icons/arrowLeft.svg';
 import arrowRight from '../../../assets/icons/arrowRight.svg';
 import { LinkProductContext } from '../../context/LinkProductContext';
-import ImageModal from '../ImageModal/ImageModal';
 import {
   ArrowLeft,
   ArrowRight,
@@ -27,13 +26,13 @@ export default function ImagesSlider({ previewImage }) {
   };
 
   const allImages = orderProducts.map((product) => product.images);
-  const [imageModal, setImageModal] = useState(false);
-  const [modalSrc, setModalSrc] = useState('');
+  // const [imageModal, setImageModal] = useState(false);
+  // const [modalSrc, setModalSrc] = useState('');
 
-  const handleImageModal = (src) => {
-    setImageModal(true);
-    setModalSrc(src);
-  };
+  // const handleImageModal = (src) => {
+  //   setImageModal(true);
+  //   setModalSrc(src);
+  // };
 
   return (
     <>
@@ -54,9 +53,7 @@ export default function ImagesSlider({ previewImage }) {
         <ArrowLeft src={ arrowLeft } onClick={ selectPreviousProduct } />
         <ArrowRight src={ arrowRight } onClick={ selectNextProduct } />
       </SliderContainer>
-      {imageModal && (
-        <ImageModal src={ modalSrc } disable={ () => setImageModal(false) } />
-      )}
+      {/* <ImageModal src={ modalSrc } disable={ () => setImageModal(false) } /> */}
     </>
   );
 }
