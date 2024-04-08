@@ -1,4 +1,6 @@
 // Componente de carregamento provisório do Skeleton até integrar com API
+// Antes de excluir passar modificações desse arquivo para o AllProductsAvailable
+
 import { useEffect, useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { SkeletonGrid } from '../Skeleton/SkeletonGrid';
@@ -83,24 +85,31 @@ export function CardRender({
         >
           {filteredProducts.map(((product, i) => (
             <ImageContainer
+              imagesPerview={ imagesPerview }
               onClick={ () => selectProduct(product) }
               key={ i }
             >
               <HeaderImage
+                $imagesPerview={ imagesPerview }
                 $selected={ selectedProducts
                   .some((productSelected) => productSelected.id === product.id) }
               >
                 <HeaderImageText
+                  $imagesPerview={ imagesPerview }
                   $selected={ selectedProducts
                     .some((productSelected) => productSelected.id === product.id) }
                 >
                   <span>
-                    <SecondaryText>R$</SecondaryText>
+                    <SecondaryText $imagesPerview={ imagesPerview }>
+                      R$
+                    </SecondaryText>
                     {' '}
                     {filteredProducts[i]?.price.toFixed(2)}
                   </span>
                   <span>
-                    <SecondaryText>REF:</SecondaryText>
+                    <SecondaryText $imagesPerview={ imagesPerview }>
+                      REF:
+                    </SecondaryText>
                     {' '}
                     {product.reference}
                   </span>
@@ -117,6 +126,7 @@ export function CardRender({
               </HeaderImage>
               <ImageRenderContainer>
                 <ImageStyle
+                  imagesPerview={ imagesPerview }
                   src={ product.images[0].image }
                   alt="Foto"
                   onError={ (e) => handleErrorImage(e, product.images) }

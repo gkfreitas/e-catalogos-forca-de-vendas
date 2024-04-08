@@ -21,9 +21,11 @@ export const AllImagesContainer = styled.main`
   width: 100%;
   grid-gap: 8px;
   display: grid;
-  grid-template-columns: repeat(${({ $imagesPerview }) => $imagesPerview}, 1fr);
+  grid-template-columns: ${({ $imagesPerview }) => ($imagesPerview === 4
+    ? `repeat(${$imagesPerview}, 24%)`
+    : `repeat(${$imagesPerview}, 1fr)`)};
   justify-content: center;
-  align-items: center;
+  align-items: ${({ $imagesPerview }) => ($imagesPerview === 4 ? 'auto' : 'center')};
 `;
 
 export const ContainerSkeleton = styled.main`
@@ -39,32 +41,30 @@ export const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 240px;
+  height: ${({ imagesPerview }) => (imagesPerview === 1 || imagesPerview === 4 ? 'auto' : '240px')};
   border-radius: 5px;
   border: 1px solid #ddd;
   cursor: pointer;
 `;
 
 export const ImageRenderContainer = styled.div`
-
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  
+
 `;
 
 export const HeaderImage = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 2px 1px;
   border-radius: 5px 5px 0px 0px;
   background:  ${({ $selected }) => ($selected ? 'green' : '#b6c8d1')};
   text-align: center;
   padding: 2px;
-  gap: 2px;
+  gap: 4px;
   width: 100%;
 `;
 
@@ -73,18 +73,24 @@ export const SecondaryText = styled.span`
   text-align: center;
   font-family: Roboto;
   font-size: 10px;
+  font-size: ${({ $imagesPerview }) => ($imagesPerview === 4 && '9px')};
   font-style: normal;
   font-weight: 700;
 `;
 
 export const HeaderImageText = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 4px;
+  justify-content: space-between;
   color:  ${({ $selected }) => ($selected ? '#FFF' : '#000')};
   font-family: Roboto;
-  font-size: 13px;
+  font-size: ${({ $imagesPerview }) => ($imagesPerview === 1 && '20px')};
+  font-size: ${({ $imagesPerview }) => ($imagesPerview === 2 && '13px')};
+  font-size: ${({ $imagesPerview }) => ($imagesPerview === 3 && '11px')};
+  font-size: ${({ $imagesPerview }) => ($imagesPerview === 4 && '9px')};
+  gap: 1px;
+  flex-wrap: wrap;
   font-style: normal;
+  width: 100%;
   font-weight: 500;
 `;
 
@@ -99,6 +105,6 @@ export const Image = styled.img`
 export const ImageStyle = styled.img`
   cursor: pointer;
   width: 100%;
-  max-height: 215px;
+  max-height: ${({ imagesPerview }) => (imagesPerview === 1 ? 'auto' : '215px')};
   object-fit: contain;
 `;
